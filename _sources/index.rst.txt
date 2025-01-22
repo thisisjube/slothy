@@ -30,6 +30,5 @@ Slothy documentation
    :maxdepth: 2
    :hidden:
 
-test
    apidocs/index
 
