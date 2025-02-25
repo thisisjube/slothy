@@ -84,16 +84,12 @@ API
 
    .. autodoc2-docstring:: slothy.targets.arm_v7m.cortex_m4.llvm_mca_target
 
-.. py:class:: ExecutionUnit(*args, **kwds)
+.. py:class:: ExecutionUnit
    :canonical: slothy.targets.arm_v7m.cortex_m4.ExecutionUnit
 
    Bases: :py:obj:`slothy.targets.arm_v7m.arch_v7m.Enum`
 
    .. autodoc2-docstring:: slothy.targets.arm_v7m.cortex_m4.ExecutionUnit
-
-   .. rubric:: Initialization
-
-   .. autodoc2-docstring:: slothy.targets.arm_v7m.cortex_m4.ExecutionUnit.__init__
 
    .. py:attribute:: UNIT
       :canonical: slothy.targets.arm_v7m.cortex_m4.ExecutionUnit.UNIT
