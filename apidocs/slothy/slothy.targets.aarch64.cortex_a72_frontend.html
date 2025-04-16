@@ -20,8 +20,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="slothy.targets.aarch64.aarch64_big_experimental" href="slothy.targets.aarch64.aarch64_big_experimental.html" />
-    <link rel="prev" title="slothy.targets.aarch64.apple_m1_firestorm_experimental" href="slothy.targets.aarch64.apple_m1_firestorm_experimental.html" /> 
+    <link rel="next" title="slothy.targets.aarch64.apple_m1_firestorm_experimental" href="slothy.targets.aarch64.apple_m1_firestorm_experimental.html" />
+    <link rel="prev" title="slothy.targets.aarch64.neoverse_n1_experimental" href="slothy.targets.aarch64.neoverse_n1_experimental.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -60,11 +60,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="slothy.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy</span></code></a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="slothy.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="slothy.core.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.core</span></code></a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="slothy.targets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.targets</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slothy.core.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.core</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="slothy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slothy.html#package-contents">Package Contents</a></li>
 </ul>
 </li>
 </ul>
@@ -115,7 +116,8 @@ queue (IQ) for a long time, and once the IQs are full, the frontend will stall.
 It is therefore advisable to generally seek to obey latencies to reduce presssure
 on issue queues.</p>
 <p>This file thus tries to model basic aspects of the frontend of Cortex-A72
-alongside instruction latencies, both taken from the Cortex-A72 Software Optimization Guide.</p>
+alongside instruction latencies, both taken from the Cortex-A72 Software Optimization
+Guide.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We focus on a very small subset of AArch64, just enough to experiment with the
@@ -195,7 +197,7 @@ optimization of the Kyber and Dilithium NTT.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.cortex_a72_frontend.ExecutionUnit">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.cortex_a72_frontend.</span></span><span class="sig-name descname"><span class="pre">ExecutionUnit</span></span><a class="headerlink" href="#slothy.targets.aarch64.cortex_a72_frontend.ExecutionUnit" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.Enum</span></code></p>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
 <p>Enumeration of execution units in approximative Cortex-A72 SLOTHY model</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.cortex_a72_frontend.ExecutionUnit.LOAD0">
@@ -337,8 +339,8 @@ optimization of the Kyber and Dilithium NTT.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="slothy.targets.aarch64.apple_m1_firestorm_experimental.html" class="btn btn-neutral float-left" title="slothy.targets.aarch64.apple_m1_firestorm_experimental" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="slothy.targets.aarch64.aarch64_big_experimental.html" class="btn btn-neutral float-right" title="slothy.targets.aarch64.aarch64_big_experimental" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="slothy.targets.aarch64.neoverse_n1_experimental.html" class="btn btn-neutral float-left" title="slothy.targets.aarch64.neoverse_n1_experimental" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="slothy.targets.aarch64.apple_m1_firestorm_experimental.html" class="btn btn-neutral float-right" title="slothy.targets.aarch64.apple_m1_firestorm_experimental" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

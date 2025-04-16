@@ -589,6 +589,12 @@ Classes
      -
    * - :py:obj:`st4_with_inc <slothy.targets.aarch64.aarch64_neon.st4_with_inc>`
      -
+   * - :py:obj:`St3 <slothy.targets.aarch64.aarch64_neon.St3>`
+     -
+   * - :py:obj:`st3_base <slothy.targets.aarch64.aarch64_neon.st3_base>`
+     -
+   * - :py:obj:`st3_with_inc <slothy.targets.aarch64.aarch64_neon.st3_with_inc>`
+     -
    * - :py:obj:`St2 <slothy.targets.aarch64.aarch64_neon.St2>`
      -
    * - :py:obj:`st2_base <slothy.targets.aarch64.aarch64_neon.st2_base>`
@@ -600,6 +606,12 @@ Classes
    * - :py:obj:`ld4_base <slothy.targets.aarch64.aarch64_neon.ld4_base>`
      -
    * - :py:obj:`ld4_with_inc <slothy.targets.aarch64.aarch64_neon.ld4_with_inc>`
+     -
+   * - :py:obj:`Ld3 <slothy.targets.aarch64.aarch64_neon.Ld3>`
+     -
+   * - :py:obj:`ld3_base <slothy.targets.aarch64.aarch64_neon.ld3_base>`
+     -
+   * - :py:obj:`ld3_with_inc <slothy.targets.aarch64.aarch64_neon.ld3_with_inc>`
      -
    * - :py:obj:`Ld2 <slothy.targets.aarch64.aarch64_neon.Ld2>`
      -
@@ -718,7 +730,7 @@ API
 
 .. py:data:: llvm_mc_attr
    :canonical: slothy.targets.aarch64.aarch64_neon.llvm_mc_attr
-   :value: None
+   :value: 'aes'
 
    .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.llvm_mc_attr
 
@@ -876,7 +888,7 @@ API
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.Branch.unconditional
 
-.. py:class:: SubsLoop(lbl='lbl', lbl_start='1', lbl_end='2', loop_init='lr')
+.. py:class:: SubsLoop(lbl='lbl')
    :canonical: slothy.targets.aarch64.aarch64_neon.SubsLoop
 
    Bases: :py:obj:`slothy.helper.Loop`
@@ -983,7 +995,7 @@ API
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.Instruction.make
 
-   .. py:method:: build(c, src, mnemonic, **kwargs)
+   .. py:method:: build(c: any, src: str, mnemonic: str, **kwargs: list) -> slothy.targets.aarch64.aarch64_neon.Instruction
       :canonical: slothy.targets.aarch64.aarch64_neon.Instruction.build
       :staticmethod:
 
@@ -7241,6 +7253,59 @@ API
       :canonical: slothy.targets.aarch64.aarch64_neon.st4_with_inc.make
       :classmethod:
 
+.. py:class:: St3(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.St3
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
+
+.. py:class:: st3_base(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.st3_base
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.St3`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.st3_base.pattern
+      :value: 'st3 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>}, [<Xc>]'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.st3_base.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.st3_base.inputs
+      :value: ['Xc', 'Va', 'Vb', 'Vc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.st3_base.inputs
+
+   .. py:method:: make(src)
+      :canonical: slothy.targets.aarch64.aarch64_neon.st3_base.make
+      :classmethod:
+
+.. py:class:: st3_with_inc(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.st3_with_inc
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.St3`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.st3_with_inc.pattern
+      :value: 'st3 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>}, [<Xc>], <imm>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.st3_with_inc.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.st3_with_inc.inputs
+      :value: ['Va', 'Vb', 'Vc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.st3_with_inc.inputs
+
+   .. py:attribute:: in_outs
+      :canonical: slothy.targets.aarch64.aarch64_neon.st3_with_inc.in_outs
+      :value: ['Xc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.st3_with_inc.in_outs
+
+   .. py:method:: make(src)
+      :canonical: slothy.targets.aarch64.aarch64_neon.st3_with_inc.make
+      :classmethod:
+
 .. py:class:: St2(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.St2
 
@@ -7351,6 +7416,65 @@ API
 
    .. py:method:: make(src)
       :canonical: slothy.targets.aarch64.aarch64_neon.ld4_with_inc.make
+      :classmethod:
+
+.. py:class:: Ld3(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.Ld3
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
+
+.. py:class:: ld3_base(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.ld3_base
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.Ld3`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.ld3_base.pattern
+      :value: 'ld3 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>}, [<Xc>]'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld3_base.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.ld3_base.inputs
+      :value: ['Xc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld3_base.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.ld3_base.outputs
+      :value: ['Va', 'Vb', 'Vc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld3_base.outputs
+
+   .. py:method:: make(src)
+      :canonical: slothy.targets.aarch64.aarch64_neon.ld3_base.make
+      :classmethod:
+
+.. py:class:: ld3_with_inc(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.ld3_with_inc
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.Ld3`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.ld3_with_inc.pattern
+      :value: 'ld3 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>}, [<Xc>], <imm>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld3_with_inc.pattern
+
+   .. py:attribute:: in_outs
+      :canonical: slothy.targets.aarch64.aarch64_neon.ld3_with_inc.in_outs
+      :value: ['Xc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld3_with_inc.in_outs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.ld3_with_inc.outputs
+      :value: ['Va', 'Vb', 'Vc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld3_with_inc.outputs
+
+   .. py:method:: make(src)
+      :canonical: slothy.targets.aarch64.aarch64_neon.ld3_with_inc.make
       :classmethod:
 
 .. py:class:: Ld2(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)

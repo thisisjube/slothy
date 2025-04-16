@@ -117,6 +117,11 @@ API
 
       .. autodoc2-docstring:: slothy.helper.SourceLine.reduce
 
+   .. py:method:: unify()
+      :canonical: slothy.helper.SourceLine.unify
+
+      .. autodoc2-docstring:: slothy.helper.SourceLine.unify
+
    .. py:method:: add_comment(comment)
       :canonical: slothy.helper.SourceLine.add_comment
 
@@ -185,6 +190,12 @@ API
       :staticmethod:
 
       .. autodoc2-docstring:: slothy.helper.SourceLine.reduce_source
+
+   .. py:method:: unify_source(src)
+      :canonical: slothy.helper.SourceLine.unify_source
+      :staticmethod:
+
+      .. autodoc2-docstring:: slothy.helper.SourceLine.unify_source
 
    .. py:method:: log(name, s, logger=None, err=False)
       :canonical: slothy.helper.SourceLine.log
@@ -266,12 +277,12 @@ API
 
       .. autodoc2-docstring:: slothy.helper.SourceLine.add_tag
 
-   .. py:method:: inherit_tags(l)
+   .. py:method:: inherit_tags(line)
       :canonical: slothy.helper.SourceLine.inherit_tags
 
       .. autodoc2-docstring:: slothy.helper.SourceLine.inherit_tags
 
-   .. py:method:: inherit_comments(l)
+   .. py:method:: inherit_comments(line)
       :canonical: slothy.helper.SourceLine.inherit_comments
 
       .. autodoc2-docstring:: slothy.helper.SourceLine.inherit_comments
@@ -776,7 +787,7 @@ API
 
       .. autodoc2-docstring:: slothy.helper.Permutation.permutation_pad
 
-   .. py:method:: permutation_move_entry_forward(l, idx_from, idx_to)
+   .. py:method:: permutation_move_entry_forward(ll, idx_from, idx_to)
       :canonical: slothy.helper.Permutation.permutation_move_entry_forward
       :staticmethod:
 
@@ -834,7 +845,7 @@ API
 
       .. autodoc2-docstring:: slothy.helper.Loop._extract
 
-   .. py:method:: extract(source, lbl, forced_loop_type=None)
+   .. py:method:: extract(source: list, lbl: str, forced_loop_type: any = None) -> any
       :canonical: slothy.helper.Loop.extract
       :staticmethod:
 

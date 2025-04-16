@@ -20,8 +20,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="slothy.targets.arm_v7m" href="slothy.targets.arm_v7m.html" />
-    <link rel="prev" title="slothy.targets.arm_v81m.cortex_m85r1" href="slothy.targets.arm_v81m.cortex_m85r1.html" /> 
+    <link rel="next" title="slothy.targets.arm_v81m.helium_experimental" href="slothy.targets.arm_v81m.helium_experimental.html" />
+    <link rel="prev" title="slothy.targets.arm_v81m.cortex_m55r1" href="slothy.targets.arm_v81m.cortex_m55r1.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -60,11 +60,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="slothy.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy</span></code></a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="slothy.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="slothy.core.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.core</span></code></a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="slothy.targets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.targets</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slothy.core.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.core</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="slothy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slothy.html#package-contents">Package Contents</a></li>
 </ul>
 </li>
 </ul>
@@ -339,16 +340,13 @@
 <h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-left">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.arm_v81m.arch_v81m.write" title="slothy.targets.arm_v81m.arch_v81m.write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.arm_v81m.arch_v81m.vqdmlsdh_vqdmladhx_parsing_cb" title="slothy.targets.arm_v81m.arch_v81m.vqdmlsdh_vqdmladhx_parsing_cb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vqdmlsdh_vqdmladhx_parsing_cb</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.arm_v81m.arch_v81m.vqdmlsdh_vqdmladhx_parsing_cb" title="slothy.targets.arm_v81m.arch_v81m.vqdmlsdh_vqdmladhx_parsing_cb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vqdmlsdh_vqdmladhx_parsing_cb</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.arm_v81m.arch_v81m.lookup_multidict" title="slothy.targets.arm_v81m.arch_v81m.lookup_multidict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lookup_multidict</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.arm_v81m.arch_v81m.lookup_multidict" title="slothy.targets.arm_v81m.arch_v81m.lookup_multidict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lookup_multidict</span></code></a></p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.arm_v81m.arch_v81m.find_class" title="slothy.targets.arm_v81m.arch_v81m.find_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_class</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.arm_v81m.arch_v81m.find_class" title="slothy.targets.arm_v81m.arch_v81m.find_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_class</span></code></a></p></td>
 <td></td>
 </tr>
 </tbody>
@@ -674,12 +672,12 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.arm_v81m.arch_v81m.</span></span><span class="sig-name descname"><span class="pre">vmulf_T2</span></span><a class="headerlink" href="#slothy.targets.arm_v81m.arch_v81m.vmulf_T2" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#slothy.targets.arm_v81m.arch_v81m.Instruction" title="slothy.targets.arm_v81m.arch_v81m.Instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.arm_v81m.arch_v81m.Instruction</span></code></a></p>
 <p class="rubric">Initialization</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="slothy.targets.arm_v81m.arch_v81m.write">
-<span class="sig-prename descclassname"><span class="pre">slothy.targets.arm_v81m.arch_v81m.</span></span><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.arm_v81m.arch_v81m.write" title="Link to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="slothy.targets.arm_v81m.arch_v81m.vmulf_T2.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.arm_v81m.arch_v81m.vmulf_T2.write" title="Link to this definition"></a></dt>
 <dd></dd></dl>
+
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="slothy.targets.arm_v81m.arch_v81m.vmulf_T1">
@@ -1539,8 +1537,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="slothy.targets.arm_v81m.cortex_m85r1.html" class="btn btn-neutral float-left" title="slothy.targets.arm_v81m.cortex_m85r1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="slothy.targets.arm_v7m.html" class="btn btn-neutral float-right" title="slothy.targets.arm_v7m" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="slothy.targets.arm_v81m.cortex_m55r1.html" class="btn btn-neutral float-left" title="slothy.targets.arm_v81m.cortex_m55r1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="slothy.targets.arm_v81m.helium_experimental.html" class="btn btn-neutral float-right" title="slothy.targets.arm_v81m.helium_experimental" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
