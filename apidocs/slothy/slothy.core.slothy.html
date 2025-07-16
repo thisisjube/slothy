@@ -20,8 +20,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="slothy.targets" href="slothy.targets.html" />
-    <link rel="prev" title="slothy.core.core" href="slothy.core.core.html" /> 
+    <link rel="next" title="slothy.core.heuristics" href="slothy.core.heuristics.html" />
+    <link rel="prev" title="slothy.core.dataflow" href="slothy.core.dataflow.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -135,7 +135,7 @@ one-shot and heuristic optimizations using SLOTHY.</p>
 <h3>API<a class="headerlink" href="#api" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="slothy.core.slothy.Slothy">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.core.slothy.</span></span><span class="sig-name descname"><span class="pre">Slothy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.core.slothy.Slothy" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.core.slothy.</span></span><span class="sig-name descname"><span class="pre">Slothy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.core.slothy.Slothy" title="Link to this definition"></a></dt>
 <dd><p>SLOTHY optimizer</p>
 <p>This class provides a stateful interface to both one-shot and heuristic
 optimizations using SLOTHY.</p>
@@ -170,9 +170,14 @@ straightline block of code, using optimize() or optimize_loop().</p></li>
 <span class="sig-name descname"><span class="pre">target</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'property(...)'</span></em><a class="headerlink" href="#slothy.core.slothy.Slothy.target" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="slothy.core.slothy.Slothy._get_version">
+<span class="sig-name descname"><span class="pre">_get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#slothy.core.slothy.Slothy._get_version" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="slothy.core.slothy.Slothy.source">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">source</span></span><a class="headerlink" href="#slothy.core.slothy.Slothy.source" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">source</span></span><a class="headerlink" href="#slothy.core.slothy.Slothy.source" title="Link to this definition"></a></dt>
 <dd><p>Returns the current source code as an array of SourceLine objects.</p>
 <p>If you want the current source code as a multiline string, use
 get_source_as_string().</p>
@@ -180,7 +185,7 @@ get_source_as_string().</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="slothy.core.slothy.Slothy.original_source">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">original_source</span></span><a class="headerlink" href="#slothy.core.slothy.Slothy.original_source" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">original_source</span></span><a class="headerlink" href="#slothy.core.slothy.Slothy.original_source" title="Link to this definition"></a></dt>
 <dd><p>Returns the original source code as an array of SourceLine objects</p>
 <p>If you want the current source code as a multiline string, use
 get_original_source_as_string().</p>
@@ -230,7 +235,7 @@ get_original_source_as_string().</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="slothy.core.slothy.Slothy._dump">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">err</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.core.slothy.Slothy._dump" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">err</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.core.slothy.Slothy._dump" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -398,8 +403,8 @@ architectural model by setting an instruction class’ global_fusion_cb.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="slothy.core.core.html" class="btn btn-neutral float-left" title="slothy.core.core" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="slothy.targets.html" class="btn btn-neutral float-right" title="slothy.targets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="slothy.core.dataflow.html" class="btn btn-neutral float-left" title="slothy.core.dataflow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="slothy.core.heuristics.html" class="btn btn-neutral float-right" title="slothy.core.heuristics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
