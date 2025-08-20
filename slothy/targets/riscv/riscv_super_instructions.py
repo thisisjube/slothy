@@ -70,34 +70,47 @@ def _parse_lmul_string(lmul):
 
 
 def _expand_vector_registers_generic(
-    obj,
-    expansion_factor,
-    expansion_type="lmul",
-    num_vector_inputs=None,
-    num_vector_outputs=None,
-):
-    """Expand vector registers based on expansion factor for vector instructions.
+    obj: any,
+    expansion_factor: int,
+    expansion_type: str = "lmul",
+    num_vector_inputs: any = None,
+    num_vector_outputs: any = None,
+) -> any:
+    """
+    Expand vector registers based on expansion factor for vector instructions.
 
     Supports two expansion types:
-    1. LMUL (Length Multiplier): Groups consecutive vector registers together
-       - With LMUL=2: v8 becomes [v8, v9], v4 becomes [v4, v5]
-       - With LMUL=4: v8 becomes [v8, v9, v10, v11]
-    2. NF (Number of Fields): Expands for load/store whole register operations
-       - With NF=2: v8 becomes [v8, v9] for consecutive register groups
+
+    * **LMUL (Length Multiplier)**: Groups consecutive vector registers together
+
+      - With ``LMUL=2``: ``v8`` becomes [``v8, v9``], ``v4`` becomes [``v4, v5``]
+      - With ``LMUL=4``: ``v8`` becomes [``v8, v9, v10, v11``]
+
+    * **NF (Number of Fields)**: Expands for load/store whole register operations
+
+      - With ``NF=2``: ``v8`` becomes [``v8, v9``] for consecutive register groups
 
     This function:
-    1. Automatically detects which operands are vector registers
-    2. Expands vector operands into register groups
-    3. Preserves scalar/immediate operands unchanged
-    4. Sets up constraint combinations for SLOTHY's register allocator
 
-    Args:
-        obj: Instruction object to modify
-        expansion_factor: Expansion value (LMUL or NF value)
-        expansion_type: Type of expansion ("lmul" or "nf")
-        num_vector_inputs: Number of vector inputs (auto-detected if None)
-        num_vector_outputs: Number of vector outputs (auto-detected if None)
+    #. Automatically detects which operands are vector registers
+    #. Expands vector operands into register groups
+    #. Preserves scalar/immediate operands unchanged
+    #. Sets up constraint combinations for SLOTHY's register allocator
+
+    :param obj: Instruction object to modify
+    :type obj: any
+    :param expansion_factor: Expansion value (LMUL or NF value)
+    :type expansion_factor: int
+    :param expansion_type: Type of expansion (``"lmul"`` or ``"nf"``)
+    :type expansion_type: str
+    :param num_vector_inputs: Number of vector inputs (auto-detected if ``None``)
+    :type num_vector_inputs: any
+    :param num_vector_outputs: Number of vector outputs (auto-detected if ``None``)
+    :type num_vector_outputs: any
+    :return: modified obj
+    :rtype: any
     """
+
     if expansion_factor <= 1:
         return obj
 
