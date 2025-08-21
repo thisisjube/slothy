@@ -245,8 +245,9 @@ def _expand_vector_registers_generic(
     # Input constraints: only apply to vector inputs
     if vector_input_constraint_indices:
         import itertools
-        
-        # Generate combinations using itertools.product (works for both single and multiple inputs)
+
+        # Generate combinations using itertools.product
+        # (works for both single and multiple inputs)
         multi_combinations = [
             [reg for combo in combination for reg in combo]
             for combination in itertools.product(
@@ -273,32 +274,84 @@ def _expand_vector_registers_for_lmul(
     )
 
 
-def _expand_vector_registers_for_nf(obj, nf, load_or_store="load"):
-    """Expand vector registers for load/store whole register instructions using NF."""
+def _expand_vector_registers_for_nf(obj):
+    """Expand vector registers for load/store whole register instructions using NF.
+
+    Auto-infers NF value from the instruction object.
+
+    :param obj: Instruction object with parsed NF attribute
+    :returns: Expanded instruction object with register groups
+    """
+    nf = int(obj.nf)  # Get NF from the parsed instruction
     # Use the generic function and let it auto-detect vector operands
     # The function will correctly identify which operands are vectors vs scalars
     return _expand_vector_registers_generic(obj, nf, "nf")
 
 
-def _write_lmul_instruction(self, lmul, num_vector_inputs):
-    """Custom write method for LMUL instructions that shows only base registers"""
-    if lmul > 1 and len(self.args_out) > 1:
+def _extract_base_registers(args_list, expansion_factor, num_expandable):
+    """Extract base registers from expanded register groups.
+
+    :param args_list: List of register arguments
+    :param expansion_factor: LMUL or NF expansion factor
+    :param num_expandable: Number of expandable register groups
+    :returns: List of base registers for display
+    """
+    if not args_list or expansion_factor == 1:
+        return args_list.copy()
+
+    display_args = []
+    idx = 0
+
+    # Extract first register from each expandable group
+    for _ in range(num_expandable):
+        if idx < len(args_list):
+            display_args.append(args_list[idx])
+            idx += expansion_factor
+
+    # Add remaining non-expandable registers
+    display_args.extend(args_list[idx:])
+    return display_args
+
+
+def _write_expanded_instruction(self, expansion_factor, num_expandable_vector_inputs):
+    """Custom write method for expanded instructions that shows only base registers.
+
+    Works for both LMUL and NF expansion, handles cases with:
+
+    - Only expanded outputs (load instructions)
+    - Only expanded inputs (store instructions)
+    - Both expanded inputs and outputs
+
+    :param expansion_factor: The LMUL or NF expansion factor
+    :param num_expandable_vector_inputs: Number of vector inputs that get expanded
+                                        (excludes mask registers and other non-expandable vectors)
+    :returns: Formatted instruction string with base registers only
+    """
+    # Early return for simple case
+    if expansion_factor <= 1:
+        return RISCVInstruction.write(self)
+
+    # Check if we have expansion (either inputs or outputs)
+    has_expansion = expansion_factor > 1
+    has_expanded_inputs = (
+        has_expansion
+        and num_expandable_vector_inputs > 0
+        and len(self.args_in) > num_expandable_vector_inputs
+    )
+    has_expanded_outputs = has_expansion and len(self.args_out) > 1
+
+    if has_expanded_inputs or has_expanded_outputs:
         out = self.pattern
-        # Use only the first register from each group for display
-        display_args_out = [self.args_out[0]] if self.args_out else []
-        display_args_in = []
 
-        # Extract first register from each vector input group
-        input_idx = 0
-        for _ in range(num_vector_inputs):
-            if input_idx < len(self.args_in):
-                display_args_in.append(self.args_in[input_idx])
-                input_idx += lmul
-
-        # Add any remaining non-vector inputs
-        while input_idx < len(self.args_in):
-            display_args_in.append(self.args_in[input_idx])
-            input_idx += 1
+        # Extract base registers for display
+        display_args_out = _extract_base_registers(
+            self.args_out, expansion_factor if has_expanded_outputs else 1, 1
+        )
+        display_args_in = _extract_base_registers(
+            self.args_in,
+            expansion_factor if has_expanded_inputs else 1,
+            num_expandable_vector_inputs,
+        )
 
         l = (
             list(zip(display_args_in, self.pattern_inputs))
@@ -346,9 +399,9 @@ def _write_lmul_instruction(self, lmul, num_vector_inputs):
         out = out.replace("\\[", "[")
         out = out.replace("\\]", "]")
         return out
-    else:
-        # Default write behavior for LMUL=1
-        return RISCVInstruction.write(self)
+
+    # Should not reach here, but fallback to default behavior
+    return RISCVInstruction.write(self)
 
 
 class RISCVStore(RISCVInstruction):
@@ -459,53 +512,7 @@ class RISCVVectorLoadIndexed(RISCVInstruction):
 
 class RISCVVectorLoadWholeRegister(RISCVInstruction):
     def write(self):
-        out = self.pattern
-        l = (
-            list(zip(self.args_in, self.pattern_inputs))
-            + list(zip(self.args_out, self.pattern_outputs))
-            + list(zip(self.args_in_out, self.pattern_in_outs))
-        )
-
-        for arg, (s, ty) in l[:2]:
-            out = RISCVInstruction._instantiate_pattern(s, ty, arg, out)
-
-        def replace_pattern(txt, attr_name, mnemonic_key, t=None):
-            def t_default(x):
-                return x
-
-            if t is None:
-                t = t_default
-
-            a = getattr(self, attr_name)
-            if a is None and attr_name == "is32bit":
-                return txt.replace("<w>", "")
-            if a is None:
-                return txt
-            if not isinstance(a, list):
-                txt = txt.replace(f"<{mnemonic_key}>", t(a))
-                return txt
-            for i, v in enumerate(a):
-                txt = txt.replace(f"<{mnemonic_key}{i}>", t(v))
-            return txt
-
-        out = replace_pattern(out, "immediate", "imm", lambda x: f"{x}")
-        out = replace_pattern(out, "datatype", "dt", lambda x: x.upper())
-        out = replace_pattern(out, "flag", "flag")
-        out = replace_pattern(out, "index", "index", str)
-        out = replace_pattern(out, "is32bit", "w", lambda x: x.lower())
-        out = replace_pattern(out, "len", "len")
-        out = replace_pattern(out, "vm", "vm")
-        out = replace_pattern(out, "vtype", "vtype")
-        out = replace_pattern(out, "sew", "sew")
-        out = replace_pattern(out, "lmul", "lmul")
-        out = replace_pattern(out, "tpol", "tpol")
-        out = replace_pattern(out, "mpol", "mpol")
-        out = replace_pattern(out, "nf", "nf")
-        out = replace_pattern(out, "ew", "ew")
-
-        out = out.replace("\\[", "[")
-        out = out.replace("\\]", "]")
-        return out
+        return _write_expanded_instruction(self, int(self.nf), 0)
 
     @classmethod
     def make(cls, src):
@@ -514,30 +521,8 @@ class RISCVVectorLoadWholeRegister(RISCVInstruction):
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
 
-        # Use the original _expand_reg method for compatibility
-        regs_types, expanded_regs = RISCVInstruction._expand_reg(
-            obj.args_out[0], obj.nf, "load"
-        )
-        obj.args_out = expanded_regs
-        obj.num_out = len(obj.args_out)
-        obj.arg_types_out = regs_types
-
-        # Set up register allocation constraints using the generalized approach
-        available_regs = RegisterType.list_registers(RegisterType.VECT)
-        combinations = []
-        # NF allows any consecutive group
-        for i in range(0, len(available_regs) - int(obj.nf) + 1):
-            combinations.append([available_regs[i + j] for j in range(int(obj.nf))])
-
-        obj.args_out_combinations = [(list(range(0, int(obj.num_out))), combinations)]
-        obj.args_out_restrictions = [None for _ in range(obj.num_out)]
-
-        # Update pattern outputs for the expanded registers
-        vlist = [
-            "V" + chr(i) for i in range(ord("d"), ord("z") + 1)
-        ]  # list of all V registers names
-        obj.outputs = vlist[: int(obj.nf)]
-        obj.pattern_outputs = list(zip(obj.outputs, obj.arg_types_out))
+        # Use the new _expand_vector_registers_for_nf function
+        obj = _expand_vector_registers_for_nf(obj)
         return obj
 
     pattern = "mnemonic <Vd>, (<Xa>)"
@@ -590,88 +575,15 @@ class RISCVVectorStoreIndexed(RISCVInstruction):
 
 class RISCVVectorStoreWholeRegister(RISCVInstruction):
     def write(self):
-        out = self.pattern
-        l = (
-            list(zip(self.args_in, self.pattern_inputs))
-            + list(zip(self.args_out, self.pattern_outputs))
-            + list(zip(self.args_in_out, self.pattern_in_outs))
-        )
-
-        for arg, (s, ty) in [l[-1], l[0]]:
-            out = RISCVInstruction._instantiate_pattern(s, ty, arg, out)
-
-        def replace_pattern(txt, attr_name, mnemonic_key, t=None):
-            def t_default(x):
-                return x
-
-            if t is None:
-                t = t_default
-
-            a = getattr(self, attr_name)
-            if a is None and attr_name == "is32bit":
-                return txt.replace("<w>", "")
-            if a is None:
-                return txt
-            if not isinstance(a, list):
-                txt = txt.replace(f"<{mnemonic_key}>", t(a))
-                return txt
-            for i, v in enumerate(a):
-                txt = txt.replace(f"<{mnemonic_key}{i}>", t(v))
-            return txt
-
-        out = replace_pattern(out, "immediate", "imm", lambda x: f"{x}")
-        out = replace_pattern(out, "datatype", "dt", lambda x: x.upper())
-        out = replace_pattern(out, "flag", "flag")
-        out = replace_pattern(out, "index", "index", str)
-        out = replace_pattern(out, "is32bit", "w", lambda x: x.lower())
-        out = replace_pattern(out, "len", "len")
-        out = replace_pattern(out, "vm", "vm")
-        out = replace_pattern(out, "vtype", "vtype")
-        out = replace_pattern(out, "sew", "sew")
-        out = replace_pattern(out, "lmul", "lmul")
-        out = replace_pattern(out, "tpol", "tpol")
-        out = replace_pattern(out, "mpol", "mpol")
-        out = replace_pattern(out, "nf", "nf")
-        out = replace_pattern(out, "ew", "ew")
-
-        out = out.replace("\\[", "[")
-        out = out.replace("\\]", "]")
-        return out
+        return _write_expanded_instruction(self, int(self.nf), 1)
 
     @classmethod
     def make(cls, src):
         obj = RISCVInstruction.build(cls, src)
         obj.increment = None
-        # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[1]
 
-        # Use the original _expand_reg method for compatibility
-        regs_types, expanded_regs = RISCVInstruction._expand_reg(
-            obj.args_in[0], obj.nf, "store"
-        )
-        mem_reg = obj.args_in[1]
-        obj.args_in = expanded_regs + [
-            mem_reg
-        ]  # add the register holding the memory address
-        obj.num_in = len(obj.args_in)
-        obj.arg_types_in = regs_types
-
-        # Set up register allocation constraints using the generalized approach
-        available_regs = RegisterType.list_registers(RegisterType.VECT)
-        combinations = []
-        # NF allows any consecutive group
-        for i in range(0, len(available_regs) - int(obj.nf) + 1):
-            combinations.append([available_regs[i + j] for j in range(int(obj.nf))])
-
-        obj.args_in_combinations = [(list(range(0, int(obj.num_in - 1))), combinations)]
-        obj.args_in_restrictions = [None for _ in range(obj.num_in)]
-
-        vlist = [
-            "V" + chr(i) for i in range(ord("d"), ord("z") + 1)
-        ]  # list of all V registers names
-        obj.inputs = vlist[: int(obj.nf)] + ["Xa"]
-        obj.pattern_inputs = list(zip(obj.inputs, obj.arg_types_in))
-
+        obj = _expand_vector_registers_for_nf(obj)
         return obj
 
     pattern = "mnemonic <Vd>, (<Xa>)"
@@ -688,7 +600,7 @@ class RISCVVectorIntegerVectorVector(RISCVInstruction):
 
     def write(self):
         lmul = _get_lmul_value(self)
-        return _write_lmul_instruction(self, lmul, num_vector_inputs=2)
+        return _write_expanded_instruction(self, lmul, 2)
 
     @classmethod
     def make(cls, src):
@@ -705,7 +617,7 @@ class RISCVVectorIntegerVectorVectorMasked(RISCVInstruction):
 
     def write(self):
         lmul = _get_lmul_value(self)
-        return _write_lmul_instruction(self, lmul, num_vector_inputs=2)
+        return _write_expanded_instruction(self, lmul, 2)
 
     @classmethod
     def make(cls, src):
@@ -722,7 +634,7 @@ class RISCVVectorIntegerVectorScalar(RISCVInstruction):
 
     def write(self):
         lmul = _get_lmul_value(self)
-        return _write_lmul_instruction(self, lmul, num_vector_inputs=1)
+        return _write_expanded_instruction(self, lmul, 1)
 
     @classmethod
     def make(cls, src):
@@ -740,7 +652,7 @@ class RISCVVectorIntegerVectorScalarMasked(RISCVInstruction):
 
     def write(self):
         lmul = _get_lmul_value(self)
-        return _write_lmul_instruction(self, lmul, num_vector_inputs=1)
+        return _write_expanded_instruction(self, lmul, 1)
 
     @classmethod
     def make(cls, src):
@@ -757,7 +669,7 @@ class RISCVVectorIntegerVectorImmediate(RISCVInstruction):
 
     def write(self):
         lmul = _get_lmul_value(self)
-        return _write_lmul_instruction(self, lmul, num_vector_inputs=1)
+        return _write_expanded_instruction(self, lmul, 1)
 
     @classmethod
     def make(cls, src):
@@ -775,7 +687,7 @@ class RISCVVectorIntegerVectorImmediateMasked(RISCVInstruction):
 
     def write(self):
         lmul = _get_lmul_value(self)
-        return _write_lmul_instruction(self, lmul, num_vector_inputs=1)
+        return _write_expanded_instruction(self, lmul, 1)
 
     @classmethod
     def make(cls, src):
@@ -795,7 +707,7 @@ class RISCVScalarVector(RISCVInstruction):
 
     def write(self):
         lmul = _get_lmul_value(self)
-        return _write_lmul_instruction(self, lmul, num_vector_inputs=1)
+        return _write_expanded_instruction(self, lmul, 1)
 
     @classmethod
     def make(cls, src):
@@ -812,7 +724,7 @@ class RISCVVectorScalar(RISCVInstruction):
 
     def write(self):
         lmul = _get_lmul_value(self)
-        return _write_lmul_instruction(self, lmul, num_vector_inputs=0)
+        return _write_expanded_instruction(self, lmul, 0)
 
     @classmethod
     def make(cls, src):
@@ -829,7 +741,7 @@ class RISCVVectorVector(RISCVInstruction):
 
     def write(self):
         lmul = _get_lmul_value(self)
-        return _write_lmul_instruction(self, lmul, num_vector_inputs=1)
+        return _write_expanded_instruction(self, lmul, 1)
 
     @classmethod
     def make(cls, src):
@@ -846,7 +758,7 @@ class RISCVectorVectorMasked(RISCVInstruction):
 
     def write(self):
         lmul = _get_lmul_value(self)
-        return _write_lmul_instruction(self, lmul, num_vector_inputs=1)
+        return _write_expanded_instruction(self, lmul, 1)
 
     @classmethod
     def make(cls, src):
