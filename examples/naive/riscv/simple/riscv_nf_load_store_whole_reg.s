@@ -1,7 +1,10 @@
 start:
 vl1r.v     v8, (x1)
-vl2r.v     v10, (x2)
-vl4re32.v  v12, (x3) 
+vadd.vv v31, v8, v9
+vl2r.v     v8, (x2)
+vadd.vv v31, v8, v31
+vl4re32.v  v8, (x3) 
+vadd.vv v31, v9, v31
 vl8r.v     v16, (x4)
 
 vs1r.v     v24, (x5)
