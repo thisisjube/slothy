@@ -244,24 +244,18 @@ def _expand_vector_registers_generic(
 
     # Input constraints: only apply to vector inputs
     if vector_input_constraint_indices:
-        if num_vector_inputs == 1:
-            # Single vector input: use simple combinations
-            obj.args_in_combinations = [
-                (vector_input_constraint_indices, valid_combinations)
-            ]
-        else:
-            # Multiple vector inputs: generate cartesian product of valid groups
-            import itertools
-
-            multi_combinations = [
-                [reg for combo in combination for reg in combo]
-                for combination in itertools.product(
-                    valid_combinations, repeat=num_vector_inputs
-                )
-            ]
-            obj.args_in_combinations = [
-                (vector_input_constraint_indices, multi_combinations)
-            ]
+        import itertools
+        
+        # Generate combinations using itertools.product (works for both single and multiple inputs)
+        multi_combinations = [
+            [reg for combo in combination for reg in combo]
+            for combination in itertools.product(
+                valid_combinations, repeat=num_vector_inputs
+            )
+        ]
+        obj.args_in_combinations = [
+            (vector_input_constraint_indices, multi_combinations)
+        ]
 
     # Set up empty restrictions (no specific register restrictions)
     obj.args_out_restrictions = [None] * obj.num_out if obj.num_out > 0 else []
