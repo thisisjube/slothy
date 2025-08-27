@@ -274,13 +274,15 @@ def _expand_vector_registers_for_lmul(
     )
 
 
-def _expand_vector_registers_for_nf(obj):
+def _expand_vector_registers_for_nf(obj: any) -> any:
     """Expand vector registers for load/store whole register instructions using NF.
 
     Auto-infers NF value from the instruction object.
 
     :param obj: Instruction object with parsed NF attribute
+    :type obj: any
     :returns: Expanded instruction object with register groups
+    :rtype: any
     """
     nf = int(obj.nf)  # Get NF from the parsed instruction
     # Use the generic function and let it auto-detect vector operands
@@ -288,13 +290,19 @@ def _expand_vector_registers_for_nf(obj):
     return _expand_vector_registers_generic(obj, nf, "nf")
 
 
-def _extract_base_registers(args_list, expansion_factor, num_expandable):
+def _extract_base_registers(
+    args_list: list, expansion_factor: int, num_expandable: int
+) -> list:
     """Extract base registers from expanded register groups.
 
     :param args_list: List of register arguments
+    :type args_list: list
     :param expansion_factor: LMUL or NF expansion factor
+    :type expansion_factor: int
     :param num_expandable: Number of expandable register groups
+    :type num_expandable: int
     :returns: List of base registers for display
+    :rtype: list
     """
     if not args_list or expansion_factor == 1:
         return args_list.copy()
@@ -313,7 +321,11 @@ def _extract_base_registers(args_list, expansion_factor, num_expandable):
     return display_args
 
 
-def _write_expanded_instruction(self, expansion_factor, num_expandable_vector_inputs):
+def _write_expanded_instruction(
+    self: any,
+    expansion_factor: int,
+    num_expandable_vector_inputs: int,
+) -> any:
     """Custom write method for expanded instructions that shows only base registers.
 
     Works for both LMUL and NF expansion, handles cases with:
@@ -322,10 +334,16 @@ def _write_expanded_instruction(self, expansion_factor, num_expandable_vector_in
     - Only expanded inputs (store instructions)
     - Both expanded inputs and outputs
 
+    :param self: self
+    :type self: any
     :param expansion_factor: The LMUL or NF expansion factor
-    :param num_expandable_vector_inputs: Number of vector inputs that get expanded
-                                        (excludes mask registers and other non-expandable vectors)
+    :type expansion_factor: int
+    :param num_expandable_vector_inputs:
+      Number of vector inputs that get expanded
+      (excludes mask registers and other non-expandable vectors)
+    :type num_expandable_vector_inputs: int
     :returns: Formatted instruction string with base registers only
+    :rtype: any
     """
     # Early return for simple case
     if expansion_factor <= 1:
