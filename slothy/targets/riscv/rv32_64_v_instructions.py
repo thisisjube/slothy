@@ -151,6 +151,8 @@ v_instrs = [
             "vmsgtu.vi",
             "vmsgt.vi",
             "vrgather.vi",
+            "vssrl.vi",
+            "vssra.vi",
         ],
         RISCVVectorIntegerVectorImmediate,
     ),
