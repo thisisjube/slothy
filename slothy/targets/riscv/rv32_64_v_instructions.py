@@ -89,6 +89,8 @@ v_instrs = [
             "vnmsub.vv",
             "vrgather.vv",
             "vrgatherei16.vv",
+            "vssrl.vv",
+            "vssra.vv",
         ],
         RISCVVectorIntegerVectorVector,
     ),

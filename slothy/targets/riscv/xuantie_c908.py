@@ -278,6 +278,8 @@ execution_units = {
         instrs["vs<nf>re<ew>.v"],
         instrs["vs<nf>r.v"],
         instrs["vnot.v"],
+        instrs["vssrl.vv"],  # guessed
+        instrs["vssra.vv"],  # guessed
     ): [ExecutionUnit.VEC0],
 }
 
@@ -445,6 +447,8 @@ inverse_throughput = {
         instrs["vrgather.vi"],
         instrs["vmv.x.s"],
         instrs["vnot.v"],
+        instrs["vssrl.vv"],  # guessed
+        instrs["vssra.vv"],  # guessed
     ): 1,
     instrs["vdivu.vv"]: 21,
     instrs["vdiv.vv"]: 23,
