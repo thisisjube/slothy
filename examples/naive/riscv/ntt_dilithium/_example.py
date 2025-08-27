@@ -155,7 +155,7 @@ class RISC_V_ntt_rvv_vlen128(OptimizationRunner):
 
     def core(self, slothy):
         slothy.config.variable_size = True
-        slothy.config.constraints.stalls_first_attempt = 512
+        slothy.config.constraints.stalls_first_attempt = 32
         slothy.config.inputs_are_outputs = True
 
         # slothy.config.sw_pipelining.enabled = True
