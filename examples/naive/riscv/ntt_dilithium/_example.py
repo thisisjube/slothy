@@ -149,7 +149,7 @@ class RISC_V_ntt_rvv_vlen128(OptimizationRunner):
             rename=True,
             arch=arch,
             target=target,
-            funcname="ntt_8l_rvv_vlen128",
+            funcname="ntt_rvv_vlen128",
             timeout=timeout,
         )
 
@@ -159,12 +159,13 @@ class RISC_V_ntt_rvv_vlen128(OptimizationRunner):
         slothy.config.inputs_are_outputs = True
 
         # slothy.config.sw_pipelining.enabled = True
-        slothy.config.sw_pipelining.halving_heuristic = True
+        # slothy.config.sw_pipelining.halving_heuristic = True
         slothy.config.split_heuristic = True
         slothy.config.split_heuristic_factor = 40
-        slothy.config.split_heuristic_stepsize = 0.1
+        slothy.config.split_heuristic_stepsize = 0.2
         slothy.config.timeout = 180
-        slothy.config.split_heuristic_repeat = 2
+        slothy.config.split_heuristic_repeat = 1
+        slothy.config.split_heuristic_estimate_performance = False
 
         slothy.config.with_preprocessor = True
         r = slothy.config.reserved_regs
@@ -174,7 +175,7 @@ class RISC_V_ntt_rvv_vlen128(OptimizationRunner):
             "examples/naive/riscv/ntt_dilithium/include"
         )
         # slothy.config.allow_useless_instructions = True
-        slothy.fusion_region("start", "end", ssa=False)
+        # slothy.fusion_region("start", "end", ssa=False)
         slothy.optimize("start", "end")
 
 
