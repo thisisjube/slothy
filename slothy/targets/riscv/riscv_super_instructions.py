@@ -538,9 +538,9 @@ class RISCVVectorLoadWholeRegister(RISCVInstruction):
         obj.increment = None
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
-
         # Use the new _expand_vector_registers_for_nf function
-        obj = _expand_vector_registers_for_nf(obj)
+        obj = _expand_vector_registers_for_lmul(obj, int(obj.nf))
+
         return obj
 
     pattern = "mnemonic <Vd>, (<Xa>)"
@@ -601,7 +601,7 @@ class RISCVVectorStoreWholeRegister(RISCVInstruction):
         obj.increment = None
         obj.addr = obj.args_in[1]
 
-        obj = _expand_vector_registers_for_nf(obj)
+        obj = _expand_vector_registers_for_lmul(obj, int(obj.nf))
         return obj
 
     pattern = "mnemonic <Vd>, (<Xa>)"
