@@ -73,6 +73,8 @@ def _parse_lmul_string(lmul):
 def _expand_vector_registers_generic(
     obj: any,
     expansion_factor: int,
+    expand_output_indices: list = None,
+    expand_input_indices: list = None,
 ) -> any:
     """
     Expand vector registers based on expansion factor for vector instructions.
@@ -89,11 +91,16 @@ def _expand_vector_registers_generic(
     #. Expands vector operands into register groups
     #. Preserves scalar/immediate operands unchanged
     #. Sets up constraint combinations for SLOTHY's register allocator
+    #. Allows selective expansion of specific operands (useful for masked instructions)
 
     :param obj: Instruction object to modify
     :type obj: any
     :param expansion_factor: Expansion value (LMUL or NF value)
     :type expansion_factor: int
+    :param expand_output_indices: Indices of outputs to expand (None = expand all vector outputs)
+    :type expand_output_indices: list
+    :param expand_input_indices: Indices of inputs to expand (None = expand all vector inputs)
+    :type expand_input_indices: list
     :return: modified obj
     :rtype: any
     """
@@ -118,8 +125,11 @@ def _expand_vector_registers_generic(
 
         return [available_regs[start_idx + i] for i in range(expansion_factor)]
 
-    def expand_register_list(orig_args, orig_arg_types):
-        """Expand a list of registers, tracking expansion info for constraints."""
+    def expand_register_list(orig_args, orig_arg_types, expand_indices):
+        """Expand a list of registers, tracking expansion info for constraints.
+
+        :param expand_indices: Indices to expand (None = expand all vectors)
+        """
         expanded_args = []
         new_arg_types = []
         constraint_indices = []
@@ -127,7 +137,12 @@ def _expand_vector_registers_generic(
         expanded_idx = 0
 
         for i, reg in enumerate(orig_args):
-            if is_vector_register(reg):
+            should_expand = (
+                is_vector_register(reg) and
+                (expand_indices is None or i in expand_indices)
+            )
+
+            if should_expand:
                 expanded_regs = expand_vector_register(reg)
                 expanded_args.extend(expanded_regs)
                 new_arg_types.extend([RegisterType.VECT] * len(expanded_regs))
@@ -153,10 +168,10 @@ def _expand_vector_registers_generic(
 
     # Expand outputs and inputs
     expanded_outputs, new_arg_types_out, output_constraint_indices, _ = (
-        expand_register_list(obj.args_out, obj.arg_types_out)
+        expand_register_list(obj.args_out, obj.arg_types_out, expand_output_indices)
     )
     expanded_inputs, new_arg_types_in, input_constraint_indices, num_vector_inputs = (
-        expand_register_list(obj.args_in, obj.arg_types_in)
+        expand_register_list(obj.args_in, obj.arg_types_in, expand_input_indices)
     )
 
     # Update instruction object
@@ -577,7 +592,14 @@ class RISCVVectorIntegerVectorVectorMasked(RISCVInstruction):
         obj = RISCVInstruction.build(cls, src)
         lmul = _get_lmul_value(obj)
         # Note: mask register (Vg) is not expanded, only vector operands
-        return _expand_vector_registers_generic(obj, lmul)
+        obj = _expand_vector_registers_generic(obj, lmul, expand_input_indices=[0, 1])
+        # Fix Vg to v0 manually
+        obj.args_in_combinations[0][0].append(16)
+        for comb in obj.args_in_combinations[0][1]:
+            comb.append("v0")
+        # TODO: May v0 be used in the other input/output registers? Potentially
+        # filter here. 
+        return obj
 
 
 class RISCVVectorIntegerVectorScalar(RISCVInstruction):
