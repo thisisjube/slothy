@@ -25,6 +25,7 @@
 
 """This module contains abstract RISC-V instruction types to represent
 instructions which share the same pattern"""
+import itertools
 from slothy.targets.riscv.riscv import RegisterType
 from slothy.targets.riscv.riscv_instruction_core import RISCVInstruction
 
@@ -72,23 +73,15 @@ def _parse_lmul_string(lmul):
 def _expand_vector_registers_generic(
     obj: any,
     expansion_factor: int,
-    expansion_type: str = "lmul",
-    num_vector_inputs: any = None,
-    num_vector_outputs: any = None,
 ) -> any:
     """
     Expand vector registers based on expansion factor for vector instructions.
 
-    Supports two expansion types:
+    Groups consecutive vector registers together based on the expansion factor
+    (LMUL or NF value):
 
-    * **LMUL (Length Multiplier)**: Groups consecutive vector registers together
-
-      - With ``LMUL=2``: ``v8`` becomes [``v8, v9``], ``v4`` becomes [``v4, v5``]
-      - With ``LMUL=4``: ``v8`` becomes [``v8, v9, v10, v11``]
-
-    * **NF (Number of Fields)**: Expands for load/store whole register operations
-
-      - With ``NF=2``: ``v8`` becomes [``v8, v9``] for consecutive register groups
+      - With expansion=2: ``v8`` becomes [``v8, v9``], ``v4`` becomes [``v4, v5``]
+      - With expansion=4: ``v8`` becomes [``v8, v9, v10, v11``]
 
     This function:
 
@@ -101,12 +94,6 @@ def _expand_vector_registers_generic(
     :type obj: any
     :param expansion_factor: Expansion value (LMUL or NF value)
     :type expansion_factor: int
-    :param expansion_type: Type of expansion (``"lmul"`` or ``"nf"``)
-    :type expansion_type: str
-    :param num_vector_inputs: Number of vector inputs (auto-detected if ``None``)
-    :type num_vector_inputs: any
-    :param num_vector_outputs: Number of vector outputs (auto-detected if ``None``)
-    :type num_vector_outputs: any
     :return: modified obj
     :rtype: any
     """
@@ -131,73 +118,48 @@ def _expand_vector_registers_generic(
 
         return [available_regs[start_idx + i] for i in range(expansion_factor)]
 
-    def generate_combinations():
-        """Generate all possible register group combinations."""
-        combinations = []
-        if expansion_type == "lmul":
-            # LMUL requires aligned groups (start at multiples of expansion_factor)
-            for i in range(0, len(available_regs), expansion_factor):
-                if i + expansion_factor <= len(available_regs):
-                    combinations.append(
-                        [available_regs[i + j] for j in range(expansion_factor)]
-                    )
-        else:  # nf
-            # NF allows any consecutive group
-            for i in range(0, len(available_regs) - expansion_factor + 1):
-                combinations.append(
-                    [available_regs[i + j] for j in range(expansion_factor)]
+    def expand_register_list(orig_args, orig_arg_types):
+        """Expand a list of registers, tracking expansion info for constraints."""
+        expanded_args = []
+        new_arg_types = []
+        constraint_indices = []
+        num_vectors = 0
+        expanded_idx = 0
+
+        for i, reg in enumerate(orig_args):
+            if is_vector_register(reg):
+                expanded_regs = expand_vector_register(reg)
+                expanded_args.extend(expanded_regs)
+                new_arg_types.extend([RegisterType.VECT] * len(expanded_regs))
+                constraint_indices.extend(
+                    range(expanded_idx, expanded_idx + len(expanded_regs))
                 )
-        return combinations
+                expanded_idx += len(expanded_regs)
+                num_vectors += 1
+            else:
+                expanded_args.append(reg)
+                new_arg_types.append(orig_arg_types[i])
+                expanded_idx += 1
 
-    # Save original state for reference
-    orig_args_in = obj.args_in.copy()
-    orig_args_out = obj.args_out.copy()
-    orig_arg_types_in = obj.arg_types_in.copy()
-    orig_arg_types_out = obj.arg_types_out.copy()
+        return expanded_args, new_arg_types, constraint_indices, num_vectors
 
-    # === ANALYZE OPERAND TYPES ===
-    # Auto-detect vector operands if not specified
-    if num_vector_outputs is None:
-        num_vector_outputs = sum(1 for reg in orig_args_out if is_vector_register(reg))
+    def generate_combinations():
+        """Generate all possible register group combinations (aligned groups)."""
+        return [
+            [available_regs[i + j] for j in range(expansion_factor)]
+            for i in range(0, len(available_regs), expansion_factor)
+            if i + expansion_factor <= len(available_regs)
+        ]
 
-    if num_vector_inputs is None:
-        num_vector_inputs = sum(1 for reg in orig_args_in if is_vector_register(reg))
+    # Expand outputs and inputs
+    expanded_outputs, new_arg_types_out, output_constraint_indices, _ = (
+        expand_register_list(obj.args_out, obj.arg_types_out)
+    )
+    expanded_inputs, new_arg_types_in, input_constraint_indices, num_vector_inputs = (
+        expand_register_list(obj.args_in, obj.arg_types_in)
+    )
 
-    # Identify which operand positions are vectors
-    vector_output_indices = [
-        i for i, reg in enumerate(orig_args_out) if is_vector_register(reg)
-    ]
-    vector_input_indices = [
-        i for i, reg in enumerate(orig_args_in) if is_vector_register(reg)
-    ]
-
-    # === EXPAND OUTPUT REGISTERS ===
-    expanded_outputs = []
-    new_arg_types_out = []
-
-    for i, reg in enumerate(orig_args_out):
-        if i in vector_output_indices:
-            expanded_regs = expand_vector_register(reg)
-            expanded_outputs.extend(expanded_regs)
-            new_arg_types_out.extend([RegisterType.VECT] * len(expanded_regs))
-        else:
-            expanded_outputs.append(reg)
-            new_arg_types_out.append(orig_arg_types_out[i])
-
-    # === EXPAND INPUT REGISTERS ===
-    expanded_inputs = []
-    new_arg_types_in = []
-
-    for i, reg in enumerate(orig_args_in):
-        if i in vector_input_indices:
-            expanded_regs = expand_vector_register(reg)
-            expanded_inputs.extend(expanded_regs)
-            new_arg_types_in.extend([RegisterType.VECT] * len(expanded_regs))
-        else:
-            expanded_inputs.append(reg)
-            new_arg_types_in.append(orig_arg_types_in[i])
-
-    # === UPDATE INSTRUCTION OBJECT ===
+    # Update instruction object
     obj.args_out = expanded_outputs
     obj.args_in = expanded_inputs
     obj.num_out = len(expanded_outputs)
@@ -205,89 +167,27 @@ def _expand_vector_registers_generic(
     obj.arg_types_out = new_arg_types_out
     obj.arg_types_in = new_arg_types_in
 
-    # === SET UP REGISTER ALLOCATION CONSTRAINTS ===
+    # Set up register allocation constraints
     valid_combinations = generate_combinations()
 
-    # Calculate constraint indices for expanded vector operands
-    vector_output_constraint_indices = []
-    vector_input_constraint_indices = []
+    if output_constraint_indices:
+        obj.args_out_combinations = [(output_constraint_indices, valid_combinations)]
 
-    # Map expanded vector outputs to constraint indices
-    expanded_idx = 0
-    for i, reg in enumerate(orig_args_out):
-        if i in vector_output_indices:
-            group_size = len(expand_vector_register(reg))
-            vector_output_constraint_indices.extend(
-                range(expanded_idx, expanded_idx + group_size)
-            )
-            expanded_idx += group_size
-        else:
-            expanded_idx += 1
-
-    # Map expanded vector inputs to constraint indices
-    expanded_idx = 0
-    for i, reg in enumerate(orig_args_in):
-        if i in vector_input_indices:
-            group_size = len(expand_vector_register(reg))
-            vector_input_constraint_indices.extend(
-                range(expanded_idx, expanded_idx + group_size)
-            )
-            expanded_idx += group_size
-        else:
-            expanded_idx += 1
-
-    # Output constraints: only apply to vector outputs
-    if vector_output_constraint_indices:
-        obj.args_out_combinations = [
-            (vector_output_constraint_indices, valid_combinations)
-        ]
-
-    # Input constraints: only apply to vector inputs
-    if vector_input_constraint_indices:
-        import itertools
-
-        # Generate combinations using itertools.product
-        # (works for both single and multiple inputs)
+    if input_constraint_indices:
+        # Generate combinations for multiple vector inputs using Cartesian product
         multi_combinations = [
             [reg for combo in combination for reg in combo]
             for combination in itertools.product(
                 valid_combinations, repeat=num_vector_inputs
             )
         ]
-        obj.args_in_combinations = [
-            (vector_input_constraint_indices, multi_combinations)
-        ]
+        obj.args_in_combinations = [(input_constraint_indices, multi_combinations)]
 
-    # Set up empty restrictions (no specific register restrictions)
-    obj.args_out_restrictions = [None] * obj.num_out if obj.num_out > 0 else []
-    obj.args_in_restrictions = [None] * obj.num_in if obj.num_in > 0 else []
+    # Set up empty restrictions
+    obj.args_out_restrictions = [None] * obj.num_out
+    obj.args_in_restrictions = [None] * obj.num_in
 
     return obj
-
-
-def _expand_vector_registers_for_lmul(
-    obj, lmul, num_vector_inputs=None, num_vector_outputs=None
-):
-    """Backward compatibility wrapper for LMUL expansion."""
-    return _expand_vector_registers_generic(
-        obj, lmul, "lmul", num_vector_inputs, num_vector_outputs
-    )
-
-
-def _expand_vector_registers_for_nf(obj: any) -> any:
-    """Expand vector registers for load/store whole register instructions using NF.
-
-    Auto-infers NF value from the instruction object.
-
-    :param obj: Instruction object with parsed NF attribute
-    :type obj: any
-    :returns: Expanded instruction object with register groups
-    :rtype: any
-    """
-    nf = int(obj.nf)  # Get NF from the parsed instruction
-    # Use the generic function and let it auto-detect vector operands
-    # The function will correctly identify which operands are vectors vs scalars
-    return _expand_vector_registers_generic(obj, nf, "nf")
 
 
 def _extract_base_registers(
@@ -498,7 +398,7 @@ class RISCVVectorLoadUnitStride(RISCVInstruction):
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
         lmul = _get_lmul_value(obj)
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
     pattern = "mnemonic <Vd>, (<Xa>)<vm>"
     inputs = ["Xa"]
@@ -518,7 +418,7 @@ class RISCVVectorLoadStrided(RISCVInstruction):
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
         lmul = _get_lmul_value(obj)
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
     pattern = "mnemonic <Vd>, (<Xa>), <Xb><vm>"
     inputs = ["Xa", "Xb"]
@@ -538,7 +438,7 @@ class RISCVVectorLoadIndexed(RISCVInstruction):
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
         lmul = _get_lmul_value(obj)
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
     pattern = "mnemonic <Vd>, (<Xa>), <Ve><vm>"
     inputs = ["Xa", "Ve"]
@@ -556,8 +456,7 @@ class RISCVVectorLoadWholeRegister(RISCVInstruction):
         obj.increment = None
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
-        # Use the new _expand_vector_registers_for_nf function
-        obj = _expand_vector_registers_for_lmul(obj, int(obj.nf))
+        obj = _expand_vector_registers_generic(obj, int(obj.nf))
 
         return obj
 
@@ -581,7 +480,7 @@ class RISCVVectorStoreUnitStride(RISCVInstruction):
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
         lmul = _get_lmul_value(obj)
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
     pattern = "mnemonic <Va>, (<Xa>)<vm>"
     inputs = ["Xa", "Va"]
@@ -600,7 +499,7 @@ class RISCVVectorStoreStrided(RISCVInstruction):
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
         lmul = _get_lmul_value(obj)
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
         return obj
 
     pattern = "mnemonic <Vd>, (<Xa>), <Xb><vm>"
@@ -619,7 +518,7 @@ class RISCVVectorStoreIndexed(RISCVInstruction):
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
         lmul = _get_lmul_value(obj)
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
     pattern = "mnemonic <Vd>, (<Xa>), <Ve><vm>"
     inputs = ["Xa", "Ve", "Vd"]
@@ -635,7 +534,7 @@ class RISCVVectorStoreWholeRegister(RISCVInstruction):
         obj.increment = None
         obj.addr = obj.args_in[1]
 
-        obj = _expand_vector_registers_for_lmul(obj, int(obj.nf))
+        obj = _expand_vector_registers_generic(obj, int(obj.nf))
         return obj
 
     pattern = "mnemonic <Vd>, (<Xa>)"
@@ -657,8 +556,10 @@ class RISCVVectorIntegerVectorVector(RISCVInstruction):
     @classmethod
     def make(cls, src):
         obj = RISCVInstruction.build(cls, src)
+        if "gather" in src:
+            obj.args_in_out_different = [(0, 0), (0, 1)]  # Can't have Rd==Ra
         lmul = _get_lmul_value(obj)
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
 
 # mask is fixed to v0
@@ -676,7 +577,7 @@ class RISCVVectorIntegerVectorVectorMasked(RISCVInstruction):
         obj = RISCVInstruction.build(cls, src)
         lmul = _get_lmul_value(obj)
         # Note: mask register (Vg) is not expanded, only vector operands
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
 
 class RISCVVectorIntegerVectorScalar(RISCVInstruction):
@@ -693,7 +594,7 @@ class RISCVVectorIntegerVectorScalar(RISCVInstruction):
         obj = RISCVInstruction.build(cls, src)
         lmul = _get_lmul_value(obj)
         # Only the vector input is expanded, scalar input (Xa) is kept as-is
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
 
 # mask is fixed to v0
@@ -711,7 +612,7 @@ class RISCVVectorIntegerVectorScalarMasked(RISCVInstruction):
         obj = RISCVInstruction.build(cls, src)
         lmul = _get_lmul_value(obj)
         # Only the vector input is expanded, scalar (Xa) and mask (Vg) are kept as-is
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
 
 class RISCVVectorIntegerVectorImmediate(RISCVInstruction):
@@ -728,7 +629,7 @@ class RISCVVectorIntegerVectorImmediate(RISCVInstruction):
         obj = RISCVInstruction.build(cls, src)
         lmul = _get_lmul_value(obj)
         # Only the vector input is expanded
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
 
 # mask is fixed to v0
@@ -746,7 +647,7 @@ class RISCVVectorIntegerVectorImmediateMasked(RISCVInstruction):
         obj = RISCVInstruction.build(cls, src)
         lmul = _get_lmul_value(obj)
         # Only the vector input is expanded, mask (Vg) is kept as-is
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
 
 # Vector Permutation Instructions
@@ -766,7 +667,7 @@ class RISCVScalarVector(RISCVInstruction):
         obj = RISCVInstruction.build(cls, src)
         lmul = _get_lmul_value(obj)
         # Vector input is expanded, scalar output (Xd) is kept as-is
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
 
 class RISCVVectorScalar(RISCVInstruction):
@@ -783,7 +684,7 @@ class RISCVVectorScalar(RISCVInstruction):
         obj = RISCVInstruction.build(cls, src)
         lmul = _get_lmul_value(obj)
         # Scalar input (Xa) is kept as-is, vector output is expanded
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
 
 class RISCVVectorVector(RISCVInstruction):
@@ -800,7 +701,7 @@ class RISCVVectorVector(RISCVInstruction):
         obj = RISCVInstruction.build(cls, src)
         lmul = _get_lmul_value(obj)
         # Both vector input and output are expanded
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
 
 class RISCVectorVectorMasked(RISCVInstruction):
@@ -817,7 +718,7 @@ class RISCVectorVectorMasked(RISCVInstruction):
         obj = RISCVInstruction.build(cls, src)
         lmul = _get_lmul_value(obj)
         # Both vector input and output are expanded, mask is implicit in pattern
-        return _expand_vector_registers_for_lmul(obj, lmul)
+        return _expand_vector_registers_generic(obj, lmul)
 
 
 class RISCVBranch(RISCVInstruction):
