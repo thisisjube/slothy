@@ -26,6 +26,10 @@
 """This module creates the RV3264-V extension set instructions"""
 from slothy.targets.riscv.riscv_super_instructions import *  # noqa: F403
 from slothy.targets.riscv.riscv_instruction_core import RISCVInstruction
+from slothy.targets.riscv.riscv_super_instructions import (
+    _write_expanded_instruction,
+    _expand_vector_registers_for_lmul,
+)
 
 
 class RISCVvsetvli(RISCVInstruction):
@@ -44,6 +48,23 @@ class RISCVvsetvl(RISCVInstruction):
     pattern = "vsetvl <Xd>, <Xa>, <Xb>"
     inputs = ["Xa", "Xb"]
     outputs = ["Xd"]
+
+
+class RISCVvrgathervv(RISCVInstruction):
+    def write(self):
+        return _write_expanded_instruction(self, int(self.nf), 1)
+
+    @classmethod
+    def make(cls, src):
+        obj = RISCVInstruction.build(cls, src)
+        obj.increment = None
+        obj.addr = obj.args_in[1]
+
+        obj = _expand_vector_registers_for_lmul(obj, int(obj.nf))
+        return obj
+
+    pattern = "mnemonic <Vd>, (<Xa>)"
+    inputs = ["Vd", "Xa"]
 
 
 v_instrs = [
@@ -87,8 +108,6 @@ v_instrs = [
             "vnmsac.vv",
             "vmadd.vv",
             "vnmsub.vv",
-            "vrgather.vv",
-            "vrgatherei16.vv",
             "vssrl.vv",
             "vssra.vv",
         ],
@@ -165,6 +184,7 @@ v_instrs = [
     (["vmv.x.s"], RISCVScalarVector),
     (["vmv.s.x"], RISCVVectorScalar),
     (["vmv.v.v"], RISCVVectorVector),
+    (["vrgather.vv", "vrgatherei16.vv"], RISCVvrgathervv),
 ]
 
 

@@ -1,3 +1,3 @@
 start:
-    unzip x1, x2
+    vmerge.vvm v1, v2, v3, v0
 end:

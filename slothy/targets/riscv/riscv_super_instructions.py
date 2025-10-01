@@ -487,44 +487,62 @@ class RISCVIntegerRegisterRegisterMul(RISCVInstruction):
 
 
 class RISCVVectorLoadUnitStride(RISCVInstruction):
+    def write(self):
+        lmul = _get_lmul_value(self)
+        return _write_expanded_instruction(self, lmul, 0)
+
     @classmethod
     def make(cls, src):
         obj = RISCVInstruction.build(cls, src)
         obj.increment = None
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
-        return obj
+        lmul = _get_lmul_value(obj)
+        return _expand_vector_registers_for_lmul(obj, lmul)
 
     pattern = "mnemonic <Vd>, (<Xa>)<vm>"
     inputs = ["Xa"]
     outputs = ["Vd"]
+    # TODO: declare input register if vm (mask) is used
 
 
 class RISCVVectorLoadStrided(RISCVInstruction):
+    def write(self):
+        lmul = _get_lmul_value(self)
+        return _write_expanded_instruction(self, lmul, 0)
+
     @classmethod
     def make(cls, src):
         obj = RISCVInstruction.build(cls, src)
         obj.increment = None
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
-        return obj
+        lmul = _get_lmul_value(obj)
+        return _expand_vector_registers_for_lmul(obj, lmul)
 
     pattern = "mnemonic <Vd>, (<Xa>), <Xb><vm>"
     inputs = ["Xa", "Xb"]
+    # TODO: declare input register if vm (mask) is used
     outputs = ["Vd"]
 
 
 class RISCVVectorLoadIndexed(RISCVInstruction):
+    def write(self):
+        lmul = _get_lmul_value(self)
+        return _write_expanded_instruction(self, lmul, 1)
+
     @classmethod
     def make(cls, src):
         obj = RISCVInstruction.build(cls, src)
         obj.increment = None
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
-        return obj
+        lmul = _get_lmul_value(obj)
+        return _expand_vector_registers_for_lmul(obj, lmul)
 
     pattern = "mnemonic <Vd>, (<Xa>), <Ve><vm>"
     inputs = ["Xa", "Ve"]
+    # TODO: declare input register if vm (mask) is used
     outputs = ["Vd"]
 
 
@@ -552,13 +570,18 @@ class RISCVVectorLoadWholeRegister(RISCVInstruction):
 
 
 class RISCVVectorStoreUnitStride(RISCVInstruction):
+    def write(self):
+        lmul = _get_lmul_value(self)
+        return _write_expanded_instruction(self, lmul, 1)
+
     @classmethod
     def make(cls, src):
         obj = RISCVInstruction.build(cls, src)
         obj.increment = None
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
-        return obj
+        lmul = _get_lmul_value(obj)
+        return _expand_vector_registers_for_lmul(obj, lmul)
 
     pattern = "mnemonic <Va>, (<Xa>)<vm>"
     inputs = ["Xa", "Va"]
@@ -566,29 +589,40 @@ class RISCVVectorStoreUnitStride(RISCVInstruction):
 
 
 class RISCVVectorStoreStrided(RISCVInstruction):
+    def write(self):
+        lmul = _get_lmul_value(self)
+        return _write_expanded_instruction(self, lmul, 1)
+
     @classmethod
     def make(cls, src):
         obj = RISCVInstruction.build(cls, src)
         obj.increment = None
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
+        lmul = _get_lmul_value(obj)
+        return _expand_vector_registers_for_lmul(obj, lmul)
         return obj
 
     pattern = "mnemonic <Vd>, (<Xa>), <Xb><vm>"
-    inputs = ["Xa", "Xb"]
+    inputs = ["Xa", "Xb", "Vd"]
 
 
 class RISCVVectorStoreIndexed(RISCVInstruction):
+    def write(self):
+        lmul = _get_lmul_value(self)
+        return _write_expanded_instruction(self, lmul, 2)
+
     @classmethod
     def make(cls, src):
         obj = RISCVInstruction.build(cls, src)
         obj.increment = None
         # obj.pre_index = obj.immediate
         obj.addr = obj.args_in[0]
-        return obj
+        lmul = _get_lmul_value(obj)
+        return _expand_vector_registers_for_lmul(obj, lmul)
 
     pattern = "mnemonic <Vd>, (<Xa>), <Ve><vm>"
-    inputs = ["Xa", "Ve"]
+    inputs = ["Xa", "Ve", "Vd"]
 
 
 class RISCVVectorStoreWholeRegister(RISCVInstruction):
