@@ -1,3 +1,3 @@
 start:
-    vmerge.vvm v1, v2, v3, v0
+    vrgather.vv v8, v16, v24
 end:

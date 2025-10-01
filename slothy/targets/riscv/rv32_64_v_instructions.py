@@ -28,7 +28,8 @@ from slothy.targets.riscv.riscv_super_instructions import *  # noqa: F403
 from slothy.targets.riscv.riscv_instruction_core import RISCVInstruction
 from slothy.targets.riscv.riscv_super_instructions import (
     _write_expanded_instruction,
-    _expand_vector_registers_for_lmul,
+    _expand_vector_registers_generic,
+    _get_lmul_value,
 )
 
 
@@ -52,7 +53,7 @@ class RISCVvsetvl(RISCVInstruction):
 
 class RISCVvrgathervv(RISCVInstruction):
     def write(self):
-        return _write_expanded_instruction(self, int(self.nf), 1)
+        return _write_expanded_instruction(self, _get_lmul_value(self), 1)
 
     @classmethod
     def make(cls, src):
@@ -60,11 +61,12 @@ class RISCVvrgathervv(RISCVInstruction):
         obj.increment = None
         obj.addr = obj.args_in[1]
 
-        obj = _expand_vector_registers_for_lmul(obj, int(obj.nf))
+        obj = _expand_vector_registers_generic(obj, _get_lmul_value(obj))
         return obj
 
-    pattern = "mnemonic <Vd>, (<Xa>)"
-    inputs = ["Vd", "Xa"]
+    pattern = "mnemonic <Vd>, <Ve>, <Vf><vm>"
+    inputs = ["Ve", "Vf"]
+    outputs = ["Vd"]
 
 
 v_instrs = [

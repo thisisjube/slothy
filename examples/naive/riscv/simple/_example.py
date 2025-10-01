@@ -42,6 +42,12 @@ class RISC_VExample0(OptimizationRunner):
             "x2",
             "x3",
         ]
+
+        # Set LMUL in target module
+        import slothy.targets.riscv.xuantie_c908 as target_module
+
+        target_module.lmul = 8
+
         # slothy.fusion_region(start="start", end="end")
         slothy.optimize(start="start", end="end")
 
