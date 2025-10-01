@@ -278,6 +278,10 @@ execution_units = {
         instrs["vs<nf>re<ew>.v"],
         instrs["vs<nf>r.v"],
         instrs["vnot.v"],
+        instrs["vssrl.vv"],  # guessed
+        instrs["vssra.vv"],  # guessed
+        instrs["vssrl.vi"],  # guessed
+        instrs["vssra.vi"],  # guessed
     ): [ExecutionUnit.VEC0],
 }
 
@@ -445,6 +449,10 @@ inverse_throughput = {
         instrs["vrgather.vi"],
         instrs["vmv.x.s"],
         instrs["vnot.v"],
+        instrs["vssrl.vv"],  # guessed
+        instrs["vssra.vv"],  # guessed
+        instrs["vssrl.vi"],  # guessed
+        instrs["vssra.vi"],  # guessed
     ): 1,
     instrs["vdivu.vv"]: 21,
     instrs["vdiv.vv"]: 23,
@@ -537,6 +545,7 @@ default_latencies = {
     instrs["vmv.v.v"]: 3,  # TODO: estimated
     instrs["vnot.v"]: 4,
     instrs["la"]: 4,  # TODO: estimated (pseudo instruction)
+    RISCVvrgathervv: 4,  # TODO: estimated
 }
 
 rv32_latencies = {

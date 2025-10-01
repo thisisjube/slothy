@@ -46,12 +46,7 @@ test:
     nop
     .rept 100
         start_label:
-        mul x18, x18, x18
-        add x27, x27, x27
-        add x22, x22, x22
-        add x26, x26, x26
-        add x23, x23, x23
-        add x25, x25, x25
+        vmerge.vvm v1, v2, v3, v0
         end_label:
     .endr
     nop
