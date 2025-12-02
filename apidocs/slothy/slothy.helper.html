@@ -159,11 +159,37 @@ them to the same or different logger later.</p></td>
 <tr class="row-odd"><td><p><a class="reference internal" href="#slothy.helper.binary_search" title="slothy.helper.binary_search"><code class="xref py py-obj docutils literal notranslate"><span class="pre">binary_search</span></code></a></p></td>
 <td><p>Conduct a binary search</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.helper.lookup_multidict" title="slothy.helper.lookup_multidict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lookup_multidict</span></code></a></p></td>
+<td><p>Lookup a value in a multidict based on an instruction instance.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data">
+<h3>Data<a class="headerlink" href="#data" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-left">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.helper._BLOCK_COMMENT_MARKER" title="slothy.helper._BLOCK_COMMENT_MARKER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_BLOCK_COMMENT_MARKER</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.helper._NEWLINE_MARKER" title="slothy.helper._NEWLINE_MARKER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_NEWLINE_MARKER</span></code></a></p></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 </section>
 <section id="api">
 <h3>API<a class="headerlink" href="#api" title="Link to this heading"></a></h3>
+<dl class="py data">
+<dt class="sig sig-object py" id="slothy.helper._BLOCK_COMMENT_MARKER">
+<span class="sig-prename descclassname"><span class="pre">slothy.helper.</span></span><span class="sig-name descname"><span class="pre">_BLOCK_COMMENT_MARKER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'__SLOTHY_BLOCK__'</span></em><a class="headerlink" href="#slothy.helper._BLOCK_COMMENT_MARKER" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="slothy.helper._NEWLINE_MARKER">
+<span class="sig-prename descclassname"><span class="pre">slothy.helper.</span></span><span class="sig-name descname"><span class="pre">_NEWLINE_MARKER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'__SLOTHY_NL__'</span></em><a class="headerlink" href="#slothy.helper._NEWLINE_MARKER" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="slothy.helper.SourceLine">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.helper.</span></span><span class="sig-name descname"><span class="pre">SourceLine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.helper.SourceLine" title="Link to this definition"></a></dt>
@@ -273,6 +299,12 @@ indentation for the comments, improving readability.</p>
 <dt class="sig sig-object py" id="slothy.helper.SourceLine.has_text">
 <span class="sig-name descname"><span class="pre">has_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#slothy.helper.SourceLine.has_text" title="Link to this definition"></a></dt>
 <dd><p>Indicates if the source line constaints some text</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slothy.helper.SourceLine.instruction_count">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instruction_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.helper.SourceLine.instruction_count" title="Link to this definition"></a></dt>
+<dd><p>Count the number of instructions in a list of source lines</p>
 </dd></dl>
 
 <dl class="py property">
@@ -980,12 +1012,13 @@ and the filter list to empty.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="slothy.helper.Loop.extract">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lbl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forced_loop_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="headerlink" href="#slothy.helper.Loop.extract" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lbl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forced_loop_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="headerlink" href="#slothy.helper.Loop.extract" title="Link to this definition"></a></dt>
 <dd><p>Find a loop with start label <cite>lbl</cite> in <cite>source</cite> and return it together
 with its type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>arch</strong> (<em>any</em>) – module representing architecture for which loops are extracted</p></li>
 <li><p><strong>source</strong> (<em>list</em>) – list of SourceLine objects</p></li>
 <li><p><strong>lbl</strong> (<em>str</em>) – label of the loop to extract</p></li>
 <li><p><strong>forced_loop_type</strong> (<em>any</em>) – if not None, only try to extract this type of loop</p></li>
@@ -1003,6 +1036,30 @@ with its type.</p>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slothy.helper.lookup_multidict">
+<span class="sig-prename descclassname"><span class="pre">slothy.helper.</span></span><span class="sig-name descname"><span class="pre">lookup_multidict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instclass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="headerlink" href="#slothy.helper.lookup_multidict" title="Link to this definition"></a></dt>
+<dd><p>Lookup a value in a multidict based on an instruction instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>dict</em>) – The multidict mapping keys (classes, callables, or tuples) to values.</p></li>
+<li><p><strong>inst</strong> (<em>any</em>) – The instruction instance to match against the keys.</p></li>
+<li><p><strong>instclass</strong> (<em>any</em>) – A descriptive name of the instruction class, used in error messages.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value corresponding to the only matching key in the multidict.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>any</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="slothy.targets.arm_v7m.arch_v7m.html#slothy.targets.arm_v7m.arch_v7m.UnknownInstruction" title="slothy.targets.arm_v7m.arch_v7m.UnknownInstruction"><strong>UnknownInstruction</strong></a> – If no matching key found, or multiple matches found.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

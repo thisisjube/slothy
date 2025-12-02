@@ -68,9 +68,38 @@ Functions
    * - :py:obj:`binary_search <slothy.helper.binary_search>`
      - .. autodoc2-docstring:: slothy.helper.binary_search
           :summary:
+   * - :py:obj:`lookup_multidict <slothy.helper.lookup_multidict>`
+     - .. autodoc2-docstring:: slothy.helper.lookup_multidict
+          :summary:
+
+Data
+~~~~
+
+.. list-table::
+   :class: autosummary longtable
+   :align: left
+
+   * - :py:obj:`_BLOCK_COMMENT_MARKER <slothy.helper._BLOCK_COMMENT_MARKER>`
+     - .. autodoc2-docstring:: slothy.helper._BLOCK_COMMENT_MARKER
+          :summary:
+   * - :py:obj:`_NEWLINE_MARKER <slothy.helper._NEWLINE_MARKER>`
+     - .. autodoc2-docstring:: slothy.helper._NEWLINE_MARKER
+          :summary:
 
 API
 ~~~
+
+.. py:data:: _BLOCK_COMMENT_MARKER
+   :canonical: slothy.helper._BLOCK_COMMENT_MARKER
+   :value: '__SLOTHY_BLOCK__'
+
+   .. autodoc2-docstring:: slothy.helper._BLOCK_COMMENT_MARKER
+
+.. py:data:: _NEWLINE_MARKER
+   :canonical: slothy.helper._NEWLINE_MARKER
+   :value: '__SLOTHY_NL__'
+
+   .. autodoc2-docstring:: slothy.helper._NEWLINE_MARKER
 
 .. py:class:: SourceLine(s, reduce=True)
    :canonical: slothy.helper.SourceLine
@@ -166,6 +195,12 @@ API
       :canonical: slothy.helper.SourceLine.has_text
 
       .. autodoc2-docstring:: slothy.helper.SourceLine.has_text
+
+   .. py:method:: instruction_count(lines)
+      :canonical: slothy.helper.SourceLine.instruction_count
+      :staticmethod:
+
+      .. autodoc2-docstring:: slothy.helper.SourceLine.instruction_count
 
    .. py:property:: indentation
       :canonical: slothy.helper.SourceLine.indentation
@@ -845,8 +880,13 @@ API
 
       .. autodoc2-docstring:: slothy.helper.Loop._extract
 
-   .. py:method:: extract(source: list, lbl: str, forced_loop_type: any = None) -> any
+   .. py:method:: extract(arch: any, source: list, lbl: str, forced_loop_type: any = None) -> any
       :canonical: slothy.helper.Loop.extract
       :staticmethod:
 
       .. autodoc2-docstring:: slothy.helper.Loop.extract
+
+.. py:function:: lookup_multidict(d: dict, inst: any, instclass: any) -> any
+   :canonical: slothy.helper.lookup_multidict
+
+   .. autodoc2-docstring:: slothy.helper.lookup_multidict

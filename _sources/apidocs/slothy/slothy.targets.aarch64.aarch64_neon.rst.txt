@@ -27,6 +27,9 @@ Classes
    * - :py:obj:`SubsLoop <slothy.targets.aarch64.aarch64_neon.SubsLoop>`
      - .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.SubsLoop
           :summary:
+   * - :py:obj:`BranchLoop <slothy.targets.aarch64.aarch64_neon.BranchLoop>`
+     - .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.BranchLoop
+          :summary:
    * - :py:obj:`Instruction <slothy.targets.aarch64.aarch64_neon.Instruction>`
      - .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.Instruction
           :summary:
@@ -50,6 +53,14 @@ Classes
    * - :py:obj:`vadd <slothy.targets.aarch64.aarch64_neon.vadd>`
      -
    * - :py:obj:`vsub <slothy.targets.aarch64.aarch64_neon.vsub>`
+     -
+   * - :py:obj:`Ldr_D <slothy.targets.aarch64.aarch64_neon.Ldr_D>`
+     -
+   * - :py:obj:`d_ldr <slothy.targets.aarch64.aarch64_neon.d_ldr>`
+     -
+   * - :py:obj:`d_ldr_with_postinc <slothy.targets.aarch64.aarch64_neon.d_ldr_with_postinc>`
+     -
+   * - :py:obj:`d_ldr_with_inc_writeback <slothy.targets.aarch64.aarch64_neon.d_ldr_with_inc_writeback>`
      -
    * - :py:obj:`Ldr_Q <slothy.targets.aarch64.aarch64_neon.Ldr_Q>`
      -
@@ -82,6 +93,8 @@ Classes
    * - :py:obj:`q_ldr_stack_with_inc <slothy.targets.aarch64.aarch64_neon.q_ldr_stack_with_inc>`
      -
    * - :py:obj:`q_ldr_with_inc <slothy.targets.aarch64.aarch64_neon.q_ldr_with_inc>`
+     -
+   * - :py:obj:`q_ldr_with_imm_shifted <slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted>`
      -
    * - :py:obj:`q_ld1_with_inc <slothy.targets.aarch64.aarch64_neon.q_ld1_with_inc>`
      -
@@ -133,7 +146,9 @@ Classes
      -
    * - :py:obj:`x_ldr_with_imm_uxtw <slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_uxtw>`
      -
-   * - :py:obj:`x_ldr_with_imm_lsl <slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_lsl>`
+   * - :py:obj:`x_ldr_with_imm_shifted <slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_shifted>`
+     -
+   * - :py:obj:`x_ldr_regidx <slothy.targets.aarch64.aarch64_neon.x_ldr_regidx>`
      -
    * - :py:obj:`x_ldr_with_postinc <slothy.targets.aarch64.aarch64_neon.x_ldr_with_postinc>`
      -
@@ -174,8 +189,6 @@ Classes
    * - :py:obj:`lsr_wform <slothy.targets.aarch64.aarch64_neon.lsr_wform>`
      -
    * - :py:obj:`asr_wform <slothy.targets.aarch64.aarch64_neon.asr_wform>`
-     -
-   * - :py:obj:`eor_wform <slothy.targets.aarch64.aarch64_neon.eor_wform>`
      -
    * - :py:obj:`AArch64BasicArithmetic <slothy.targets.aarch64.aarch64_neon.AArch64BasicArithmetic>`
      -
@@ -251,21 +264,15 @@ Classes
      -
    * - :py:obj:`AArch64ShiftedArithmetic <slothy.targets.aarch64.aarch64_neon.AArch64ShiftedArithmetic>`
      -
-   * - :py:obj:`eor_ror <slothy.targets.aarch64.aarch64_neon.eor_ror>`
+   * - :py:obj:`eor_shifted <slothy.targets.aarch64.aarch64_neon.eor_shifted>`
      -
-   * - :py:obj:`bic_ror <slothy.targets.aarch64.aarch64_neon.bic_ror>`
+   * - :py:obj:`bic_shifted <slothy.targets.aarch64.aarch64_neon.bic_shifted>`
      -
-   * - :py:obj:`add_lsl <slothy.targets.aarch64.aarch64_neon.add_lsl>`
+   * - :py:obj:`add_shifted <slothy.targets.aarch64.aarch64_neon.add_shifted>`
      -
-   * - :py:obj:`add_lsr <slothy.targets.aarch64.aarch64_neon.add_lsr>`
+   * - :py:obj:`adds_shifted <slothy.targets.aarch64.aarch64_neon.adds_shifted>`
      -
-   * - :py:obj:`adds_lsl <slothy.targets.aarch64.aarch64_neon.adds_lsl>`
-     -
-   * - :py:obj:`adds_lsr <slothy.targets.aarch64.aarch64_neon.adds_lsr>`
-     -
-   * - :py:obj:`add_asr <slothy.targets.aarch64.aarch64_neon.add_asr>`
-     -
-   * - :py:obj:`add_imm_lsl <slothy.targets.aarch64.aarch64_neon.add_imm_lsl>`
+   * - :py:obj:`add_imm_shifted <slothy.targets.aarch64.aarch64_neon.add_imm_shifted>`
      -
    * - :py:obj:`AArch64Shift <slothy.targets.aarch64.aarch64_neon.AArch64Shift>`
      -
@@ -283,7 +290,13 @@ Classes
      -
    * - :py:obj:`rev_w <slothy.targets.aarch64.aarch64_neon.rev_w>`
      -
+   * - :py:obj:`eor_wform <slothy.targets.aarch64.aarch64_neon.eor_wform>`
+     -
+   * - :py:obj:`eon_wform <slothy.targets.aarch64.aarch64_neon.eon_wform>`
+     -
    * - :py:obj:`eor <slothy.targets.aarch64.aarch64_neon.eor>`
+     -
+   * - :py:obj:`eon <slothy.targets.aarch64.aarch64_neon.eon>`
      -
    * - :py:obj:`orr <slothy.targets.aarch64.aarch64_neon.orr>`
      -
@@ -301,6 +314,8 @@ Classes
      -
    * - :py:obj:`bic <slothy.targets.aarch64.aarch64_neon.bic>`
      -
+   * - :py:obj:`bic_reg <slothy.targets.aarch64.aarch64_neon.bic_reg>`
+     -
    * - :py:obj:`orr_imm <slothy.targets.aarch64.aarch64_neon.orr_imm>`
      -
    * - :py:obj:`sbfx <slothy.targets.aarch64.aarch64_neon.sbfx>`
@@ -313,17 +328,21 @@ Classes
      -
    * - :py:obj:`orr_shifted <slothy.targets.aarch64.aarch64_neon.orr_shifted>`
      -
-   * - :py:obj:`orr_shifted_asr_w <slothy.targets.aarch64.aarch64_neon.orr_shifted_asr_w>`
-     -
-   * - :py:obj:`orr_shifted_asr <slothy.targets.aarch64.aarch64_neon.orr_shifted_asr>`
-     -
-   * - :py:obj:`eor_shifted_lsl <slothy.targets.aarch64.aarch64_neon.eor_shifted_lsl>`
+   * - :py:obj:`orr_shifted_w <slothy.targets.aarch64.aarch64_neon.orr_shifted_w>`
      -
    * - :py:obj:`AArch64ConditionalCompare <slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare>`
      -
+   * - :py:obj:`ccmp <slothy.targets.aarch64.aarch64_neon.ccmp>`
+     -
    * - :py:obj:`ccmp_xzr <slothy.targets.aarch64.aarch64_neon.ccmp_xzr>`
      -
-   * - :py:obj:`ccmp <slothy.targets.aarch64.aarch64_neon.ccmp>`
+   * - :py:obj:`ccmp_xzr2 <slothy.targets.aarch64.aarch64_neon.ccmp_xzr2>`
+     -
+   * - :py:obj:`ccmn <slothy.targets.aarch64.aarch64_neon.ccmn>`
+     -
+   * - :py:obj:`ccmn_xzr <slothy.targets.aarch64.aarch64_neon.ccmn_xzr>`
+     -
+   * - :py:obj:`ccmn_xzr2 <slothy.targets.aarch64.aarch64_neon.ccmn_xzr2>`
      -
    * - :py:obj:`AArch64ConditionalSelect <slothy.targets.aarch64.aarch64_neon.AArch64ConditionalSelect>`
      -
@@ -354,6 +373,10 @@ Classes
    * - :py:obj:`mov <slothy.targets.aarch64.aarch64_neon.mov>`
      -
    * - :py:obj:`AArch64Move <slothy.targets.aarch64.aarch64_neon.AArch64Move>`
+     -
+   * - :py:obj:`movz_imm <slothy.targets.aarch64.aarch64_neon.movz_imm>`
+     -
+   * - :py:obj:`movz_imm_lsl <slothy.targets.aarch64.aarch64_neon.movz_imm_lsl>`
      -
    * - :py:obj:`mov_imm <slothy.targets.aarch64.aarch64_neon.mov_imm>`
      -
@@ -433,6 +456,8 @@ Classes
      -
    * - :py:obj:`vqrdmulh_lane <slothy.targets.aarch64.aarch64_neon.vqrdmulh_lane>`
      -
+   * - :py:obj:`vqdmulh_vector <slothy.targets.aarch64.aarch64_neon.vqdmulh_vector>`
+     -
    * - :py:obj:`vqdmulh_lane <slothy.targets.aarch64.aarch64_neon.vqdmulh_lane>`
      -
    * - :py:obj:`fcsel_dform <slothy.targets.aarch64.aarch64_neon.fcsel_dform>`
@@ -443,6 +468,12 @@ Classes
    * - :py:obj:`vins_d <slothy.targets.aarch64.aarch64_neon.vins_d>`
      -
    * - :py:obj:`vins_d_force_output <slothy.targets.aarch64.aarch64_neon.vins_d_force_output>`
+     -
+   * - :py:obj:`AArch64NeonCount <slothy.targets.aarch64.aarch64_neon.AArch64NeonCount>`
+     -
+   * - :py:obj:`vcnt <slothy.targets.aarch64.aarch64_neon.vcnt>`
+     -
+   * - :py:obj:`vclz <slothy.targets.aarch64.aarch64_neon.vclz>`
      -
    * - :py:obj:`Mov_xtov_d <slothy.targets.aarch64.aarch64_neon.Mov_xtov_d>`
      -
@@ -466,9 +497,13 @@ Classes
      -
    * - :py:obj:`AArch64NeonLogical <slothy.targets.aarch64.aarch64_neon.AArch64NeonLogical>`
      -
+   * - :py:obj:`vtbl <slothy.targets.aarch64.aarch64_neon.vtbl>`
+     -
    * - :py:obj:`vand <slothy.targets.aarch64.aarch64_neon.vand>`
      -
    * - :py:obj:`vbic <slothy.targets.aarch64.aarch64_neon.vbic>`
+     -
+   * - :py:obj:`vbic_imm_shifted <slothy.targets.aarch64.aarch64_neon.vbic_imm_shifted>`
      -
    * - :py:obj:`vmvn <slothy.targets.aarch64.aarch64_neon.vmvn>`
      -
@@ -590,6 +625,8 @@ Classes
      -
    * - :py:obj:`Fmov <slothy.targets.aarch64.aarch64_neon.Fmov>`
      -
+   * - :py:obj:`fmov_s_form <slothy.targets.aarch64.aarch64_neon.fmov_s_form>`
+     -
    * - :py:obj:`fmov_0 <slothy.targets.aarch64.aarch64_neon.fmov_0>`
      -
    * - :py:obj:`fmov_0_force_output <slothy.targets.aarch64.aarch64_neon.fmov_0_force_output>`
@@ -614,9 +651,15 @@ Classes
      -
    * - :py:obj:`aese_x4 <slothy.targets.aarch64.aarch64_neon.aese_x4>`
      -
+   * - :py:obj:`aesdr <slothy.targets.aarch64.aarch64_neon.aesdr>`
+     -
    * - :py:obj:`aese <slothy.targets.aarch64.aarch64_neon.aese>`
      -
    * - :py:obj:`aesmc <slothy.targets.aarch64.aarch64_neon.aesmc>`
+     -
+   * - :py:obj:`aesd <slothy.targets.aarch64.aarch64_neon.aesd>`
+     -
+   * - :py:obj:`aesimc <slothy.targets.aarch64.aarch64_neon.aesimc>`
      -
    * - :py:obj:`pmull1_q <slothy.targets.aarch64.aarch64_neon.pmull1_q>`
      -
@@ -705,6 +748,20 @@ Classes
           :summary:
    * - :py:obj:`cmge <slothy.targets.aarch64.aarch64_neon.cmge>`
      -
+   * - :py:obj:`cmhi <slothy.targets.aarch64.aarch64_neon.cmhi>`
+     -
+   * - :py:obj:`cmeq <slothy.targets.aarch64.aarch64_neon.cmeq>`
+     -
+   * - :py:obj:`cmgt <slothy.targets.aarch64.aarch64_neon.cmgt>`
+     -
+   * - :py:obj:`cmhs <slothy.targets.aarch64.aarch64_neon.cmhs>`
+     -
+   * - :py:obj:`cmle <slothy.targets.aarch64.aarch64_neon.cmle>`
+     -
+   * - :py:obj:`cmlt <slothy.targets.aarch64.aarch64_neon.cmlt>`
+     -
+   * - :py:obj:`vuaddlv_sform <slothy.targets.aarch64.aarch64_neon.vuaddlv_sform>`
+     -
    * - :py:obj:`Spill <slothy.targets.aarch64.aarch64_neon.Spill>`
      - .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.Spill
           :summary:
@@ -757,9 +814,6 @@ Functions
           :summary:
    * - :py:obj:`all_subclass_leaves <slothy.targets.aarch64.aarch64_neon.all_subclass_leaves>`
      - .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.all_subclass_leaves
-          :summary:
-   * - :py:obj:`lookup_multidict <slothy.targets.aarch64.aarch64_neon.lookup_multidict>`
-     - .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.lookup_multidict
           :summary:
 
 Data
@@ -1026,6 +1080,27 @@ API
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.SubsLoop.end
 
+.. py:class:: BranchLoop(lbl='lbl')
+   :canonical: slothy.targets.aarch64.aarch64_neon.BranchLoop
+
+   Bases: :py:obj:`slothy.helper.Loop`
+
+   .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.BranchLoop
+
+   .. rubric:: Initialization
+
+   .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.BranchLoop.__init__
+
+   .. py:method:: start(loop_cnt, indentation=0, fixup=0, unroll=1, jump_if_empty=None, preamble_code=None, body_code=None, postamble_code=None, register_aliases=None)
+      :canonical: slothy.targets.aarch64.aarch64_neon.BranchLoop.start
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.BranchLoop.start
+
+   .. py:method:: end(other, indentation=0)
+      :canonical: slothy.targets.aarch64.aarch64_neon.BranchLoop.end
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.BranchLoop.end
+
 .. py:class:: Instruction(*, mnemonic, arg_types_in=None, arg_types_in_out=None, arg_types_out=None)
    :canonical: slothy.targets.aarch64.aarch64_neon.Instruction
 
@@ -1143,6 +1218,18 @@ API
       :value: None
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.AArch64Instruction.PARSERS
+
+   .. py:method:: _replace_duplicate_datatypes(src, mnemonic_key)
+      :canonical: slothy.targets.aarch64.aarch64_neon.AArch64Instruction._replace_duplicate_datatypes
+      :staticmethod:
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.AArch64Instruction._replace_duplicate_datatypes
+
+   .. py:method:: _enforce_datatype_matching(pattern, res)
+      :canonical: slothy.targets.aarch64.aarch64_neon.AArch64Instruction._enforce_datatype_matching
+      :staticmethod:
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.AArch64Instruction._enforce_datatype_matching
 
    .. py:method:: _unfold_pattern(src)
       :canonical: slothy.targets.aarch64.aarch64_neon.AArch64Instruction._unfold_pattern
@@ -1286,7 +1373,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vadd.pattern
-      :value: 'add <Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>'
+      :value: 'add <Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vadd.pattern
 
@@ -1309,7 +1396,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vsub.pattern
-      :value: 'sub <Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>'
+      :value: 'sub <Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsub.pattern
 
@@ -1324,6 +1411,92 @@ API
       :value: ['Va']
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsub.outputs
+
+.. py:class:: Ldr_D(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.Ldr_D
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
+
+.. py:class:: d_ldr(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.Ldr_D`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr.pattern
+      :value: 'ldr <Da>, [<Xc>]'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.d_ldr.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr.inputs
+      :value: ['Xc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.d_ldr.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr.outputs
+      :value: ['Da']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.d_ldr.outputs
+
+   .. py:method:: make(src)
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr.make
+      :classmethod:
+
+.. py:class:: d_ldr_with_postinc(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr_with_postinc
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.Ldr_D`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr_with_postinc.pattern
+      :value: 'ldr <Da>, [<Xc>], <imm>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.d_ldr_with_postinc.pattern
+
+   .. py:attribute:: in_outs
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr_with_postinc.in_outs
+      :value: ['Xc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.d_ldr_with_postinc.in_outs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr_with_postinc.outputs
+      :value: ['Da']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.d_ldr_with_postinc.outputs
+
+   .. py:method:: make(src)
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr_with_postinc.make
+      :classmethod:
+
+.. py:class:: d_ldr_with_inc_writeback(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr_with_inc_writeback
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.Ldr_D`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr_with_inc_writeback.pattern
+      :value: 'ldr <Da>, [<Xc>, <imm>]!'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.d_ldr_with_inc_writeback.pattern
+
+   .. py:attribute:: in_outs
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr_with_inc_writeback.in_outs
+      :value: ['Xc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.d_ldr_with_inc_writeback.in_outs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr_with_inc_writeback.outputs
+      :value: ['Da']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.d_ldr_with_inc_writeback.outputs
+
+   .. py:method:: make(src)
+      :canonical: slothy.targets.aarch64.aarch64_neon.d_ldr_with_inc_writeback.make
+      :classmethod:
 
 .. py:class:: Ldr_Q(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.Ldr_Q
@@ -1521,7 +1694,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc.pattern
-      :value: 'ld2 { <Va>.<dt0>, <Vb>.<dt1> }[<index>], [<Xa>], <imm>'
+      :value: 'ld2 { <Va>.<dt>, <Vb>.<dt> }[<index>], [<Xa>], <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc.pattern
 
@@ -1545,7 +1718,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc_force_output.pattern
-      :value: 'ld2 { <Va>.<dt0>, <Vb>.<dt1> }[<index>], [<Xa>], <imm>'
+      :value: 'ld2 { <Va>.<dt>, <Vb>.<dt> }[<index>], [<Xa>], <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc_force_output.pattern
 
@@ -1675,6 +1848,36 @@ API
 
    .. py:method:: write()
       :canonical: slothy.targets.aarch64.aarch64_neon.q_ldr_with_inc.write
+
+.. py:class:: q_ldr_with_imm_shifted(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.Ldr_Q`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted.pattern
+      :value: 'ldr <Qa>, [<Xa>, <Xc>, <barrel> <imm>]'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted.inputs
+      :value: ['Xa', 'Xc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted.outputs
+      :value: ['Qa']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted.outputs
+
+   .. py:method:: make(src)
+      :canonical: slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted.make
+      :classmethod:
+
+   .. py:method:: write()
+      :canonical: slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted.write
 
 .. py:class:: q_ld1_with_inc(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.q_ld1_with_inc
@@ -2279,35 +2482,65 @@ API
    .. py:method:: write()
       :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_uxtw.write
 
-.. py:class:: x_ldr_with_imm_lsl(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_lsl
+.. py:class:: x_ldr_with_imm_shifted(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_shifted
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.Ldr_X`
 
    .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_lsl.pattern
-      :value: 'ldr <Xd>, [<Xa>, <Xb>, LSL <imm>]'
+      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_shifted.pattern
+      :value: 'ldr <Xd>, [<Xa>, <Xb>, <barrel> <imm>]'
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_lsl.pattern
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_shifted.pattern
 
    .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_lsl.inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_shifted.inputs
       :value: ['Xa', 'Xb']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_lsl.inputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_shifted.inputs
 
    .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_lsl.outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_shifted.outputs
       :value: ['Xd']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_lsl.outputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_shifted.outputs
 
    .. py:method:: make(src)
-      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_lsl.make
+      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_shifted.make
       :classmethod:
 
    .. py:method:: write()
-      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_lsl.write
+      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_imm_shifted.write
+
+.. py:class:: x_ldr_regidx(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_regidx
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.Ldr_X`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_regidx.pattern
+      :value: 'ldr <Xa>, [<Xb>, <Xc>]'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.x_ldr_regidx.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_regidx.inputs
+      :value: ['Xb', 'Xc']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.x_ldr_regidx.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_regidx.outputs
+      :value: ['Xa']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.x_ldr_regidx.outputs
+
+   .. py:method:: make(src)
+      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_regidx.make
+      :classmethod:
+
+   .. py:method:: write()
+      :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_regidx.write
 
 .. py:class:: x_ldr_with_postinc(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.x_ldr_with_postinc
@@ -2823,29 +3056,6 @@ API
       :value: ['Wd']
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.asr_wform.outputs
-
-.. py:class:: eor_wform(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.eor_wform
-
-   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
-
-   .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.eor_wform.pattern
-      :value: 'eor <Wd>, <Wa>, <Wb>'
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_wform.pattern
-
-   .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.eor_wform.inputs
-      :value: ['Wa', 'Wb']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_wform.inputs
-
-   .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.eor_wform.outputs
-      :value: ['Wd']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_wform.outputs
 
 .. py:class:: AArch64BasicArithmetic(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.AArch64BasicArithmetic
@@ -3854,201 +4064,126 @@ API
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
 
-.. py:class:: eor_ror(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.eor_ror
+.. py:class:: eor_shifted(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.eor_shifted
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ShiftedArithmetic`
 
    .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.eor_ror.pattern
-      :value: 'eor <Xd>, <Xa>, <Xb>, ror <imm>'
+      :canonical: slothy.targets.aarch64.aarch64_neon.eor_shifted.pattern
+      :value: 'eor <Xd>, <Xa>, <Xb>, <barrel> <imm>'
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_ror.pattern
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_shifted.pattern
 
    .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.eor_ror.inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.eor_shifted.inputs
       :value: ['Xa', 'Xb']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_ror.inputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_shifted.inputs
 
    .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.eor_ror.outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.eor_shifted.outputs
       :value: ['Xd']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_ror.outputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_shifted.outputs
 
-.. py:class:: bic_ror(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.bic_ror
+.. py:class:: bic_shifted(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.bic_shifted
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ShiftedArithmetic`
 
    .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.bic_ror.pattern
-      :value: 'bic <Xd>, <Xa>, <Xb>, ror <imm>'
+      :canonical: slothy.targets.aarch64.aarch64_neon.bic_shifted.pattern
+      :value: 'bic <Xd>, <Xa>, <Xb>, <barrel> <imm>'
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.bic_ror.pattern
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.bic_shifted.pattern
 
    .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.bic_ror.inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.bic_shifted.inputs
       :value: ['Xa', 'Xb']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.bic_ror.inputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.bic_shifted.inputs
 
    .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.bic_ror.outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.bic_shifted.outputs
       :value: ['Xd']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.bic_ror.outputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.bic_shifted.outputs
 
-.. py:class:: add_lsl(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.add_lsl
+.. py:class:: add_shifted(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.add_shifted
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ShiftedArithmetic`
 
    .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_lsl.pattern
-      :value: 'add <Xd>, <Xa>, <Xb>, lsl <imm>'
+      :canonical: slothy.targets.aarch64.aarch64_neon.add_shifted.pattern
+      :value: 'add <Xd>, <Xa>, <Xb>, <barrel> <imm>'
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_lsl.pattern
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_shifted.pattern
 
    .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_lsl.inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.add_shifted.inputs
       :value: ['Xa', 'Xb']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_lsl.inputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_shifted.inputs
 
    .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_lsl.outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.add_shifted.outputs
       :value: ['Xd']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_lsl.outputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_shifted.outputs
 
-.. py:class:: add_lsr(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.add_lsr
+.. py:class:: adds_shifted(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.adds_shifted
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ShiftedArithmetic`
 
    .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_lsr.pattern
-      :value: 'add <Xd>, <Xa>, <Xb>, lsr <imm>'
+      :canonical: slothy.targets.aarch64.aarch64_neon.adds_shifted.pattern
+      :value: 'adds <Xd>, <Xa>, <Xb>, <barrel> <imm>'
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_lsr.pattern
-
-   .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_lsr.inputs
-      :value: ['Xa', 'Xb']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_lsr.inputs
-
-   .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_lsr.outputs
-      :value: ['Xd']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_lsr.outputs
-
-.. py:class:: adds_lsl(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.adds_lsl
-
-   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ShiftedArithmetic`
-
-   .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.adds_lsl.pattern
-      :value: 'adds <Xd>, <Xa>, <Xb>, lsl <imm>'
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_lsl.pattern
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_shifted.pattern
 
    .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.adds_lsl.inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.adds_shifted.inputs
       :value: ['Xa', 'Xb']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_lsl.inputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_shifted.inputs
 
    .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.adds_lsl.outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.adds_shifted.outputs
       :value: ['Xd']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_lsl.outputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_shifted.outputs
 
    .. py:attribute:: modifiesFlags
-      :canonical: slothy.targets.aarch64.aarch64_neon.adds_lsl.modifiesFlags
+      :canonical: slothy.targets.aarch64.aarch64_neon.adds_shifted.modifiesFlags
       :value: True
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_lsl.modifiesFlags
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_shifted.modifiesFlags
 
-.. py:class:: adds_lsr(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.adds_lsr
-
-   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ShiftedArithmetic`
-
-   .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.adds_lsr.pattern
-      :value: 'adds <Xd>, <Xa>, <Xb>, lsr <imm>'
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_lsr.pattern
-
-   .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.adds_lsr.inputs
-      :value: ['Xa', 'Xb']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_lsr.inputs
-
-   .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.adds_lsr.outputs
-      :value: ['Xd']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_lsr.outputs
-
-   .. py:attribute:: modifiesFlags
-      :canonical: slothy.targets.aarch64.aarch64_neon.adds_lsr.modifiesFlags
-      :value: True
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.adds_lsr.modifiesFlags
-
-.. py:class:: add_asr(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.add_asr
+.. py:class:: add_imm_shifted(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.add_imm_shifted
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ShiftedArithmetic`
 
    .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_asr.pattern
-      :value: 'add <Xd>, <Xa>, <Xb>, asr <imm>'
+      :canonical: slothy.targets.aarch64.aarch64_neon.add_imm_shifted.pattern
+      :value: 'add <Xd>, <Xa>, <imm0>, <barrel> <imm1>'
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_asr.pattern
-
-   .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_asr.inputs
-      :value: ['Xa', 'Xb']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_asr.inputs
-
-   .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_asr.outputs
-      :value: ['Xd']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_asr.outputs
-
-.. py:class:: add_imm_lsl(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.add_imm_lsl
-
-   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ShiftedArithmetic`
-
-   .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_imm_lsl.pattern
-      :value: 'add <Xd>, <Xa>, <imm0>, lsl <imm1>'
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_imm_lsl.pattern
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_imm_shifted.pattern
 
    .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_imm_lsl.inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.add_imm_shifted.inputs
       :value: ['Xa']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_imm_lsl.inputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_imm_shifted.inputs
 
    .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.add_imm_lsl.outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.add_imm_shifted.outputs
       :value: ['Xd']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_imm_lsl.outputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.add_imm_shifted.outputs
 
 .. py:class:: AArch64Shift(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.AArch64Shift
@@ -4198,6 +4333,52 @@ API
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.rev_w.outputs
 
+.. py:class:: eor_wform(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.eor_wform
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Logical`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.eor_wform.pattern
+      :value: 'eor <Wd>, <Wa>, <Wb>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_wform.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.eor_wform.inputs
+      :value: ['Wa', 'Wb']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_wform.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.eor_wform.outputs
+      :value: ['Wd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_wform.outputs
+
+.. py:class:: eon_wform(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.eon_wform
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Logical`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.eon_wform.pattern
+      :value: 'eon <Wd>, <Wa>, <Wb>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eon_wform.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.eon_wform.inputs
+      :value: ['Wa', 'Wb']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eon_wform.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.eon_wform.outputs
+      :value: ['Wd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eon_wform.outputs
+
 .. py:class:: eor(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.eor
 
@@ -4220,6 +4401,29 @@ API
       :value: ['Xd']
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor.outputs
+
+.. py:class:: eon(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.eon
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Logical`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.eon.pattern
+      :value: 'eon <Xd>, <Xa>, <Xb>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eon.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.eon.inputs
+      :value: ['Xa', 'Xb']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eon.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.eon.outputs
+      :value: ['Xd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eon.outputs
 
 .. py:class:: orr(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.orr
@@ -4411,6 +4615,29 @@ API
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.bic.outputs
 
+.. py:class:: bic_reg(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.bic_reg
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Logical`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.bic_reg.pattern
+      :value: 'bic <Xd>, <Xa>, <Xb>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.bic_reg.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.bic_reg.inputs
+      :value: ['Xa', 'Xb']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.bic_reg.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.bic_reg.outputs
+      :value: ['Xd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.bic_reg.outputs
+
 .. py:class:: orr_imm(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.orr_imm
 
@@ -4515,7 +4742,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted.pattern
-      :value: 'orr <Xd>, <Xa>, <Xb>, lsl <imm>'
+      :value: 'orr <Xd>, <Xa>, <Xb>, <barrel> <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.orr_shifted.pattern
 
@@ -4531,108 +4758,33 @@ API
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.orr_shifted.outputs
 
-.. py:class:: orr_shifted_asr_w(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr_w
+.. py:class:: orr_shifted_w(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_w
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64LogicalShifted`
 
    .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr_w.pattern
-      :value: 'and <Wd>, <Wa>, <Wb>, asr <imm>'
+      :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_w.pattern
+      :value: 'and <Wd>, <Wa>, <Wb>, <barrel> <imm>'
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr_w.pattern
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.orr_shifted_w.pattern
 
    .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr_w.inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_w.inputs
       :value: ['Wa', 'Wb']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr_w.inputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.orr_shifted_w.inputs
 
    .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr_w.outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_w.outputs
       :value: ['Wd']
 
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr_w.outputs
-
-.. py:class:: orr_shifted_asr(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr
-
-   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64LogicalShifted`
-
-   .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr.pattern
-      :value: 'orr <Xd>, <Xa>, <Xb>, asr <imm>'
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr.pattern
-
-   .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr.inputs
-      :value: ['Xa', 'Xb']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr.inputs
-
-   .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr.outputs
-      :value: ['Xd']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.orr_shifted_asr.outputs
-
-.. py:class:: eor_shifted_lsl(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.eor_shifted_lsl
-
-   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64LogicalShifted`
-
-   .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.eor_shifted_lsl.pattern
-      :value: 'eor <Xd>, <Xa>, <Xb>, lsl <imm>'
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_shifted_lsl.pattern
-
-   .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.eor_shifted_lsl.inputs
-      :value: ['Xa', 'Xb']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_shifted_lsl.inputs
-
-   .. py:attribute:: outputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.eor_shifted_lsl.outputs
-      :value: ['Xd']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.eor_shifted_lsl.outputs
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.orr_shifted_w.outputs
 
 .. py:class:: AArch64ConditionalCompare(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
-
-.. py:class:: ccmp_xzr(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
-   :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr
-
-   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare`
-
-   .. py:attribute:: pattern
-      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.pattern
-      :value: 'ccmp <Xa>, xzr, <imm>, <flag>'
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.pattern
-
-   .. py:attribute:: inputs
-      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.inputs
-      :value: ['Xa']
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.inputs
-
-   .. py:attribute:: modifiesFlags
-      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.modifiesFlags
-      :value: True
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.modifiesFlags
-
-   .. py:attribute:: dependsOnFlags
-      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.dependsOnFlags
-      :value: True
-
-      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.dependsOnFlags
 
 .. py:class:: ccmp(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.ccmp
@@ -4662,6 +4814,151 @@ API
       :value: True
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp.dependsOnFlags
+
+.. py:class:: ccmp_xzr(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.pattern
+      :value: 'ccmp xzr, <Xa>, <imm>, <flag>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.inputs
+      :value: ['Xa']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.inputs
+
+   .. py:attribute:: modifiesFlags
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.modifiesFlags
+      :value: True
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.modifiesFlags
+
+   .. py:attribute:: dependsOnFlags
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.dependsOnFlags
+      :value: True
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr.dependsOnFlags
+
+.. py:class:: ccmp_xzr2(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr2
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr2.pattern
+      :value: 'ccmp <Xa>, xzr, <imm>, <flag>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr2.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr2.inputs
+      :value: ['Xa']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr2.inputs
+
+   .. py:attribute:: modifiesFlags
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr2.modifiesFlags
+      :value: True
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr2.modifiesFlags
+
+   .. py:attribute:: dependsOnFlags
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmp_xzr2.dependsOnFlags
+      :value: True
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmp_xzr2.dependsOnFlags
+
+.. py:class:: ccmn(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.ccmn
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn.pattern
+      :value: 'ccmn <Xa>, <Xb>, <imm>, <flag>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn.inputs
+      :value: ['Xa', 'Xb']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn.inputs
+
+   .. py:attribute:: modifiesFlags
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn.modifiesFlags
+      :value: True
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn.modifiesFlags
+
+   .. py:attribute:: dependsOnFlags
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn.dependsOnFlags
+      :value: True
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn.dependsOnFlags
+
+.. py:class:: ccmn_xzr(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.ccmn_xzr
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn_xzr.pattern
+      :value: 'ccmn xzr, <Xa>, <imm>, <flag>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn_xzr.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn_xzr.inputs
+      :value: ['Xa']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn_xzr.inputs
+
+   .. py:attribute:: modifiesFlags
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn_xzr.modifiesFlags
+      :value: True
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn_xzr.modifiesFlags
+
+   .. py:attribute:: dependsOnFlags
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn_xzr.dependsOnFlags
+      :value: True
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn_xzr.dependsOnFlags
+
+.. py:class:: ccmn_xzr2(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.ccmn_xzr2
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn_xzr2.pattern
+      :value: 'ccmn <Xa>, xzr, <imm>, <flag>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn_xzr2.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn_xzr2.inputs
+      :value: ['Xa']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn_xzr2.inputs
+
+   .. py:attribute:: modifiesFlags
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn_xzr2.modifiesFlags
+      :value: True
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn_xzr2.modifiesFlags
+
+   .. py:attribute:: dependsOnFlags
+      :canonical: slothy.targets.aarch64.aarch64_neon.ccmn_xzr2.dependsOnFlags
+      :value: True
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ccmn_xzr2.dependsOnFlags
 
 .. py:class:: AArch64ConditionalSelect(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.AArch64ConditionalSelect
@@ -5007,6 +5304,52 @@ API
    :canonical: slothy.targets.aarch64.aarch64_neon.AArch64Move
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
+
+.. py:class:: movz_imm(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.movz_imm
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Move`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.movz_imm.pattern
+      :value: 'movz <Xd>, <imm>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.movz_imm.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.movz_imm.inputs
+      :value: []
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.movz_imm.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.movz_imm.outputs
+      :value: ['Xd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.movz_imm.outputs
+
+.. py:class:: movz_imm_lsl(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.movz_imm_lsl
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Move`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.movz_imm_lsl.pattern
+      :value: 'movz <Xd>, <imm0>, <barrel> <imm1>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.movz_imm_lsl.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.movz_imm_lsl.inputs
+      :value: []
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.movz_imm_lsl.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.movz_imm_lsl.outputs
+      :value: ['Xd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.movz_imm_lsl.outputs
 
 .. py:class:: mov_imm(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.mov_imm
@@ -5655,7 +5998,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vzip1.pattern
-      :value: 'zip1 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'zip1 <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vzip1.pattern
 
@@ -5678,7 +6021,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vzip2.pattern
-      :value: 'zip2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'zip2 <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vzip2.pattern
 
@@ -5701,7 +6044,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vuzp1.pattern
-      :value: 'uzp1 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'uzp1 <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vuzp1.pattern
 
@@ -5724,7 +6067,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vuzp2.pattern
-      :value: 'uzp2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'uzp2 <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vuzp2.pattern
 
@@ -5752,7 +6095,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vqrdmulh.pattern
-      :value: 'sqrdmulh <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'sqrdmulh <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vqrdmulh.pattern
 
@@ -5775,7 +6118,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vqrdmulh_lane.pattern
-      :value: 'sqrdmulh <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>[<index>]'
+      :value: 'sqrdmulh <Vd>.<dt0>, <Va>.<dt0>, <Vb>.<dt1>[<index>]'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vqrdmulh_lane.pattern
 
@@ -5795,6 +6138,29 @@ API
       :canonical: slothy.targets.aarch64.aarch64_neon.vqrdmulh_lane.make
       :classmethod:
 
+.. py:class:: vqdmulh_vector(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.vqdmulh_vector
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.Vqdmulh`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.vqdmulh_vector.pattern
+      :value: 'sqdmulh <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vqdmulh_vector.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.vqdmulh_vector.inputs
+      :value: ['Va', 'Vb']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vqdmulh_vector.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.vqdmulh_vector.outputs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vqdmulh_vector.outputs
+
 .. py:class:: vqdmulh_lane(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.vqdmulh_lane
 
@@ -5802,7 +6168,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vqdmulh_lane.pattern
-      :value: 'sqdmulh <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>[<index>]'
+      :value: 'sqdmulh <Vd>.<dt0>, <Va>.<dt0>, <Vb>.<dt1>[<index>]'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vqdmulh_lane.pattern
 
@@ -5894,6 +6260,57 @@ API
    .. py:method:: make(src, force=False)
       :canonical: slothy.targets.aarch64.aarch64_neon.vins_d_force_output.make
       :classmethod:
+
+.. py:class:: AArch64NeonCount(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.AArch64NeonCount
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
+
+.. py:class:: vcnt(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.vcnt
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64NeonCount`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.vcnt.pattern
+      :value: 'cnt <Vd>.<dt>, <Va>.<dt>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vcnt.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.vcnt.inputs
+      :value: ['Va']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vcnt.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.vcnt.outputs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vcnt.outputs
+
+.. py:class:: vclz(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.vclz
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64NeonCount`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.vclz.pattern
+      :value: 'clz <Vd>.<dt>, <Va>.<dt>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vclz.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.vclz.inputs
+      :value: ['Va']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vclz.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.vclz.outputs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vclz.outputs
 
 .. py:class:: Mov_xtov_d(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.Mov_xtov_d
@@ -5998,7 +6415,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vrax1.pattern
-      :value: 'rax1 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'rax1 <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vrax1.pattern
 
@@ -6021,7 +6438,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.veor3.pattern
-      :value: 'eor3 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>, <Vc>.<dt3>'
+      :value: 'eor3 <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.veor3.pattern
 
@@ -6044,7 +6461,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vbcax.pattern
-      :value: 'bcax <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>, <Vc>.<dt3>'
+      :value: 'bcax <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vbcax.pattern
 
@@ -6067,7 +6484,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vxar.pattern
-      :value: 'xar <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>, <imm>'
+      :value: 'xar <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>, <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vxar.pattern
 
@@ -6088,6 +6505,29 @@ API
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
 
+.. py:class:: vtbl(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.vtbl
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.vtbl.pattern
+      :value: 'tbl <Vd>.<dt>, {<Va>.<dt>}, <Vb>.<dt>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vtbl.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.vtbl.inputs
+      :value: ['Va', 'Vb']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vtbl.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.vtbl.outputs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vtbl.outputs
+
 .. py:class:: vand(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.vand
 
@@ -6095,7 +6535,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vand.pattern
-      :value: 'and <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'and <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vand.pattern
 
@@ -6118,7 +6558,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vbic.pattern
-      :value: 'bic <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'bic <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vbic.pattern
 
@@ -6134,6 +6574,23 @@ API
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vbic.outputs
 
+.. py:class:: vbic_imm_shifted(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.vbic_imm_shifted
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64NeonLogical`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.vbic_imm_shifted.pattern
+      :value: 'bic <Vda>.<dt>, <imm0>, <barrel> <imm1>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vbic_imm_shifted.pattern
+
+   .. py:attribute:: in_outs
+      :canonical: slothy.targets.aarch64.aarch64_neon.vbic_imm_shifted.in_outs
+      :value: ['Vda']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vbic_imm_shifted.in_outs
+
 .. py:class:: vmvn(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.vmvn
 
@@ -6141,7 +6598,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vmvn.pattern
-      :value: 'mvn <Vd>.<dt0>, <Va>.<dt1>'
+      :value: 'mvn <Vd>.<dt>, <Va>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vmvn.pattern
 
@@ -6164,7 +6621,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vorr.pattern
-      :value: 'orr <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'orr <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vorr.pattern
 
@@ -6187,7 +6644,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vorn.pattern
-      :value: 'orn <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'orn <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vorn.pattern
 
@@ -6210,7 +6667,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.veor.pattern
-      :value: 'eor <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'eor <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.veor.pattern
 
@@ -6279,7 +6736,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vext.pattern
-      :value: 'ext <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>, <imm>'
+      :value: 'ext <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>, <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vext.pattern
 
@@ -6307,7 +6764,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vmul.pattern
-      :value: 'mul <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'mul <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vmul.pattern
 
@@ -6330,7 +6787,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vmul_lane.pattern
-      :value: 'mul <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>[<index>]'
+      :value: 'mul <Vd>.<dt0>, <Va>.<dt0>, <Vb>.<dt1>[<index>]'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vmul_lane.pattern
 
@@ -6362,7 +6819,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vmla.pattern
-      :value: 'mla <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'mla <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vmla.pattern
 
@@ -6385,7 +6842,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vmla_lane.pattern
-      :value: 'mla <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>[<index>]'
+      :value: 'mla <Vd>.<dt0>, <Va>.<dt0>, <Vb>.<dt1>[<index>]'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vmla_lane.pattern
 
@@ -6412,7 +6869,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vmls.pattern
-      :value: 'mls <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'mls <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vmls.pattern
 
@@ -6435,7 +6892,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vmls_lane.pattern
-      :value: 'mls <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>[<index>]'
+      :value: 'mls <Vd>.<dt0>, <Va>.<dt0>, <Vb>.<dt1>[<index>]'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vmls_lane.pattern
 
@@ -6490,7 +6947,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vumull.pattern
-      :value: 'umull <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'umull <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vumull.pattern
 
@@ -6513,7 +6970,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vumull2.pattern
-      :value: 'umull2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'umull2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vumull2.pattern
 
@@ -6536,7 +6993,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vsmull.pattern
-      :value: 'smull <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'smull <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsmull.pattern
 
@@ -6559,7 +7016,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vsmull2.pattern
-      :value: 'smull2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'smull2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsmull2.pattern
 
@@ -6695,7 +7152,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vumlal.pattern
-      :value: 'umlal <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'umlal <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vumlal.pattern
 
@@ -6718,7 +7175,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vumlal2.pattern
-      :value: 'umlal2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'umlal2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vumlal2.pattern
 
@@ -6741,7 +7198,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vsmlal.pattern
-      :value: 'smlal <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'smlal <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsmlal.pattern
 
@@ -6764,7 +7221,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vsmlal2.pattern
-      :value: 'smlal2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'smlal2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsmlal2.pattern
 
@@ -6895,7 +7352,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vumlsl.pattern
-      :value: 'umlsl <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'umlsl <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vumlsl.pattern
 
@@ -6918,7 +7375,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vumlsl2.pattern
-      :value: 'umlsl2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'umlsl2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vumlsl2.pattern
 
@@ -6941,7 +7398,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vsmlsl.pattern
-      :value: 'smlsl <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'smlsl <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsmlsl.pattern
 
@@ -6964,7 +7421,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vsmlsl2.pattern
-      :value: 'smlsl2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'smlsl2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt1>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsmlsl2.pattern
 
@@ -7100,7 +7557,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vshl.pattern
-      :value: 'shl <Vd>.<dt0>, <Va>.<dt1>, <imm>'
+      :value: 'shl <Vd>.<dt>, <Va>.<dt>, <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vshl.pattern
 
@@ -7169,7 +7626,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vsshr.pattern
-      :value: 'sshr <Vd>.<dt0>, <Va>.<dt1>, <imm>'
+      :value: 'sshr <Vd>.<dt>, <Va>.<dt>, <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsshr.pattern
 
@@ -7192,7 +7649,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vushr.pattern
-      :value: 'ushr <Vd>.<dt0>, <Va>.<dt1>, <imm>'
+      :value: 'ushr <Vd>.<dt>, <Va>.<dt>, <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vushr.pattern
 
@@ -7243,7 +7700,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vsrshr.pattern
-      :value: 'srshr <Vd>.<dt0>, <Va>.<dt1>, <imm>'
+      :value: 'srshr <Vd>.<dt>, <Va>.<dt>, <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsrshr.pattern
 
@@ -7266,7 +7723,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vurshr.pattern
-      :value: 'urshr <Vd>.<dt0>, <Va>.<dt1>, <imm>'
+      :value: 'urshr <Vd>.<dt>, <Va>.<dt>, <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vurshr.pattern
 
@@ -7294,7 +7751,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vsli.pattern
-      :value: 'sli <Vd>.<dt0>, <Va>.<dt1>, <imm>'
+      :value: 'sli <Vd>.<dt>, <Va>.<dt>, <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsli.pattern
 
@@ -7317,7 +7774,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.vsri.pattern
-      :value: 'sri <Vd>.<dt0>, <Va>.<dt1>, <imm>'
+      :value: 'sri <Vd>.<dt>, <Va>.<dt>, <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vsri.pattern
 
@@ -7411,6 +7868,29 @@ API
    :canonical: slothy.targets.aarch64.aarch64_neon.Fmov
 
    Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
+
+.. py:class:: fmov_s_form(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.fmov_s_form
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.Fmov`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.fmov_s_form.pattern
+      :value: 'fmov <Wd>, <Sa>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.fmov_s_form.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.fmov_s_form.inputs
+      :value: ['Sa']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.fmov_s_form.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.fmov_s_form.outputs
+      :value: ['Wd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.fmov_s_form.outputs
 
 .. py:class:: fmov_0(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.fmov_0
@@ -7524,7 +8004,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.trn1.pattern
-      :value: 'trn1 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'trn1 <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.trn1.pattern
 
@@ -7547,7 +8027,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.trn2.pattern
-      :value: 'trn2 <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'trn2 <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.trn2.pattern
 
@@ -7660,6 +8140,29 @@ API
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.aese_x4.in_outs
 
+.. py:class:: aesdr(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.aesdr
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AESInstruction`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.aesdr.pattern
+      :value: 'aesdr <Vd>.16b, <Va>.16b'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.aesdr.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.aesdr.inputs
+      :value: ['Va']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.aesdr.inputs
+
+   .. py:attribute:: in_outs
+      :canonical: slothy.targets.aarch64.aarch64_neon.aesdr.in_outs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.aesdr.in_outs
+
 .. py:class:: aese(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.aese
 
@@ -7705,6 +8208,52 @@ API
       :value: ['Vd']
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.aesmc.outputs
+
+.. py:class:: aesd(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.aesd
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AESInstruction`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.aesd.pattern
+      :value: 'aesd <Vd>.16b, <Va>.16b'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.aesd.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.aesd.inputs
+      :value: ['Va']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.aesd.inputs
+
+   .. py:attribute:: in_outs
+      :canonical: slothy.targets.aarch64.aarch64_neon.aesd.in_outs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.aesd.in_outs
+
+.. py:class:: aesimc(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.aesimc
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AESInstruction`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.aesimc.pattern
+      :value: 'aesimc <Vd>.16b, <Va>.16b'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.aesimc.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.aesimc.inputs
+      :value: ['Va']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.aesimc.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.aesimc.outputs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.aesimc.outputs
 
 .. py:class:: pmull1_q(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
    :canonical: slothy.targets.aarch64.aarch64_neon.pmull1_q
@@ -8272,7 +8821,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.st4_base.pattern
-      :value: 'st4 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>, <Vd>.<dt3>}, [<Xc>]'
+      :value: 'st4 {<Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>, <Vd>.<dt>}, [<Xc>]'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.st4_base.pattern
 
@@ -8293,7 +8842,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.st4_with_inc.pattern
-      :value: 'st4 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>, <Vd>.<dt3>}, [<Xc>], <imm>'
+      :value: 'st4 {<Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>, <Vd>.<dt>}, [<Xc>], <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.st4_with_inc.pattern
 
@@ -8325,7 +8874,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.st3_base.pattern
-      :value: 'st3 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>}, [<Xc>]'
+      :value: 'st3 {<Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>}, [<Xc>]'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.st3_base.pattern
 
@@ -8346,7 +8895,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.st3_with_inc.pattern
-      :value: 'st3 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>}, [<Xc>], <imm>'
+      :value: 'st3 {<Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>}, [<Xc>], <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.st3_with_inc.pattern
 
@@ -8378,7 +8927,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.st2_base.pattern
-      :value: 'st2 {<Va>.<dt0>, <Vb>.<dt1>}, [<Xc>]'
+      :value: 'st2 {<Va>.<dt>, <Vb>.<dt>}, [<Xc>]'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.st2_base.pattern
 
@@ -8399,7 +8948,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.st2_with_inc.pattern
-      :value: 'st2 {<Va>.<dt0>, <Vb>.<dt1>}, [<Xc>], <imm>'
+      :value: 'st2 {<Va>.<dt>, <Vb>.<dt>}, [<Xc>], <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.st2_with_inc.pattern
 
@@ -8431,7 +8980,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.ld4_base.pattern
-      :value: 'ld4 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>, <Vd>.<dt3>}, [<Xc>]'
+      :value: 'ld4 {<Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>, <Vd>.<dt>}, [<Xc>]'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld4_base.pattern
 
@@ -8458,7 +9007,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.ld4_with_inc.pattern
-      :value: 'ld4 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>, <Vd>.<dt3>}, [<Xc>], <imm>'
+      :value: 'ld4 {<Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>, <Vd>.<dt>}, [<Xc>], <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld4_with_inc.pattern
 
@@ -8490,7 +9039,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.ld3_base.pattern
-      :value: 'ld3 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>}, [<Xc>]'
+      :value: 'ld3 {<Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>}, [<Xc>]'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld3_base.pattern
 
@@ -8517,7 +9066,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.ld3_with_inc.pattern
-      :value: 'ld3 {<Va>.<dt0>, <Vb>.<dt1>, <Vc>.<dt2>}, [<Xc>], <imm>'
+      :value: 'ld3 {<Va>.<dt>, <Vb>.<dt>, <Vc>.<dt>}, [<Xc>], <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld3_with_inc.pattern
 
@@ -8549,7 +9098,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.ld2_base.pattern
-      :value: 'ld2 {<Va>.<dt0>, <Vb>.<dt1>}, [<Xc>]'
+      :value: 'ld2 {<Va>.<dt>, <Vb>.<dt>}, [<Xc>]'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld2_base.pattern
 
@@ -8576,7 +9125,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.ld2_with_inc.pattern
-      :value: 'ld2 {<Va>.<dt0>, <Vb>.<dt1>}, [<Xc>], <imm>'
+      :value: 'ld2 {<Va>.<dt>, <Vb>.<dt>}, [<Xc>], <imm>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.ld2_with_inc.pattern
 
@@ -8614,7 +9163,7 @@ API
 
    .. py:attribute:: pattern
       :canonical: slothy.targets.aarch64.aarch64_neon.cmge.pattern
-      :value: 'cmge <Vd>.<dt0>, <Va>.<dt1>, <Vb>.<dt2>'
+      :value: 'cmge <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmge.pattern
 
@@ -8629,6 +9178,167 @@ API
       :value: ['Vd']
 
       .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmge.outputs
+
+.. py:class:: cmhi(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.cmhi
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.ASimdCompare`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmhi.pattern
+      :value: 'cmhi <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmhi.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmhi.inputs
+      :value: ['Va', 'Vb']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmhi.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmhi.outputs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmhi.outputs
+
+.. py:class:: cmeq(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.cmeq
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.ASimdCompare`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmeq.pattern
+      :value: 'cmeq <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmeq.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmeq.inputs
+      :value: ['Va', 'Vb']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmeq.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmeq.outputs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmeq.outputs
+
+.. py:class:: cmgt(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.cmgt
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.ASimdCompare`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmgt.pattern
+      :value: 'cmgt <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmgt.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmgt.inputs
+      :value: ['Va', 'Vb']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmgt.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmgt.outputs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmgt.outputs
+
+.. py:class:: cmhs(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.cmhs
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.ASimdCompare`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmhs.pattern
+      :value: 'cmhs <Vd>.<dt>, <Va>.<dt>, <Vb>.<dt>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmhs.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmhs.inputs
+      :value: ['Va', 'Vb']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmhs.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmhs.outputs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmhs.outputs
+
+.. py:class:: cmle(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.cmle
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.ASimdCompare`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmle.pattern
+      :value: 'cmle <Vd>.<dt>, <Va>.<dt>, <imm>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmle.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmle.inputs
+      :value: ['Va']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmle.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmle.outputs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmle.outputs
+
+.. py:class:: cmlt(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.cmlt
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.ASimdCompare`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmlt.pattern
+      :value: 'cmlt <Vd>.<dt>, <Va>.<dt>, <imm>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmlt.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmlt.inputs
+      :value: ['Va']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmlt.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.cmlt.outputs
+      :value: ['Vd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.cmlt.outputs
+
+.. py:class:: vuaddlv_sform(pattern, *, inputs=None, outputs=None, in_outs=None, modifiesFlags=False, dependsOnFlags=False)
+   :canonical: slothy.targets.aarch64.aarch64_neon.vuaddlv_sform
+
+   Bases: :py:obj:`slothy.targets.aarch64.aarch64_neon.AArch64Instruction`
+
+   .. py:attribute:: pattern
+      :canonical: slothy.targets.aarch64.aarch64_neon.vuaddlv_sform.pattern
+      :value: 'uaddlv <Sd>, <Va>.<dt>'
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vuaddlv_sform.pattern
+
+   .. py:attribute:: inputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.vuaddlv_sform.inputs
+      :value: ['Va']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vuaddlv_sform.inputs
+
+   .. py:attribute:: outputs
+      :canonical: slothy.targets.aarch64.aarch64_neon.vuaddlv_sform.outputs
+      :value: ['Sd']
+
+      .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.vuaddlv_sform.outputs
 
 .. py:class:: Spill
    :canonical: slothy.targets.aarch64.aarch64_neon.Spill
@@ -8714,8 +9424,3 @@ API
    :canonical: slothy.targets.aarch64.aarch64_neon.all_subclass_leaves
 
    .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.all_subclass_leaves
-
-.. py:function:: lookup_multidict(d, inst, default=None)
-   :canonical: slothy.targets.aarch64.aarch64_neon.lookup_multidict
-
-   .. autodoc2-docstring:: slothy.targets.aarch64.aarch64_neon.lookup_multidict
