@@ -33,6 +33,14 @@
     vsub.vv \b, \a, tmp1                                    // b = b - tmp1
 .endm
 
+.macro transpose4 data, ptr
+    vsseg4e32.v \data, (\ptr)
+    vl4re32.v \data, (\ptr)  // loads data into data0, data1, data2, data3
+    // alternative:
+    // vle32.v data0, ptr
+    // vle32.v data1, ptr+1 etc.
+.end
+
 .data
 .p2align 4
 roots:
@@ -92,9 +100,10 @@ _ntt_dilithium_1234_5678:
 
     tmp0    .req v23  // used by barret_mul
     tmp1    .req v24  // used by ct_butterfly
+    tmp2    .req v25  // free to use
 
-    .equ L_STRIDE, 64
-    .equ S_STRIDE, 16
+    .equ L_STRIDE, 64  // Load Stride = distance between coefficients pairs of four
+    .equ S_STRIDE, 16  // Shift Stride = distance of coefficients between two iterations
 
     // other loads here?
     li count, 4
@@ -140,7 +149,7 @@ layer1234_start:
     vle32.v data15, (in)
 
     // Merge 4 layers (interleaved)
-    // level 1
+    // level 1 - Stride = 128*32 byte -> BF(a0,a128), BF(a16, a144) ...
     ct_butterfly data0, data8, root1, barretc_1
     ct_butterfly data1, data9, root1, barretc_1
     ct_butterfly data2, data10, root1, barretc_1
@@ -150,7 +159,7 @@ layer1234_start:
     ct_butterfly data6, data14, root1, barretc_1
     ct_butterfly data7, data15, root1, barretc_1
 
-    // level 2
+    // level 2 - Stride = 64*32 byte -> BF(a0, a64), BF(16, 80) ...
     ct_butterfly data0, data4, root2, barretc_2
     ct_butterfly data1, data5, root2, barretc_2
     ct_butterfly data2, data6, root2, barretc_2
@@ -160,7 +169,7 @@ layer1234_start:
     ct_butterfly data10, data14, root3, barretc_3
     ct_butterfly data11, data15, root3, barretc_3
 
-    // level 3
+    // level 3 - Stride = 32*32 byte -> BF(a0, a32), BF(a16, a48) ...
     ct_butterfly data0, data2, root4, barretc_4
     ct_butterfly data1, data3, root4, barretc_4
     ct_butterfly data4, data6, root5, barretc_5
@@ -170,7 +179,7 @@ layer1234_start:
     ct_butterfly data12, data14, root6, barretc_7
     ct_butterfly data13, data15, root7, barretc_7
 
-    // level 4
+    // level 4 - Stride = 16*32 byte -> BF(a0, a16), BF(a32, a48) ...
     ct_butterfly data0, data1, root8, barretc_8
     ct_butterfly data2, data3, root9, barretc_9
     ct_butterfly data4, data5, root10, barretc_10
@@ -180,9 +189,10 @@ layer1234_start:
     ct_butterfly data12, data13, root14, barretc_14
     ct_butterfly data14, data15, root15, barretc_15
 
-    addi, in, in, -15*L_STRIDE  // decrement pointer to original value
+    addi in, in, -15*L_STRIDE  // decrement pointer to original value
 
     // make this a loop?
+    // store results
     vse32.v data0, (in)
     addi in, in, L_STRIDE
     vse32.v data1, (in)
@@ -215,13 +225,71 @@ layer1234_start:
     addi in, in, L_STRIDE
     vse32.v data15, (in)
 
-    addi in, in, S_STRIDE  // load next coeffient pairs, shifted by 16 bytes
+    addi in, in, S_STRIDE  // load next coeffient pairs, all shifted by 16 bytes
 layer1234_end:
     addi count, count, -1
     bnez count, layer1234_start
 
+    // reset stuff
+    .unreq ...
+    root0_tw .req ...
+    addi in, in, -4*S_STRIDE  // reset in pointer to original value, has been updated 4 x S_STRIDE in the previous loop
+                                // other implementation saved original in to stack, maybe consider that ...
+    li count, 16
+    .equ L_STRIDE, 16
+    .equ S_STRIDE, 64  // check again
 
+    .p2align 2
+layer5678_start:
+    vse32.v data0, (in)
+    addi in, in, L_STRIDE
+    vse32.v data1, (in)
+    addi in, in, L_STRIDE
+    vse32.v data2, (in)
+    addi in, in, L_STRIDE
+    vse32.v data3, (in)
 
-    //  how to const from memory to regs?
-    // store twiddle + barret const interleaved in x registers
-    // for layer 7-8 store in vector registers
+    load_next_roots_56 ...
+    load_next_roots_6 ...
+
+    ct_butterfly data0, data2, root?, barretc_?
+    ct_butterfly data1, data3, root?, barretc_?
+    ct_butterfly data0, data1, root?, barretc_?
+    ct_butterfly data2, data3, root?, barretc_?
+
+    // !!!  we need space on stack for the transpose !!!!
+    transpose4 data0, somePointer  // necessary bc coefficients required for ct_butterfly would be in the same regs otherwise
+    laod_next_roots_78 ... // uses vector regs to store roots from now on
+
+    ct_butterfly data0, data2, root?, barretc_?
+    ct_butterfly data1, data3, root?, barretc_?
+    ct_butterfly data0, data1, root?, barretc_?
+    ct_butterfly data2, data3, root?, barretc_?
+
+    addi in, in, -3*L_STRIDE  // decrement pointer to original value
+
+    // store results, transpose back before. Corresponds to https://fprox.substack.com/i/139455473/x-matrix-transpose-using-strided-vector-stores
+    vsseg4e32.v data0, in  // Store packed vector of 4*4-byte segments from data0, data1, data2, data3 to memory
+
+    // alternative store, might be faster. Corresponds to https://fprox.substack.com/i/139455473/x-matrix-transpose-using-segmented-vector-stores
+    // Benchmarks: https://pastebin.com/gQB76kgy
+    //li tmp2, L_STRIDE
+    //vsse32.v data0, (in), tmp2
+    //addi in, in, L_STRIDE
+    //vsse32.v data1, (in), tmp2
+    //addi in, in, L_STRIDE
+    //vsse32.v data2, (in), tmp2
+    //addi in, in, L_STRIDE
+    //vsse32.v data3, (in), tmp2
+
+    addi in, in, -3*L_STRIDE  // decrement pointer to original value
+    addi in, in, S_STRIDE  // load next coeffient pairs, all shifted by 64 bytes
+layer5678_end:
+    addi count, count, -1
+    bnez count, layer5678_start
+
+// TODOs:
+// - check tranpose4 again and take care of memory + logic
+// - figure out what roots + constants to load for layer5678 and how to store them in memory (vectors required for layer 7-8)
+// - check how to load roots + constants from memory to registers
+// - save regs where necessary
