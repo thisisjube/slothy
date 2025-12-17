@@ -306,7 +306,7 @@ _ntt_dilithium_1234_5678:
         modulus .req v29
 
         ASM_LOAD(r_ptr0, roots)
-        ASM_LOAD(r_ptr1, roots_l67)
+        ASM_LOAD(r_ptr1, roots_l67) // = roots for layer 7+8!
 
         ASM_LOAD(xtmp, modulus_addr)
         ld1r {modulus.4s}, [xtmp]
