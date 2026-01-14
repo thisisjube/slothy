@@ -200,31 +200,31 @@ _ntt_dilithium_1234_5678:
     #define data15 v15
 
     // load first 5 roots only on demand due to limited number of registers
-    #define barretc_1 x7     // root1 = \psi^bitinverse(1), root2 = \psi^bitinverse(2) ...
-    #define barretc_2 x8     // barretc_1 = floor((root1 << k)\modulus) ...
-    #define barretc_3 x9
-    #define barretc_4 x1
-    #define barretc_5 x11
-    #define root6     x12
-    #define barretc_6 x13
-    #define root7     x14
-    #define barretc_7 x15
-    #define root8     x16
-    #define barretc_8 x17
-    #define root9     x18
-    #define barretc_9 x19
-    #define root10    x20
-    #define barretc_10x21
-    #define root11    x22
-    #define barretc_11x23
-    #define root12    x24
-    #define barretc_12x25
-    #define root13    x26
-    #define barretc_13x27
-    #define root14    x28
-    #define barretc_14x29
-    #define root15    x30
-    #define barretc_15x31
+    #define barretc_1  x7     // root1 = \psi^bitinverse(1), root2 = \psi^bitinverse(2) ...
+    #define barretc_2  x8     // barretc_1 = floor((root1 << k)\modulus) ...
+    #define barretc_3  x9
+    #define barretc_4  x1
+    #define barretc_5  x11
+    #define root6      x12
+    #define barretc_6  x13
+    #define root7      x14
+    #define barretc_7  x15
+    #define root8      x16
+    #define barretc_8  x17
+    #define root9      x18
+    #define barretc_9  x19
+    #define root10     x20
+    #define barretc_10 x21
+    #define root11     x22
+    #define barretc_11 x23
+    #define root12     x24
+    #define barretc_12 x25
+    #define root13     x26
+    #define barretc_13 x27
+    #define root14     x28
+    #define barretc_14 x29
+    #define root15     x30
+    #define barretc_15 x31
 
     #define vtmp0    v16  // used by barret_mul
     #define vtmp1    v17  // used by ct_butterfly
@@ -397,7 +397,7 @@ layer5678_end:
     pop_stack
     ret
 
-// TODOs:
+// TODOs:// store results
 // - add vsetvli
 // - check pointer inc/ decr and move right after
 // documentation
