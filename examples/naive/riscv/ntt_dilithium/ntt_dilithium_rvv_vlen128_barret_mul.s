@@ -109,7 +109,43 @@
     addi \root_ptr, \root_ptr, 16
 .endm
 
+.macro push_stack
+    addi sp, sp, -8*15
+    sd s0,  0*8(sp)
+    sd s1,  1*8(sp)
+    sd s2,  2*8(sp)
+    sd s3,  3*8(sp)
+    sd s4,  4*8(sp)
+    sd s5,  5*8(sp)
+    sd s6,  6*8(sp)
+    sd s7,  7*8(sp)
+    sd s8,  8*8(sp)
+    sd s9,  9*8(sp)
+    sd s10, 10*8(sp)
+    sd s11, 11*8(sp)
+    sd gp,  12*8(sp)
+    sd tp,  13*8(sp)
+    sd ra,  14*8(sp)
+
+.macro pop_stack
+    ld s0,  0*8(sp)
+    ld s1,  1*8(sp)
+    ld s2,  2*8(sp)
+    ld s3,  3*8(sp)
+    ld s4,  4*8(sp)
+    ld s5,  5*8(sp)
+    ld s6,  6*8(sp)
+    ld s7,  7*8(sp)
+    ld s8,  8*8(sp)
+    ld s9,  9*8(sp)
+    ld s10, 10*8(sp)
+    ld s11, 11*8(sp)
+    ld gp,  12*8(sp)
+    ld tp,  13*8(sp)
+    ld ra,  14*8(sp)
+    addi sp, sp, 8*15
 .data
+
 .p2align 4
 roots:
 #include "ntt_dilithium_1234_5478_twiddles_barret_mul.s"
@@ -120,7 +156,7 @@ roots:
 
 ntt_dilithium_1234_5678:
 _ntt_dilithium_1234_5678:
-    push_stack // save regs here
+    push_stack // save scalar regs here
 
     in          .req x1
     count       .req x3
@@ -343,7 +379,7 @@ layer1234_end:
     vbarretc2   .req v22
     vroot3      .req v23
     vbarretc_3  .req v24
-    addi in, in, -4*S_STRIDE  // reset in pointer to original value, has been updated 4 x S_STRIDE in the previous loop
+    addi in, in, -4*S_STRIDE    // reset in pointer to original value, has been updated 4 x S_STRIDE in the previous loop
                                 // other implementation saved original in to stack, maybe consider that ...
     li count, 16
     addi root_ptr, root_ptr, 15*8 // point to twiddles for layer5679, starting with root16
@@ -402,6 +438,9 @@ layer5678_start:
 layer5678_end:
     addi count, count, -1
     bnez count, layer5678_start
+
+    pop_stack
+    ret
 
 // TODOs:
 // - figure out what roots + constants to load for layer5678 and how to store them in memory (vectors required for layer 7-8)
