@@ -22,27 +22,27 @@
 ///
 
 .macro barret_mul dst, a, b, barret_const
-    vmul.vx \dst, \a, \b                // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, \a, \barret_const   // t = (a * barret_const) >> k
-    vnmsac.vx \dst, modulus, vtmp0       // z = z - n * t
+    vmul.vx \dst, \a, \b                            // z = a*b = coefficient (vect) * root (scalar)
+    vmulhu.vx vtmp0, \a, \barret_const              // t = (a * barret_const) >> k
+    vnmsac.vx \dst, modulus, vtmp0                  // z = z - n * t
 .endm
 
 .macro ct_butterfly a, b, root, barret_const
-    barret_mul vtmp1, b, root, barret_const                  // vtmp1 = root * b mod modulus
-    vsub.vv \b, \a, vtmp1                                    // b = b - vtmp1
-    vadd.vv \a, \a, vtmp1                                    // a = a + vtmp1
+    barret_mul vtmp1, b, root, barret_const         // vtmp1 = root * b mod modulus
+    vsub.vv \b, \a, vtmp1                           // b = b - vtmp1
+    vadd.vv \a, \a, vtmp1                           // a = a + vtmp1
 .endm
 
 .macro barret_mul_v vdst, va, vb, vbarret_const
-    vmul.vv \vdst, \va, \vb                // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vv vtmp0, \va, \vbarret_const   // t = (a * barret_const) >> k
-    vnmsac.vx \vdst, vmodulus, vtmp0       // z = z - n * t
+    vmul.vv \vdst, \va, \vb                         // z = a*b = coefficient (vect) * root (scalar)
+    vmulhu.vv vtmp0, \va, \vbarret_const            // t = (a * barret_const) >> k
+    vnmsac.vx \vdst, vmodulus, vtmp0                // z = z - n * t
 .endm
 
 .macro ct_butterfly_v va, vb, vroot, vbarret_const
-    barret_mul_v vtmp1, vb, vroot, vbarret_const               // vtmp1 = vroot * vb mod modulus
-    vsub.vv \vb, \va, vtmp1                                    // b = b - vtmp1
-    vadd.vv \va, \va, vtmp1                                    // a = a + vtmp1
+    barret_mul_v vtmp1, vb, vroot, vbarret_const    // vtmp1 = vroot * vb mod modulus
+    vsub.vv \vb, \va, vtmp1                         // b = b - vtmp1
+    vadd.vv \va, \va, vtmp1                         // a = a + vtmp1
 .endm
 
 .macro transpose4 data, ptr
@@ -53,56 +53,60 @@
     // vle32.v data1, ptr+1 etc.
 .endm
 
-.macro load_roots_1234  params here
-    lw barretc_1, (0*8+4)(root_ptr)
-    lw barretc_2, (1*8+4)(root_ptr)
-    lw barretc_3, (2*8+4)(root_ptr)
-    lw barretc_4, (3*8+4)(root_ptr)
-    lw barretc_5, (4*8+4)(root_ptr)
-    lw root6,     (5*8)(root_ptr)
-    lw barretc_6, (5*8+4)(root_ptr)
-    lw root7,     (6*8)(root_ptr)
-    lw barretc_7, (6*8+4)(root_ptr)
-    lw root8,     (7*8)(root_ptr)
-    lw barretc_8, (7*8+4)(root_ptr)
-    lw root9,     (8*8)(root_ptr)
-    lw barretc_9, (8*8+4)(root_ptr)
-    lw root10,     (9*8)(root_ptr)
-    lw barretc_10, (9*8+4)(root_ptr)
-    lw root11,     (10*8)(root_ptr)
-    lw barretc_11, (10*8+4)(root_ptr)
-    lw root12,     (11*8)(root_ptr)
-    lw barretc_12, (11*8+4)(root_ptr)
-    lw root13,     (12*8)(root_ptr)
-    lw barretc_13, (12*8+4)(root_ptr)
-    lw root14,     (13*8)(root_ptr)
-    lw barretc_14, (13*8+4)(root_ptr)
-    lw root15,     (14*8)(root_ptr)
-    lw barretc_15, (14*8+4)(root_ptr)
+.macro load_roots_1234  root_ptr, barretc_1, barretc_2, barretc_3, barretc_4, barretc_5,
+                        root6, barretc_6, root7, barretc_7, root8, barretc_8, root9, barretc_9,
+                        root10, barretc_10, root11, barretc_11, root12, barretc_12, root13,
+                        barretc_13, root14, barretc_14, root15, barretc_15
+    lw \barretc_1,  (0*8+4)(\root_ptr)
+    lw \barretc_2,  (1*8+4)(\root_ptr)
+    lw \barretc_3,  (2*8+4)(\root_ptr)
+    lw \barretc_4,  (3*8+4)(\root_ptr)
+    lw \barretc_5,  (4*8+4)(\root_ptr)
+    lw \root6,      (5*8)(\root_ptr)
+    lw \barretc_6,  (5*8+4)(\root_ptr)
+    lw \root7,      (6*8)(\root_ptr)
+    lw \barretc_7,  (6*8+4)(\root_ptr)
+    lw \root8,      (7*8)(\root_ptr)
+    lw \barretc_8,  (7*8+4)(\root_ptr)
+    lw \root9,      (8*8)(\root_ptr)
+    lw \barretc_9,  (8*8+4)(\root_ptr)
+    lw \root10,     (9*8)(\root_ptr)
+    lw \barretc_10, (9*8+4)(\root_ptr)
+    lw \root11,     (10*8)(\root_ptr)
+    lw \barretc_11, (10*8+4)(\root_ptr)
+    lw \root12,     (11*8)(\root_ptr)
+    lw \barretc_12, (11*8+4)(\root_ptr)
+    lw \root13,     (12*8)(\root_ptr)
+    lw \barretc_13, (12*8+4)(\root_ptr)
+    lw \root14,     (13*8)(\root_ptr)
+    lw \barretc_14, (13*8+4)(\root_ptr)
+    lw \root15,     (14*8)(\root_ptr)
+    lw \barretc_15, (14*8+4)(\root_ptr)
 .endm
+
 
 .macro load_roots_5678  xroot1, xbarretc_1, xroot2, xbarretc_2, xroot3, xbarretc_3,
                         vroot1, vbarretc_1, vroot2, vbarretc_2,  vroot3, vbarretc_3,
                         root_ptr
-        lw \xroot1,     (0*8)(\root_ptr)
-        lw \xbarretc_1, (0*8+4)(\root_ptr)
-        lw \xroot2,     (1*8)(\root_ptr)
-        lw \xbarretc_2, (1*8+4)(\root_ptr)
-        lw \xroot3,     (2*8)(\root_ptr)
-        lw \xbarretc_3  (2*8+4)(\root_ptr)
-        addi \root_ptr, \root_ptr, 3*8  // increment root_ptr manually here, bc vle32 does not allow offsets
-        vle32.v \vroot1, (\root_ptr)
-        addi \root_ptr, \root_ptr, 16
-        vle32.v \vbarretc_1, (\root_ptr)
-        addi \root_ptr, \root_ptr, 16
-        vle32.v \vroot2, (\root_ptr)
-        addi \root_ptr, \root_ptr, 16
-        vle32.v \vbarretc_2, (\root_ptr)
-        addi \root_ptr, \root_ptr, 16
-        vle32.v \vroot3, (\root_ptr)
-        addi \root_ptr, \root_ptr, 16
-        vle32.v \vbarretc_3, (\root_ptr)
-        addi \root_ptr, \root_ptr, 16
+    lw \xroot1,     (0*8)(\root_ptr)
+    lw \xbarretc_1, (0*8+4)(\root_ptr)
+    lw \xroot2,     (1*8)(\root_ptr)
+    lw \xbarretc_2, (1*8+4)(\root_ptr)
+    lw \xroot3,     (2*8)(\root_ptr)
+    lw \xbarretc_3  (2*8+4)(\root_ptr)
+    addi \root_ptr, \root_ptr, 3*8  // increment root_ptr manually here, bc vle32 does not allow offsets
+    vle32.v \vroot1, (\root_ptr)
+    addi \root_ptr, \root_ptr, 16
+    vle32.v \vbarretc_1, (\root_ptr)
+    addi \root_ptr, \root_ptr, 16
+    vle32.v \vroot2, (\root_ptr)
+    addi \root_ptr, \root_ptr, 16
+    vle32.v \vbarretc_2, (\root_ptr)
+    addi \root_ptr, \root_ptr, 16
+    vle32.v \vroot3, (\root_ptr)
+    addi \root_ptr, \root_ptr, 16
+    vle32.v \vbarretc_3, (\root_ptr)
+    addi \root_ptr, \root_ptr, 16
 .endm
 
 .data
@@ -113,14 +117,12 @@ roots:
     .global ntt_dilithium_1234_5678
     .global _ntt_dilithium_1234_5678
 .p2align 4
-// modulus here
 
 ntt_dilithium_1234_5678:
 _ntt_dilithium_1234_5678:
     push_stack // save regs here
 
     in          .req x1
-    // inp      .req x3  // store in memory
     count       .req x3
     modulus     .req x4
     root_ptr    .req x5
@@ -175,14 +177,18 @@ _ntt_dilithium_1234_5678:
     vtmp2    .req v18  // free to use
     vmodulus .req v19  // vectorized modulus
 
+    li modulus, 8380417  // load dilithium modulus. Get modulus from memory in future?
     vmv.v.x vmodulus, modulus // copy modulus into vector register
 
     .equ L_STRIDE, 64  // Load Stride = distance between coefficients pairs of four
     .equ S_STRIDE, 16  // Shift Stride = distance of coefficients between two iterations
 
-    // other loads here?
+    la root_ptr, roots  // load address of roots in memory into root_ptr
 
-    load_roots_1234
+    load_roots_1234 root_ptr, barretc_1, barretc_2, barretc_3, barretc_4, barretc_5,
+    root6, barretc_6, root7, barretc_7, root8, barretc_8, root9, barretc_9, root10, barretc_10,
+    root11, barretc_11, root12, barretc_12, root13, barretc_13, root14, barretc_14, root15, barretc_15
+
     li count, 4
 
     .p2align 2
