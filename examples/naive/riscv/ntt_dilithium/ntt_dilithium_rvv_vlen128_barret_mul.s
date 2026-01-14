@@ -158,60 +158,62 @@ ntt_dilithium_1234_5678:
 _ntt_dilithium_1234_5678:
     push_stack // save scalar regs here
 
-    in          .req x10  // == a0, first function arg
-    count       .req x3
-    modulus     .req x4
-    root_ptr    .req x5
-    xtmp        .req x6
+    #define in       x10  // == a0, first function arg
+    #define count    x3
+    #define modulus  x4
+    #define root_ptr x5
+    #define xtmp     x6
 
-    data0   .req v0
-    data1   .req v1
-    data2   .req v2
-    data3   .req v3
-    data4   .req v4
-    data5   .req v5
-    data6   .req v6
-    data7   .req v7
-    data8   .req v8
-    data9   .req v9
-    data10  .req v10
-    data11  .req v11
-    data12  .req v12
-    data13  .req v13
-    data14  .req v14
-    data15  .req v15
+    #define data0  v0
+    #define data1  v1
+    #define data2  v2
+    #define data3  v3
+    #define data4  v4
+    #define data5  v5
+    #define data6  v6
+    #define data7  v7
+    #define data8  v8
+    #define data9  v9
+    #define data10 v10
+    #define data11 v11
+    #define data12 v12
+    #define data13 v13
+    #define data14 v14
+    #define data15 v15
 
     // load first 5 roots only on demand due to limited number of registers
-    barretc_1   .req x7     // root1 = \psi^bitinverse(1), root2 = \psi^bitinverse(2) ...
-    barretc_2   .req x8     // barretc_1 = floor((root1 << k)\modulus) ...
-    barretc_3   .req x9
-    barretc_4   .req x1
-    barretc_5   .req x11
-    root6       .req x12
-    barretc_6   .req x13
-    root7       .req x14
-    barretc_7   .req x15
-    root8       .req x16
-    barretc_8   .req x17
-    root9       .req x18
-    barretc_9   .req x19
-    root10      .req x20
-    barretc_10  .req x21
-    root11      .req x22
-    barretc_11  .req x23
-    root12      .req x24
-    barretc_12  .req x25
-    root13      .req x26
-    barretc_13  .req x27
-    root14      .req x28
-    barretc_14  .req x29
-    root15      .req x30
-    barretc_15  .req x31
+    #define barretc_1 x7     // root1 = \psi^bitinverse(1), root2 = \psi^bitinverse(2) ...
+    #define barretc_2 x8     // barretc_1 = floor((root1 << k)\modulus) ...
+    #define barretc_3 x9
+    #define barretc_4 x1
+    #define barretc_5 x11
+    #define root6     x12
+    #define barretc_6 x13
+    #define root7     x14
+    #define barretc_7 x15
+    #define root8     x16
+    #define barretc_8 x17
+    #define root9     x18
+    #define barretc_9 x19
+    #define root10    x20
+    #define barretc_10x21
+    #define root11    x22
+    #define barretc_11x23
+    #define root12    x24
+    #define barretc_12x25
+    #define root13    x26
+    #define barretc_13x27
+    #define root14    x28
+    #define barretc_14x29
+    #define root15    x30
+    #define barretc_15x31
 
-    vtmp0    .req v16  // used by barret_mul
-    vtmp1    .req v17  // used by ct_butterfly
-    vtmp2    .req v18  // free to use
-    vmodulus .req v19  // vectorized modulus
+    #define vtmp0    v16  // used by barret_mul
+    #define vtmp1    v17  // used by ct_butterfly
+    #define vtmp2    v18  // free to use
+    #define vmodulus v19  // vectorized modulus
+
+    vsetivli zero, 4, e32, m1  // configure vector unit, 4*32 bit elements per vector @ VLEN=128
 
     li modulus, 8380417  // load dilithium modulus. Get modulus from memory in future?
     vmv.v.x vmodulus, modulus // copy modulus into vector register
@@ -359,26 +361,26 @@ layer1234_end:
     addi count, count, -1
     bnez count, layer1234_start
 
-    .unreq barretc_1
-    .unreq barretc_2
-    .unreq barretc_3
-    .unreq barretc_4
-    .unreq barretc_5
-    .unreq root6
+    #undef barretc_1
+    #undef barretc_2
+    #undef barretc_3
+    #undef barretc_4
+    #undef barretc_5
+    #undef root6
 
-    xroot1      .req x7
-    xbarretc_1  .req x8
-    xroot2      .req x9
-    xbarretc_2  .req x10
-    xroot3      .req x11
-    xbarretc_3  .req x12
-
-    vroot1      .req v19
-    vbarretc_1  .req v20
-    vroot2      .req v21
-    vbarretc2   .req v22
-    vroot3      .req v23
-    vbarretc_3  .req v24
+    #define xroot1      x7
+    #define xbarretc_1  x8
+    #define xroot2      x9
+    #define xbarretc_2  x10
+    #define xroot3      x11
+    #define xbarretc_3  x12
+    #define
+    #define vroot1      v19
+    #define vbarretc_1  v20
+    #define vroot2      v21
+    #define vbarretc2   v22
+    #define vroot3      v23
+    #define vbarretc_3  v24
     addi in, in, -4*S_STRIDE    // reset in pointer to original value, has been updated 4 x S_STRIDE in the previous loop
                                 // other implementation saved original in to stack, maybe consider that ...
     li count, 16
