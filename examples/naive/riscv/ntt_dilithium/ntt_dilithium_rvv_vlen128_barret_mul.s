@@ -53,9 +53,9 @@
     // vle32.v data1, ptr+1 etc.
 .endm
 
-.macro load_roots_1234  root_ptr, barretc_1, barretc_2, barretc_3, barretc_4, barretc_5,
-                        root6, barretc_6, root7, barretc_7, root8, barretc_8, root9, barretc_9,
-                        root10, barretc_10, root11, barretc_11, root12, barretc_12, root13,
+.macro load_roots_1234  root_ptr, barretc_1, barretc_2, barretc_3, barretc_4, barretc_5,        \
+                        root6, barretc_6, root7, barretc_7, root8, barretc_8, root9, barretc_9, \
+                        root10, barretc_10, root11, barretc_11, root12, barretc_12, root13,     \
                         barretc_13, root14, barretc_14, root15, barretc_15
     lw \barretc_1,  (0*8+4)(\root_ptr)
     lw \barretc_2,  (1*8+4)(\root_ptr)
@@ -85,8 +85,8 @@
 .endm
 
 
-.macro load_roots_5678  xroot1, xbarretc_1, xroot2, xbarretc_2, xroot3, xbarretc_3,
-                        vroot1, vbarretc_1, vroot2, vbarretc_2,  vroot3, vbarretc_3,
+.macro load_roots_5678  xroot1, xbarretc_1, xroot2, xbarretc_2, xroot3, xbarretc_3, \
+                        vroot1, vbarretc_1, vroot2, vbarretc_2,  vroot3, vbarretc_3,\
                         root_ptr
     lw \xroot1,     (0*8)(\root_ptr)
     lw \xbarretc_1, (0*8+4)(\root_ptr)
@@ -107,6 +107,24 @@
     addi \root_ptr, \root_ptr, 16
     vle32.v \vbarretc_3, (\root_ptr)
     addi \root_ptr, \root_ptr, 16
+.endm
+
+.macro load16 in, stride
+    .irp r, data0,data1,data2,data3,data4,data5,data6,data7,\
+            data8,data9,data10,data11,data12,data13,data14
+        vle32.v \r, (\in)
+        addi \in, \in, \stride
+    .endr
+    vle32.v data15, (\in)
+.endm
+
+.macro store16 in, stride
+    .irp r, data0,data1,data2,data3,data4,data5,data6,data7,\
+            data8,data9,data10,data11,data12,data13,data14
+        vse32.v \r, (\in)
+        addi \in, \in, \stride
+    .endr
+    vse32.v data15, (\in)
 .endm
 
 .macro push_stack
@@ -223,8 +241,8 @@ _ntt_dilithium_1234_5678:
 
     la root_ptr, roots  // load address of roots in memory into root_ptr
 
-    load_roots_1234 root_ptr, barretc_1, barretc_2, barretc_3, barretc_4, barretc_5,
-    root6, barretc_6, root7, barretc_7, root8, barretc_8, root9, barretc_9, root10, barretc_10,
+    load_roots_1234 root_ptr, barretc_1, barretc_2, barretc_3, barretc_4, barretc_5, \
+    root6, barretc_6, root7, barretc_7, root8, barretc_8, root9, barretc_9, root10, barretc_10, \
     root11, barretc_11, root12, barretc_12, root13, barretc_13, root14, barretc_14, root15, barretc_15
 
     li count, 4
@@ -234,38 +252,7 @@ layer1234_start:
     // Load 64 coefficients. For VLEN = 128 each register holds 4*4 byte = 32 bit coefficients. Hence, 16 regs required
     // Base register must be incremented by L_STRIDE = 64 byte to load the correct coefficient pairs.
 
-    // make this a loop?
-    vle32.v data0, (in)
-    addi in, in, L_STRIDE
-    vle32.v data1, (in)
-    addi in, in, L_STRIDE
-    vle32.v data2, (in)
-    addi in, in, L_STRIDE
-    vle32.v data3, (in)
-    addi in, in, L_STRIDE
-    vle32.v data4, (in)
-    addi in, in, L_STRIDE
-    vle32.v data5, (in)
-    addi in, in, L_STRIDE
-    vle32.v data6, (in)
-    addi in, in, L_STRIDE
-    vle32.v data7, (in)
-    addi in, in, L_STRIDE
-    vle32.v data8, (in)
-    addi in, in, L_STRIDE
-    vle32.v data9, (in)
-    addi in, in, L_STRIDE
-    vle32.v data10, (in)
-    addi in, in, L_STRIDE
-    vle32.v data11, (in)
-    addi in, in, L_STRIDE
-    vle32.v data12, (in)
-    addi in, in, L_STRIDE
-    vle32.v data13, (in)
-    addi in, in, L_STRIDE
-    vle32.v data14, (in)
-    addi in, in, L_STRIDE
-    vle32.v data15, (in)
+    load16 in, L_STRIDE
 
     lw xtmp, 0*8(root_ptr)  // xtmp = root1
 
@@ -320,43 +307,9 @@ layer1234_start:
     ct_butterfly data12, data13, root14, barretc_14
     ct_butterfly data14, data15, root15, barretc_15
 
-    addi in, in, -15*L_STRIDE  // decrement pointer to original value
-
-    // make this a loop?
-    // store results
-    vse32.v data0, (in)
-    addi in, in, L_STRIDE
-    vse32.v data1, (in)
-    addi in, in, L_STRIDE
-    vse32.v data2, (in)
-    addi in, in, L_STRIDE
-    vse32.v data3, (in)
-    addi in, in, L_STRIDE
-    vse32.v data4, (in)
-    addi in, in, L_STRIDE
-    vse32.v data5, (in)
-    addi in, in, L_STRIDE
-    vse32.v data6, (in)
-    addi in, in, L_STRIDE
-    vse32.v data7, (in)
-    addi in, in, L_STRIDE
-    vse32.v data8, (in)
-    addi in, in, L_STRIDE
-    vse32.v data9, (in)
-    addi in, in, L_STRIDE
-    vse32.v data10, (in)
-    addi in, in, L_STRIDE
-    vse32.v data11, (in)
-    addi in, in, L_STRIDE
-    vse32.v data12, (in)
-    addi in, in, L_STRIDE
-    vse32.v data13, (in)
-    addi in, in, L_STRIDE
-    vse32.v data14, (in)
-    addi in, in, L_STRIDE
-    vse32.v data15, (in)
-
-    addi in, in, S_STRIDE  // load next coeffient pairs, all shifted by 16 bytes
+    addi in, in, -15*L_STRIDE   // decrement pointer to original value
+    store16 in, L_STRIDE        // store results
+    addi in, in, S_STRIDE       // load next coeffient pairs, all shifted by 16 bytes
 layer1234_end:
     addi count, count, -1
     bnez count, layer1234_start
@@ -445,10 +398,7 @@ layer5678_end:
     ret
 
 // TODOs:
-// - figure out what roots + constants to load for layer5678 and how to store them in memory (vectors required for layer 7-8)
-// - check how to load roots + constants from memory to registers
 // - add vsetvli
-// - make big load/ store sequences macro, loop or something
 // - check pointer inc/ decr and move right after
 // documentation
     // correct comments in BF byte/ bit
