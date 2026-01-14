@@ -158,7 +158,7 @@ ntt_dilithium_1234_5678:
 _ntt_dilithium_1234_5678:
     push_stack // save scalar regs here
 
-    in          .req x1
+    in          .req x10  // == a0, first function arg
     count       .req x3
     modulus     .req x4
     root_ptr    .req x5
@@ -185,7 +185,7 @@ _ntt_dilithium_1234_5678:
     barretc_1   .req x7     // root1 = \psi^bitinverse(1), root2 = \psi^bitinverse(2) ...
     barretc_2   .req x8     // barretc_1 = floor((root1 << k)\modulus) ...
     barretc_3   .req x9
-    barretc_4   .req x10
+    barretc_4   .req x1
     barretc_5   .req x11
     root6       .req x12
     barretc_6   .req x13
@@ -445,7 +445,7 @@ layer5678_end:
 // TODOs:
 // - figure out what roots + constants to load for layer5678 and how to store them in memory (vectors required for layer 7-8)
 // - check how to load roots + constants from memory to registers
-// - save regs where necessary
+// - add vsetvli
 // - make big load/ store sequences macro, loop or something
 // - check pointer inc/ decr and move right after
 // documentation
