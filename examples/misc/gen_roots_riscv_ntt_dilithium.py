@@ -155,8 +155,9 @@ class NttRootGen:
                 return rx + 1
             return rx - 1
 
-        quot = (root * 2**self.bitsize) / self.modulus
-        root_twisted = round_to_even(quot) // 2
+        # quot = (root * 2**self.bitsize) / self.modulus
+        # root_twisted = round_to_even(quot) // 2
+        root_twisted = round((root * 2**self.bitsize) / self.modulus)
         return root, root_twisted
 
     def _bitrev_list(self, num, radix_list):
