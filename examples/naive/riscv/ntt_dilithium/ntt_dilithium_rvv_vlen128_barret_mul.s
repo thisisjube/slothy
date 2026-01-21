@@ -231,15 +231,15 @@ _ntt_dilithium_1234_5678:
     #define vtmp2    v18  // free to use
     #define vmodulus v19  // vectorized modulus
 
-    vsetivli zero, 4, e32, m1  // configure vector unit, 4*32 bit elements per vector @ VLEN=128
+    vsetivli zero, 4, e32, m1   // configure vector unit, 4*32 bit elements per vector @ VLEN=128
 
-    li modulus, 8380417  // load dilithium modulus. Get modulus from memory in future?
-    vmv.v.x vmodulus, modulus // copy modulus into vector register
+    li modulus, 8380417         // load dilithium modulus
+    vmv.v.x vmodulus, modulus   // copy modulus into vector register
 
-    .equ L_STRIDE, 64  // Load Stride = distance between coefficients pairs of four
-    .equ S_STRIDE, 16  // Shift Stride = distance of coefficients between two iterations
+    .equ L_STRIDE, 64           // Load Stride = distance between coefficients pairs of four
+    .equ S_STRIDE, 16           // Shift Stride = distance of coefficients between two iterations
 
-    la root_ptr, roots  // load address of roots in memory into root_ptr
+    la root_ptr, roots          // load address of roots in memory into root_ptr
 
     load_roots_1234 root_ptr, barretc_1, barretc_2, barretc_3, barretc_4, barretc_5, \
     root6, barretc_6, root7, barretc_7, root8, barretc_8, root9, barretc_9, root10, barretc_10, \
@@ -249,7 +249,7 @@ _ntt_dilithium_1234_5678:
 
     .p2align 2
 layer1234_start:
-    // Load 64 coefficients. For VLEN = 128 each register holds 4*4 byte = 32 bit coefficients. Hence, 16 regs required
+    // Load 64 coefficients. For VLEN = 128 each register holds 4* 4 byte = 32 bit coefficients. Hence, 16 regs required
     // Base register must be incremented by L_STRIDE = 64 byte to load the correct coefficient pairs.
 
     load16 in, L_STRIDE
@@ -257,7 +257,7 @@ layer1234_start:
     lw xtmp, 0*8(root_ptr)  // xtmp = root1
 
     // Merge 4 layers (interleaved)
-    // level 1 - Stride = 128*32 byte -> BF(a0,a128), BF(a16, a144) ...
+    // level 1 - Stride = 128*4 byte -> BF(a0,a128), BF(a16, a144) ...
     ct_butterfly data0, data8, xtmp, barretc_1
     ct_butterfly data1, data9, xtmp, barretc_1
     ct_butterfly data2, data10, xtmp, barretc_1
@@ -269,7 +269,7 @@ layer1234_start:
 
     lw xtmp, 1*8(root_ptr)  // xtmp = root2
 
-    // level 2 - Stride = 64*32 byte -> BF(a0, a64), BF(16, 80) ...
+    // level 2 - Stride = 64*4 byte -> BF(a0, a64), BF(16, 80) ...
     ct_butterfly data0, data4, xtmp, barretc_2
     ct_butterfly data1, data5, xtmp, barretc_2
     ct_butterfly data2, data6, xtmp, barretc_2
@@ -284,7 +284,7 @@ layer1234_start:
 
     lw xtmp, 3*8(root_ptr)  // xtmp = root4
 
-    // level 3 - Stride = 32*32 byte -> BF(a0, a32), BF(a16, a48) ...
+    // level 3 - Stride = 32*4 byte -> BF(a0, a32), BF(a16, a48) ...
     ct_butterfly data0, data2, xtmp, barretc_4
     ct_butterfly data1, data3, xtmp, barretc_4
 
@@ -297,7 +297,7 @@ layer1234_start:
     ct_butterfly data12, data14, root6, barretc_7
     ct_butterfly data13, data15, root7, barretc_7
 
-    // level 4 - Stride = 16*32 byte -> BF(a0, a16), BF(a32, a48) ...
+    // level 4 - Stride = 16*4 byte -> BF(a0, a16), BF(a32, a48) ...
     ct_butterfly data0, data1, root8, barretc_8
     ct_butterfly data2, data3, root9, barretc_9
     ct_butterfly data4, data5, root10, barretc_10
@@ -327,7 +327,7 @@ layer1234_end:
     #define xbarretc_2  x10
     #define xroot3      x11
     #define xbarretc_3  x12
-    #define
+
     #define vroot1      v19
     #define vbarretc_1  v20
     #define vroot2      v21
@@ -337,7 +337,7 @@ layer1234_end:
     addi in, in, -4*S_STRIDE    // reset in pointer to original value, has been updated 4 x S_STRIDE in the previous loop
                                 // other implementation saved original in to stack, maybe consider that ...
     li count, 16
-    addi root_ptr, root_ptr, 15*8 // point to twiddles for layer5679, starting with root16
+    addi root_ptr, root_ptr, 15*8 // point to twiddles for layer5678, starting with root16
 
     .equ L_STRIDE, 16
     .equ S_STRIDE, 64  // check again
@@ -359,9 +359,9 @@ layer5678_start:
                          root_ptr
 
     // level 5+6
-    ct_butterfly data0, data2, xroot1, xbarretc_1  // Stride = 8*32 byte -> BF(a0, a8), BF(a4, a12) ...
+    ct_butterfly data0, data2, xroot1, xbarretc_1  // Stride = 8*4 byte -> BF(a0, a8), BF(a4, a12) ...
     ct_butterfly data1, data3, xroot1, xbarretc_1
-    ct_butterfly data0, data1, xroot2, xbarretc_2  // Stride = 4*32 byte -> BF(a0, a4), BF(a8, a12) ...
+    ct_butterfly data0, data1, xroot2, xbarretc_2  // Stride = 4*4 byte -> BF(a0, a4), BF(a8, a12) ...
     ct_butterfly data2, data3, xroot3, xbarretc_3
 
     sub sp, sp, 64  // allocate 64 byte of memory for 4 vector registers
@@ -369,9 +369,9 @@ layer5678_start:
     add sp, sp, 64  // free memory
 
     // level 7+8
-    ct_butterfly_v data0, data2, vroot1, vbarretc_1  // Stride = 2*32 byte -> BF(a0, a2), BF(a4, a6) ...
+    ct_butterfly_v data0, data2, vroot1, vbarretc_1  // Stride = 2*4 byte -> BF(a0, a2), BF(a4, a6) ...
     ct_butterfly_v data1, data3, vroot1, vbarretc_1
-    ct_butterfly_v data0, data1, vroot2, vbarretc_2  // Stride = 1*32 byte -> BF(a0, a1), BF(a2, a3) ...
+    ct_butterfly_v data0, data1, vroot2, vbarretc_2  // Stride = 1*4 byte -> BF(a0, a1), BF(a2, a3) ...
     ct_butterfly_v data2, data3, vroot3, vbarretc_3
 
     // store results, transpose back before. Corresponds to https://fprox.substack.com/i/139455473/x-matrix-transpose-using-strided-vector-stores
@@ -397,8 +397,6 @@ layer5678_end:
     pop_stack
     ret
 
-// TODOs:// store results
-// - add vsetvli
+// TODOs:
 // - check pointer inc/ decr and move right after
 // documentation
-    // correct comments in BF byte/ bit
