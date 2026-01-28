@@ -21,7 +21,8 @@
 /// SOFTWARE.
 ///
 
-    #define in       x10  // == a0, first function arg
+    #define in       x10
+    // == a0, first function arg
     #define count    x3
     #define modulus  x4
     #define root_ptr x5
@@ -45,8 +46,10 @@
     #define data15 v15
 
     // load first 5 roots only on demand due to limited number of registers
-    #define barretc_1  x7     // root1 = \psi^bitinverse(1), root2 = \psi^bitinverse(2) ...
-    #define barretc_2  x8     // barretc_1 = floor((root1 << k)\modulus) ...
+    #define barretc_1  x7
+    // root1 = \psi^bitinverse(1), root2 = \psi^bitinverse(2) ...
+    #define barretc_2  x8
+    // barretc_1 = floor((root1 << k)\modulus) ...
     #define barretc_3  x9
     #define barretc_4  x1
     #define barretc_5  x11
@@ -71,10 +74,14 @@
     #define root15     x30
     #define barretc_15 x31
 
-    #define vtmp0    v16  // used by barret_mul
-    #define vtmp1    v17  // used by ct_butterfly
-    #define vtmp2    v18  // free to use
-    #define vmodulus v19  // vectorized modulus
+    #define vtmp0    v16
+    // used by barret_mul
+    #define vtmp1    v17
+    // used by ct_butterfly
+    #define vtmp2    v18
+    // free to use
+    #define vmodulus v19
+    // vectorized modulus
 
 .macro barret_mul dst, a, b, barret_const
     vmul.vx \dst, \a, \b                            // z = a*b = coefficient (vect) * root (scalar)
@@ -235,7 +242,7 @@ ntt_rvv_vlen128_barret_mul:
 _ntt_rvv_vlen128_barret_mul:
     push_stack // save scalar regs here
     vsetivli zero, 4, e32, m1   // configure vector unit, 4*32 bit elements per vector @ VLEN=128
-
+    start:
     li modulus, 8380417         // load dilithium modulus
     vmv.v.x vmodulus, modulus   // copy modulus into vector register
 
@@ -251,7 +258,7 @@ _ntt_rvv_vlen128_barret_mul:
     li count, 4
 
     .p2align 2
-layer1234_start:
+//layer1234_start:
     // Load 64 coefficients. For VLEN = 128 each register holds 4* 4 byte = 32 bit coefficients. Hence, 16 regs required
     // Base register must be incremented by L_STRIDE = 64 byte to load the correct coefficient pairs.
 
@@ -399,7 +406,7 @@ layer5678_start:
 layer5678_end:
     addi count, count, -1
     bnez count, layer5678_start
-
+    end:
     pop_stack
     ret
 

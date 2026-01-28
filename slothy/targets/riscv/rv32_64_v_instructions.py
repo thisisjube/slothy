@@ -161,6 +161,7 @@ v_instrs = [
     (["vmv.x.s"], RISCVScalarVector),
     (["vmv.s.x"], RISCVVectorScalar),
     (["vmv.v.v"], RISCVVectorVector),
+    (["vmv.v.x"], RISCVVectorScalar),
     (["vnmsac.vx"], RISCVVectorScalarVector),
 ]
 

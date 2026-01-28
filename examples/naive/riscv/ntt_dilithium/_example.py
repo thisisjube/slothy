@@ -178,6 +178,52 @@ class RISC_V_ntt_rvv_vlen128(OptimizationRunner):
         slothy.optimize("start", "end")
 
 
+class RISC_V_ntt_rvv_vlen128_barret_mul(OptimizationRunner):
+    def __init__(self, var="", arch=RISC_V, target=Target_XuanTieC908, timeout=None):
+        name = "ntt_dilithium_rvv_vlen128_barret_mul_unfolded"
+        infile = name
+
+        if var != "":
+            name += f"_{var}"
+            infile += f"_{var}"
+        # name += f"_{target_label_dict[target]}"
+
+        super().__init__(
+            infile,
+            name,
+            subfolder=SUBFOLDER,
+            rename=True,
+            arch=arch,
+            target=target,
+            funcname="ntt_rvv_vlen128_barret_mul",
+            timeout=timeout,
+        )
+
+    def core(self, slothy):
+        slothy.config.variable_size = True
+        slothy.config.constraints.stalls_first_attempt = 512
+        slothy.config.inputs_are_outputs = True
+
+        # slothy.config.sw_pipelining.enabled = True
+        slothy.config.sw_pipelining.halving_heuristic = True
+        slothy.config.split_heuristic = True
+        slothy.config.split_heuristic_factor = 40
+        slothy.config.split_heuristic_stepsize = 0.1
+        slothy.config.timeout = 180
+        slothy.config.split_heuristic_repeat = 2
+
+        slothy.config.with_preprocessor = True
+        r = slothy.config.reserved_regs
+        r += ["x3"]
+        slothy.config.reserved_regs = r
+        slothy.config.compiler_include_paths = (
+            "examples/naive/riscv/ntt_dilithium/include"
+        )
+        # slothy.config.allow_useless_instructions = True
+        # slothy.fusion_region("start", "end", ssa=False)
+        slothy.optimize("start", "end")
+
+
 class RISC_V_normal2ntt_order_rvv_vlen128(OptimizationRunner):
     def __init__(self, var="", arch=RISC_V, target=Target_XuanTieC908, timeout=None):
         name = "dilithium_normal2ntt_order_rvv_vlen128_unfolded"
@@ -307,4 +353,5 @@ example_instances = [
     RISC_V_normal2ntt_order_rvv_vlen128(),
     RISC_V_ntt2normal_order_rvv_vlen128(),
     RISC_V_poly_reduce_rvv_vlen128(),
+    RISC_V_ntt_rvv_vlen128_barret_mul(target=Target_XuanTieC908, timeout=300),
 ]
