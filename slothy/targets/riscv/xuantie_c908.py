@@ -50,6 +50,7 @@ from slothy.targets.riscv.rv32_64_m_instructions import *  # noqa: F403
 from slothy.targets.riscv.rv32_64_b_instructions import *  # noqa: F403
 from slothy.targets.riscv.rv32_64_pseudo_instructions import *  # noqa: F403
 
+# XuanTie C908 can issue up to 2 instructions per cycle (dual-issue)
 issue_rate = 2
 llvm_mca_target = ""
 
@@ -235,7 +236,6 @@ rv32_inverse_throughput = {
     RISCVInstruction.classes_by_names["addi"]: 1,
     RISCVInstruction.classes_by_names["srli"]: 1,
     RISCVInstruction.classes_by_names["slli"]: 1,
-    RISCVInstruction.classes_by_names["srli"]: 1,
     RISCVInstruction.classes_by_names["srai"]: 1,
     RISCVInstruction.classes_by_names["add"]: 1,
     RISCVInstruction.classes_by_names["sll"]: 1,
@@ -261,7 +261,9 @@ default_latencies = {
     RISCVUType: 1,
     RISCVLoad: 3,
     RISCVStore: 1,
-    RISCVIntegerRegisterRegisterMul: 4,  # not correct for div, rem
+    # TODO: Split mul and div/rem instructions into separate entries with correct latencies
+    # Current value is approximation for mul; div/rem may have different latencies
+    RISCVIntegerRegisterRegisterMul: 4,
     RISCVLiPseudo: 1,  # Pseudo-instruction
     RISCVULaPseudo: 1,  # Pseudo-instruction
 }
@@ -288,7 +290,17 @@ rv32_latencies = {
 }
 
 
-def get_latency(src, out_idx, dst):
+def get_latency(src, out_idx: int, dst) -> int:
+    """Get instruction latency for XuanTie C908.
+
+    :param src: Source instruction
+    :param out_idx: Output index (unused)
+    :type out_idx: int
+    :param dst: Destination instruction (unused)
+
+    :return: Latency in cycles
+    :rtype: int
+    """
     _ = out_idx  # out_idx unused
     _ = dst  # dst is unused
 
@@ -300,14 +312,28 @@ def get_latency(src, out_idx, dst):
     return latency
 
 
-def get_units(src):
+def get_units(src) -> list:
+    """Get execution units that can execute this instruction.
+
+    :param src: Source instruction
+
+    :return: List of execution units
+    :rtype: list
+    """
     units = lookup_multidict(execution_units, src)
     if isinstance(units, list):
         return units
     return [units]
 
 
-def get_inverse_throughput(src):
+def get_inverse_throughput(src) -> int:
+    """Get inverse throughput (cycles between issuing same instruction type).
+
+    :param src: Source instruction
+
+    :return: Inverse throughput in cycles
+    :rtype: int
+    """
     if src.is_32_bit():
         return lookup_multidict(rv32_inverse_throughput, src)
     return lookup_multidict(inverse_throughput, src)

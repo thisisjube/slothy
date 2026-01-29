@@ -127,7 +127,7 @@ class RISCVInstruction(Instruction):
             regexp_result = regexp.match(line)
             if regexp_result is None:
                 raise ParsingException(
-                    f"Does not match instruction pattern {src}" f"[regex: {regexp_txt}]"
+                    f"Doesn't match instruction pattern {src} [regex: {regexp_txt}]"
                 )
             res = regexp.match(line).groupdict()
             items = list(res.items())
