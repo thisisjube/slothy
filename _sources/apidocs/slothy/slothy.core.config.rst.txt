@@ -85,6 +85,11 @@ API
 
       .. autodoc2-docstring:: slothy.core.config.Config.selftest_address_registers
 
+   .. py:property:: selftest_initial_register_values
+      :canonical: slothy.core.config.Config.selftest_initial_register_values
+
+      .. autodoc2-docstring:: slothy.core.config.Config.selftest_initial_register_values
+
    .. py:property:: selftest_default_memory_size
       :canonical: slothy.core.config.Config.selftest_default_memory_size
 
@@ -330,6 +335,16 @@ API
 
       .. autodoc2-docstring:: slothy.core.config.Config.split_heuristic_preprocess_naive_interleaving_strategy
 
+   .. py:property:: log_dir
+      :canonical: slothy.core.config.Config.log_dir
+
+      .. autodoc2-docstring:: slothy.core.config.Config.log_dir
+
+   .. py:property:: log_model
+      :canonical: slothy.core.config.Config.log_model
+
+      .. autodoc2-docstring:: slothy.core.config.Config.log_model
+
    .. py:method:: copy()
       :canonical: slothy.core.config.Config.copy
 
@@ -491,6 +506,11 @@ API
          :canonical: slothy.core.config.Config.Constraints.allow_spills
 
          .. autodoc2-docstring:: slothy.core.config.Config.Constraints.allow_spills
+
+      .. py:property:: spill_stack_loc_prefix
+         :canonical: slothy.core.config.Config.Constraints.spill_stack_loc_prefix
+
+         .. autodoc2-docstring:: slothy.core.config.Config.Constraints.spill_stack_loc_prefix
 
       .. py:property:: spill_type
          :canonical: slothy.core.config.Config.Constraints.spill_type
