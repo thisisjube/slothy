@@ -122,7 +122,7 @@ class Heuristics:
     def optimize_binsearch(source: list, logger: any, conf: any, **kwargs: any) -> any:
         """Optimize for minimum number of stalls, and potentially a secondary objective.
 
-        The `variable_size` configuration option determines whether the minimiation of
+        The `variable_size` configuration option determines whether the minimization of
         stalls happens internally or externally. Internal minimization means that the
         number of stalls is part of the model, and its minimization registered as the
         objective to the underlying solver. External minimization means that the number
@@ -132,17 +132,19 @@ class Heuristics:
         :param source: The source code to be optimized. Must be a list of
             SourceLine instances.
         :type source: list
-        :param logger: The logger to be used
+        :param logger: The logger to be used.
         :type logger: any
-        :param conf: The configuration to apply. This fixed for all one-shot SLOTHY
+        :param conf: The configuration to apply. This is fixed for all one-shot SLOTHY
             runs invoked by this call, except for the variation of the stall count.
         :type conf: any
-        :param **kwargs: An optional list of parameters to the core optimize routine
-        :type **kwargs: any
-        :returns: The Result object for the succeeding optimization with the smallest
-                  number of stalls.
+        :param kwargs: An optional list of parameters to the core optimize routine.
+        :type kwargs: any
+
+        :return: The Result object for the succeeding optimization with the smallest
+            number of stalls.
         :rtype: any
         """
+
         flexible = not conf.constraints.functional_only
 
         if conf.variable_size:
@@ -186,7 +188,6 @@ class Heuristics:
         has a secondary objective, it then re-optimizes the result for that secondary
         objective, fixing the minimal number of stalls.
 
-
         :param source: The source code to be optimized. Must be a list of SourceLine
             instances.
         :type source: list
@@ -200,8 +201,9 @@ class Heuristics:
             for a fixed number of stalls (encoded in the configuration) should be
             conducted.
         :type flexible: bool
-        :param **kwargs: An optional list of parameters to the core optimize routine
-        :type **kwargs: any
+        :param kwargs: An optional list of parameters to the core optimize routine.
+        :type kwargs: any
+
         :return: A Result object representing the final optimization result.
         :rtype: any
         :raises SlothyException: If optimization fails.
@@ -247,15 +249,14 @@ class Heuristics:
         objective.
 
         This finds the minimum number of stalls for which a one-shot SLOTHY optimization
-        succeeds.
-        If the provided configuration has a secondary objective, it then re-optimizes the
-        result for that secondary objective, fixing the minimal number of stalls.
-
+        succeeds. If the provided configuration has a secondary objective, it then
+        re-optimizes the result for that secondary objective, fixing the minimal number
+        of stalls.
 
         :param source: The source code to be optimized. Must be a list of SourceLine
             instances.
         :type source: list
-        :param  logger: The logger to be used.
+        :param logger: The logger to be used.
         :type logger: any
         :param conf: The configuration to apply. This is fixed for all one-shot SLOTHY
             runs invoked by this call, except for variation of stall count.
@@ -265,11 +266,12 @@ class Heuristics:
             for a fixed number of stalls (encoded in the configuration) should be
             conducted.
         :type flexible: bool
-        :param **kwargs: An optional list of parameters to the core optimize routine
-        :type **kwargs: any
+        :param kwargs: An optional list of parameters to the core optimize routine.
+        :type kwargs: any
+
         :return: A Result object representing the final optimization result.
         :rtype: any
-        : raises SlothyException: If optimization fails.
+        :raises SlothyException: If optimization fails.
         """
 
         if not flexible:
@@ -340,7 +342,6 @@ class Heuristics:
         `B`. The straightline optimizations applied in this heuristics are
         done via Heuristics.linear() and thus themselves subject to the
         splitting heuristic, if enabled.
-
 
         :param body: The loop body to be optimized. This must be a list of
             SourceLine instances.
@@ -446,6 +447,7 @@ class Heuristics:
         :param conf: The configuration to be applied. Software pipelining must be
             disabled.
         :type conf: any
+
         :return: A Result object representing the final optimization result.
         :rtype: any
         :raises SlothyException: If software pipelining is enabled.

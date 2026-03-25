@@ -333,8 +333,8 @@ class Config:
 
     :param slothy_config: The Slothy configuration to reference.
     :type slothy_config: any
-    :param **kwargs: An optional list of modifications of the Slothy config
-    :type **kwargs: any
+    :param ``**kwargs``: An optional list of modifications of the Slothy config
+    :type ``**kwargs``: any
     """
 
     @property

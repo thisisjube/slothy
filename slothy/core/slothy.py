@@ -210,8 +210,8 @@ class Slothy:
         """Conduct a function-level selftest
             .. important::
 
-            To run this, you need `llvm-nm`, `llvm-readobj`, `llvm-mc`
-            in your PATH. Those are part of a standard LLVM setup.
+                To run this, you need `llvm-nm`, `llvm-readobj`, `llvm-mc`
+                in your PATH. Those are part of a standard LLVM setup.
 
         :param funcname: Name of function to be called. Must be exposed as a symbol
         :type funcname: str
@@ -522,8 +522,8 @@ class Slothy:
         :param end: The label marking the end of the part of the code to apply
               fusion to.
         :type end: str
-        :param **kwargs: Additional arguments to pass to the fusion callbacks.
-        :type **kwargs: any
+        :param ``**kwargs``: Additional arguments to pass to the fusion callbacks.
+        :type ``**kwargs``: any
         """
         logger = self.logger.getChild(f"ssa_{start}_{end}")
         pre, body, post = AsmHelper.extract(self.source, start, end)
@@ -545,8 +545,8 @@ class Slothy:
         :type loop_lbl: str
         :param forced_loop_type: Forces the loop to be parsed as a certain type.
         :type forced_loop_type: any
-        :param **kwargs: Additional arguments to pass to the fusion callbacks.
-        :type **kwargs: any
+        :param ``**kwargs``: Additional arguments to pass to the fusion callbacks.
+        :type ``**kwargs``: any
         """
         logger = self.logger.getChild(f"ssa_loop_{loop_lbl}")
 

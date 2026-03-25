@@ -807,8 +807,8 @@ class Instruction:
         :type src: str
         :param mnemonic: The mnemonic of instruction c
         :type mnemonic: str
-        :param **kwargs: Additional arguments to pass to the constructor of c.
-        :type **kwargs: list
+        :param ``**kwargs``: Additional arguments to pass to the constructor of c.
+        :type ``**kwargs``: list
 
         :return: Upon success, the result of parsing src as an instance of c.
         :rtype: Instruction
