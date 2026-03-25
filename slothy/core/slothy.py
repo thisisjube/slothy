@@ -510,7 +510,7 @@ class Slothy:
 
         return body
 
-    def fusion_region(self, start: str, end: str, **kwargs: any):
+    def fusion_region(self, start: str, end: str, **kwargs: any):  # noqa: DOC103
         """Run fusion callbacks on straightline code replacing certain
         instruction (sequences) with an alternative. These replacements are
         defined in the architectural model by setting an instruction class'
@@ -536,7 +536,9 @@ class Slothy:
         self.source = pre + body_ssa + post
         assert SourceLine.is_source(self.source)
 
-    def fusion_loop(self, loop_lbl: str, forced_loop_type: any = None, **kwargs: any):
+    def fusion_loop(  # noqa: DOC103
+        self, loop_lbl: str, forced_loop_type: any = None, **kwargs: any
+    ):
         """Run fusion callbacks on loop body replacing certain instruction
         (sequences) with an alternative. These replacements are defined in the
         architectural model by setting an instruction class' global_fusion_cb.

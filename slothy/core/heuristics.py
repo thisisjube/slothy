@@ -119,7 +119,9 @@ class Heuristics:
             raise SlothyException("No solution found.")
 
     @staticmethod
-    def optimize_binsearch(source: list, logger: any, conf: any, **kwargs: any) -> any:
+    def optimize_binsearch(  # noqa: DOC103
+        source: list, logger: any, conf: any, **kwargs: any
+    ) -> any:
         """Optimize for minimum number of stalls, and potentially a secondary objective.
 
         The `variable_size` configuration option determines whether the minimization of
@@ -177,8 +179,12 @@ class Heuristics:
         )
 
     @staticmethod
-    def optimize_binsearch_external(
-        source: list, logger: any, conf: any, flexible: bool = True, **kwargs: any
+    def optimize_binsearch_external(  # noqa: DOC103
+        source: list,
+        logger: any,
+        conf: any,
+        flexible: bool = True,
+        **kwargs: any,
     ) -> any:
         """Externally optimize for minimum number of stalls, and potentially a secondary
         objective.
@@ -242,8 +248,12 @@ class Heuristics:
         return core.result
 
     @staticmethod
-    def optimize_binsearch_internal(
-        source: list, logger: any, conf: any, flexible: bool = True, **kwargs: any
+    def optimize_binsearch_internal(  # noqa: DOC103
+        source: list,
+        logger: any,
+        conf: any,
+        flexible: bool = True,
+        **kwargs: any,
     ) -> any:
         """Internally optimize for minimum number of stalls, and potentially a secondary
         objective.
