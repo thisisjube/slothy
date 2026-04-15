@@ -21,7 +21,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="slothy.targets.arm_v7m" href="slothy.targets.arm_v7m.html" />
-    <link rel="prev" title="slothy.targets.arm_v81m.cortex_m85r1" href="slothy.targets.arm_v81m.cortex_m85r1.html" /> 
+    <link rel="prev" title="slothy.targets.arm_v81m.cortex_m55r1" href="slothy.targets.arm_v81m.cortex_m55r1.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -60,9 +60,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="slothy.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy</span></code></a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="slothy.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="slothy.cli.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.cli</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="slothy.core.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.core</span></code></a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="slothy.targets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.targets</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slothy.core.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.core</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slothy.cli.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.cli</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="slothy.html#submodules">Submodules</a></li>
@@ -774,15 +774,6 @@
 
 </dd></dl>
 
-<dl class="py exception">
-<dt class="sig sig-object py" id="slothy.targets.arm_v81m.arch_v81m.FatalParsingException">
-<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.arm_v81m.arch_v81m.</span></span><span class="sig-name descname"><span class="pre">FatalParsingException</span></span><a class="headerlink" href="#slothy.targets.arm_v81m.arch_v81m.FatalParsingException" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>A fatal error happened during instruction parsing</p>
-<p class="rubric">Initialization</p>
-<p>Initialize self.  See help(type(self)) for accurate signature.</p>
-</dd></dl>
-
 <dl class="py class">
 <dt class="sig sig-object py" id="slothy.targets.arm_v81m.arch_v81m.Instruction">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.arm_v81m.arch_v81m.</span></span><span class="sig-name descname"><span class="pre">Instruction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_types_in</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_types_in_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_types_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.arm_v81m.arch_v81m.Instruction" title="Link to this definition"></a></dt>
@@ -888,9 +879,9 @@ of the instruction in the context of the overall computation.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>Instruction.ParsingException</strong> – The str argument cannot be parsed as an
+<li><p><a class="reference internal" href="slothy.targets.exceptions.html#slothy.targets.exceptions.ParsingException" title="slothy.targets.exceptions.ParsingException"><strong>ParsingException</strong></a> – The str argument cannot be parsed as an
 instance of c.</p></li>
-<li><p><a class="reference internal" href="#slothy.targets.arm_v81m.arch_v81m.FatalParsingException" title="slothy.targets.arm_v81m.arch_v81m.FatalParsingException"><strong>FatalParsingException</strong></a> – A fatal error during parsing happened
+<li><p><a class="reference internal" href="slothy.targets.exceptions.html#slothy.targets.exceptions.FatalParsingException" title="slothy.targets.exceptions.FatalParsingException"><strong>FatalParsingException</strong></a> – A fatal error during parsing happened
 that’s likely a bug in the model.</p></li>
 </ul>
 </dd>
@@ -4568,12 +4559,6 @@ of a subclass of Instruction.</p>
 <span class="sig-prename descclassname"><span class="pre">slothy.targets.arm_v81m.arch_v81m.</span></span><span class="sig-name descname"><span class="pre">all_subclass_leaves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.arm_v81m.arch_v81m.all_subclass_leaves" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="py exception">
-<dt class="sig sig-object py" id="slothy.targets.arm_v81m.arch_v81m.UnknownInstruction">
-<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.arm_v81m.arch_v81m.</span></span><span class="sig-name descname"><span class="pre">UnknownInstruction</span></span><a class="headerlink" href="#slothy.targets.arm_v81m.arch_v81m.UnknownInstruction" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="slothy.targets.arm_v81m.arch_v81m.iter_MVE_instructions">
 <span class="sig-prename descclassname"><span class="pre">slothy.targets.arm_v81m.arch_v81m.</span></span><span class="sig-name descname"><span class="pre">iter_MVE_instructions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.arm_v81m.arch_v81m.iter_MVE_instructions" title="Link to this definition"></a></dt>
@@ -4597,7 +4582,7 @@ of a subclass of Instruction.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="slothy.targets.arm_v81m.cortex_m85r1.html" class="btn btn-neutral float-left" title="slothy.targets.arm_v81m.cortex_m85r1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="slothy.targets.arm_v81m.cortex_m55r1.html" class="btn btn-neutral float-left" title="slothy.targets.arm_v81m.cortex_m55r1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="slothy.targets.arm_v7m.html" class="btn btn-neutral float-right" title="slothy.targets.arm_v7m" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
