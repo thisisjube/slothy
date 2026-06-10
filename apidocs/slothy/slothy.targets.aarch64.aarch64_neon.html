@@ -20,8 +20,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="slothy.targets.aarch64.neoverse_n1_experimental" href="slothy.targets.aarch64.neoverse_n1_experimental.html" />
-    <link rel="prev" title="slothy.targets.aarch64.cortex_a72_frontend" href="slothy.targets.aarch64.cortex_a72_frontend.html" /> 
+    <link rel="next" title="slothy.targets.aarch64.aarch64_big_experimental" href="slothy.targets.aarch64.aarch64_big_experimental.html" />
+    <link rel="prev" title="slothy.targets.aarch64.cortex_a55" href="slothy.targets.aarch64.cortex_a55.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -61,8 +61,8 @@
 <li class="toctree-l2 current"><a class="reference internal" href="slothy.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy</span></code></a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="slothy.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="slothy.targets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.targets</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="slothy.core.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.core</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="slothy.cli.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.cli</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="slothy.core.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slothy.core</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="slothy.html#submodules">Submodules</a></li>
@@ -188,106 +188,112 @@ handling the loop can be considered by SLOTHY as well.</p></td>
 <tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld1" title="slothy.targets.aarch64.aarch64_neon.q_ld1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld1</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.prefetch" title="slothy.targets.aarch64.aarch64_neon.prefetch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prefetch</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld1_2" title="slothy.targets.aarch64.aarch64_neon.q_ld1_2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld1_2</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_hint" title="slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_hint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_with_imm_hint</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.prefetch" title="slothy.targets.aarch64.aarch64_neon.prefetch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prefetch</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.b_ldr_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.b_ldr_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">b_ldr_stack_with_inc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_hint" title="slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_hint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_with_imm_hint</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.d_ldr_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.d_ldr_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">d_ldr_stack_with_inc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.b_ldr_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.b_ldr_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">b_ldr_stack_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld2_lane_s" title="slothy.targets.aarch64.aarch64_neon.q_ld2_lane_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld2_lane_s</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.d_ldr_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.d_ldr_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">d_ldr_stack_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Q_Ld2_Lane_Post_Inc" title="slothy.targets.aarch64.aarch64_neon.Q_Ld2_Lane_Post_Inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Q_Ld2_Lane_Post_Inc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld2_lane_s" title="slothy.targets.aarch64.aarch64_neon.q_ld2_lane_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld2_lane_s</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc" title="slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld2_lane_post_inc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Q_Ld2_Lane_Post_Inc" title="slothy.targets.aarch64.aarch64_neon.Q_Ld2_Lane_Post_Inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Q_Ld2_Lane_Post_Inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc_force_output" title="slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc_force_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld2_lane_post_inc_force_output</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc" title="slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld2_lane_post_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr1_stack" title="slothy.targets.aarch64.aarch64_neon.q_ldr1_stack"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr1_stack</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc_force_output" title="slothy.targets.aarch64.aarch64_neon.q_ld2_lane_post_inc_force_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld2_lane_post_inc_force_output</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr1_post_inc" title="slothy.targets.aarch64.aarch64_neon.q_ldr1_post_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr1_post_inc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr1_stack" title="slothy.targets.aarch64.aarch64_neon.q_ldr1_stack"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr1_stack</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_ldr_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_stack_with_inc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr1_post_inc" title="slothy.targets.aarch64.aarch64_neon.q_ldr1_post_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr1_post_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_ldr_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_with_inc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_ldr_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_stack_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted" title="slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_with_imm_shifted</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_ldr_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld1_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_ld1_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld1_with_inc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted" title="slothy.targets.aarch64.aarch64_neon.q_ldr_with_imm_shifted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_with_imm_shifted</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldp_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_ldp_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldp_with_inc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld1_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_ld1_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld1_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_with_inc_writeback" title="slothy.targets.aarch64.aarch64_neon.q_ldr_with_inc_writeback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_with_inc_writeback</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldp_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_ldp_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldp_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_ldr_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_with_postinc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_with_inc_writeback" title="slothy.targets.aarch64.aarch64_neon.q_ldr_with_inc_writeback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_with_inc_writeback</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld1_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_ld1_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld1_with_postinc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldr_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_ldr_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldr_with_postinc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldp_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_ldp_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldp_with_postinc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ld1_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_ld1_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ld1_with_postinc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Str_Q" title="slothy.targets.aarch64.aarch64_neon.Str_Q"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Str_Q</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_ldp_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_ldp_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_ldp_with_postinc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Stp_Q" title="slothy.targets.aarch64.aarch64_neon.Stp_Q"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Stp_Q</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Str_Q" title="slothy.targets.aarch64.aarch64_neon.Str_Q"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Str_Q</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str" title="slothy.targets.aarch64.aarch64_neon.q_str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Stp_Q" title="slothy.targets.aarch64.aarch64_neon.Stp_Q"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Stp_Q</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str_with_imm_hint" title="slothy.targets.aarch64.aarch64_neon.q_str_with_imm_hint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str_with_imm_hint</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str" title="slothy.targets.aarch64.aarch64_neon.q_str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_str_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str_with_inc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str_with_imm_hint" title="slothy.targets.aarch64.aarch64_neon.q_str_with_imm_hint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str_with_imm_hint</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.d_str_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.d_str_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">d_str_stack_with_inc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_str_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_str_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str_stack_with_inc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.d_str_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.d_str_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">d_str_stack_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.d_stp_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.d_stp_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">d_stp_stack_with_inc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_str_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str_stack_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_stp_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_stp_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_stp_stack_with_inc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.d_stp_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.d_stp_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">d_stp_stack_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_stp_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_stp_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_stp_with_inc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_stp_stack_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_stp_stack_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_stp_stack_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str_with_inc_writeback" title="slothy.targets.aarch64.aarch64_neon.q_str_with_inc_writeback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str_with_inc_writeback</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_stp_with_inc" title="slothy.targets.aarch64.aarch64_neon.q_stp_with_inc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_stp_with_inc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_str_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str_with_postinc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str_with_inc_writeback" title="slothy.targets.aarch64.aarch64_neon.q_str_with_inc_writeback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str_with_inc_writeback</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_st1_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_st1_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_st1_with_postinc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_str_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_str_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_str_with_postinc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_stp_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_stp_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_stp_with_postinc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_st1_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_st1_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_st1_with_postinc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_st1_2_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_st1_2_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_st1_2_with_postinc</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_stp_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_stp_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_stp_with_postinc</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_st1_2_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_st1_2_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_st1_2_with_postinc</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc" title="slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">q_st1_4_with_postinc</span></code></a></p></td>
 <td></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Ldr_X" title="slothy.targets.aarch64.aarch64_neon.Ldr_X"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Ldr_X</span></code></a></p></td>
@@ -524,202 +530,232 @@ handling the loop can be considered by SLOTHY as well.</p></td>
 <tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ror" title="slothy.targets.aarch64.aarch64_neon.ror"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ror</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.asr" title="slothy.targets.aarch64.aarch64_neon.asr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asr</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.asr_imm" title="slothy.targets.aarch64.aarch64_neon.asr_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asr_imm</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Logical" title="slothy.targets.aarch64.aarch64_neon.AArch64Logical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64Logical</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.asr" title="slothy.targets.aarch64.aarch64_neon.asr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asr</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.rev_w" title="slothy.targets.aarch64.aarch64_neon.rev_w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rev_w</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Logical" title="slothy.targets.aarch64.aarch64_neon.AArch64Logical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64Logical</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.eor_wform" title="slothy.targets.aarch64.aarch64_neon.eor_wform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eor_wform</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.rev_w" title="slothy.targets.aarch64.aarch64_neon.rev_w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rev_w</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.eon_wform" title="slothy.targets.aarch64.aarch64_neon.eon_wform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eon_wform</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.eor_wform" title="slothy.targets.aarch64.aarch64_neon.eor_wform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eor_wform</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.eor" title="slothy.targets.aarch64.aarch64_neon.eor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eor</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.eon_wform" title="slothy.targets.aarch64.aarch64_neon.eon_wform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eon_wform</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.eon" title="slothy.targets.aarch64.aarch64_neon.eon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eon</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.eor" title="slothy.targets.aarch64.aarch64_neon.eor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eor</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.orr" title="slothy.targets.aarch64.aarch64_neon.orr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orr</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.eon" title="slothy.targets.aarch64.aarch64_neon.eon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eon</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.orr_w" title="slothy.targets.aarch64.aarch64_neon.orr_w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orr_w</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.orr" title="slothy.targets.aarch64.aarch64_neon.orr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orr</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.bfi" title="slothy.targets.aarch64.aarch64_neon.bfi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfi</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.orr_w" title="slothy.targets.aarch64.aarch64_neon.orr_w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orr_w</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.and_imm" title="slothy.targets.aarch64.aarch64_neon.and_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">and_imm</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.bfi" title="slothy.targets.aarch64.aarch64_neon.bfi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfi</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ands_imm" title="slothy.targets.aarch64.aarch64_neon.ands_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ands_imm</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.and_imm" title="slothy.targets.aarch64.aarch64_neon.and_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">and_imm</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ands_xzr_imm" title="slothy.targets.aarch64.aarch64_neon.ands_xzr_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ands_xzr_imm</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ands_imm" title="slothy.targets.aarch64.aarch64_neon.ands_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ands_imm</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.and_twoarg" title="slothy.targets.aarch64.aarch64_neon.and_twoarg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">and_twoarg</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ands_xzr_imm" title="slothy.targets.aarch64.aarch64_neon.ands_xzr_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ands_xzr_imm</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.bic" title="slothy.targets.aarch64.aarch64_neon.bic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bic</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.and_twoarg" title="slothy.targets.aarch64.aarch64_neon.and_twoarg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">and_twoarg</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.bic_reg" title="slothy.targets.aarch64.aarch64_neon.bic_reg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bic_reg</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.bic" title="slothy.targets.aarch64.aarch64_neon.bic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bic</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.orr_imm" title="slothy.targets.aarch64.aarch64_neon.orr_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orr_imm</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.bic_reg" title="slothy.targets.aarch64.aarch64_neon.bic_reg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bic_reg</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.sbfx" title="slothy.targets.aarch64.aarch64_neon.sbfx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sbfx</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.orr_imm" title="slothy.targets.aarch64.aarch64_neon.orr_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orr_imm</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ubfx" title="slothy.targets.aarch64.aarch64_neon.ubfx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ubfx</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.sbfx" title="slothy.targets.aarch64.aarch64_neon.sbfx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sbfx</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.sxtb" title="slothy.targets.aarch64.aarch64_neon.sxtb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sxtb</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ubfx" title="slothy.targets.aarch64.aarch64_neon.ubfx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ubfx</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.uxtb" title="slothy.targets.aarch64.aarch64_neon.uxtb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uxtb</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.sxtb" title="slothy.targets.aarch64.aarch64_neon.sxtb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sxtb</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.extr" title="slothy.targets.aarch64.aarch64_neon.extr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extr</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.uxtb" title="slothy.targets.aarch64.aarch64_neon.uxtb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uxtb</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64LogicalShifted" title="slothy.targets.aarch64.aarch64_neon.AArch64LogicalShifted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64LogicalShifted</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.extr" title="slothy.targets.aarch64.aarch64_neon.extr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extr</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.orr_shifted" title="slothy.targets.aarch64.aarch64_neon.orr_shifted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orr_shifted</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64LogicalShifted" title="slothy.targets.aarch64.aarch64_neon.AArch64LogicalShifted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64LogicalShifted</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.orr_shifted_w" title="slothy.targets.aarch64.aarch64_neon.orr_shifted_w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orr_shifted_w</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.orr_shifted" title="slothy.targets.aarch64.aarch64_neon.orr_shifted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orr_shifted</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare" title="slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64ConditionalCompare</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.orr_shifted_w" title="slothy.targets.aarch64.aarch64_neon.orr_shifted_w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orr_shifted_w</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmp" title="slothy.targets.aarch64.aarch64_neon.ccmp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmp</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare" title="slothy.targets.aarch64.aarch64_neon.AArch64ConditionalCompare"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64ConditionalCompare</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmp_xzr" title="slothy.targets.aarch64.aarch64_neon.ccmp_xzr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmp_xzr</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmp" title="slothy.targets.aarch64.aarch64_neon.ccmp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmp</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmp_xzr2" title="slothy.targets.aarch64.aarch64_neon.ccmp_xzr2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmp_xzr2</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmp_xzr" title="slothy.targets.aarch64.aarch64_neon.ccmp_xzr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmp_xzr</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmn" title="slothy.targets.aarch64.aarch64_neon.ccmn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmn</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmp_xzr2" title="slothy.targets.aarch64.aarch64_neon.ccmp_xzr2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmp_xzr2</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmn_xzr" title="slothy.targets.aarch64.aarch64_neon.ccmn_xzr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmn_xzr</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmn" title="slothy.targets.aarch64.aarch64_neon.ccmn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmn</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmn_xzr2" title="slothy.targets.aarch64.aarch64_neon.ccmn_xzr2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmn_xzr2</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmn_xzr" title="slothy.targets.aarch64.aarch64_neon.ccmn_xzr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmn_xzr</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64ConditionalSelect" title="slothy.targets.aarch64.aarch64_neon.AArch64ConditionalSelect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64ConditionalSelect</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ccmn_xzr2" title="slothy.targets.aarch64.aarch64_neon.ccmn_xzr2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ccmn_xzr2</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cneg" title="slothy.targets.aarch64.aarch64_neon.cneg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cneg</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64ConditionalSelect" title="slothy.targets.aarch64.aarch64_neon.AArch64ConditionalSelect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64ConditionalSelect</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.csel_xzr_ne" title="slothy.targets.aarch64.aarch64_neon.csel_xzr_ne"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csel_xzr_ne</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cneg" title="slothy.targets.aarch64.aarch64_neon.cneg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cneg</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.csel_xzr2_ne" title="slothy.targets.aarch64.aarch64_neon.csel_xzr2_ne"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csel_xzr2_ne</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.csel_xzr_ne" title="slothy.targets.aarch64.aarch64_neon.csel_xzr_ne"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csel_xzr_ne</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.csel" title="slothy.targets.aarch64.aarch64_neon.csel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csel</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.csel_xzr2_ne" title="slothy.targets.aarch64.aarch64_neon.csel_xzr2_ne"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csel_xzr2_ne</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cinv" title="slothy.targets.aarch64.aarch64_neon.cinv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cinv</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.csel" title="slothy.targets.aarch64.aarch64_neon.csel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csel</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cinc" title="slothy.targets.aarch64.aarch64_neon.cinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cinc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cinv" title="slothy.targets.aarch64.aarch64_neon.cinv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cinv</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.csetm" title="slothy.targets.aarch64.aarch64_neon.csetm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csetm</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cinc" title="slothy.targets.aarch64.aarch64_neon.cinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cinc</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cset" title="slothy.targets.aarch64.aarch64_neon.cset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cset</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.csetm" title="slothy.targets.aarch64.aarch64_neon.csetm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csetm</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.fcsel" title="slothy.targets.aarch64.aarch64_neon.fcsel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fcsel</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cset" title="slothy.targets.aarch64.aarch64_neon.cset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cset</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cmn" title="slothy.targets.aarch64.aarch64_neon.cmn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmn</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.fcsel" title="slothy.targets.aarch64.aarch64_neon.fcsel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fcsel</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cmn_imm" title="slothy.targets.aarch64.aarch64_neon.cmn_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmn_imm</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cmn" title="slothy.targets.aarch64.aarch64_neon.cmn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmn</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ldr_const" title="slothy.targets.aarch64.aarch64_neon.ldr_const"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ldr_const</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.cmn_imm" title="slothy.targets.aarch64.aarch64_neon.cmn_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmn_imm</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.movk_imm" title="slothy.targets.aarch64.aarch64_neon.movk_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movk_imm</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.ldr_const" title="slothy.targets.aarch64.aarch64_neon.ldr_const"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ldr_const</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.movk_imm_lsl" title="slothy.targets.aarch64.aarch64_neon.movk_imm_lsl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movk_imm_lsl</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.movk_imm" title="slothy.targets.aarch64.aarch64_neon.movk_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movk_imm</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mov" title="slothy.targets.aarch64.aarch64_neon.mov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mov</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.movk_imm_lsl" title="slothy.targets.aarch64.aarch64_neon.movk_imm_lsl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movk_imm_lsl</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Move" title="slothy.targets.aarch64.aarch64_neon.AArch64Move"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64Move</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mov" title="slothy.targets.aarch64.aarch64_neon.mov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mov</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.movz_imm" title="slothy.targets.aarch64.aarch64_neon.movz_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movz_imm</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Move" title="slothy.targets.aarch64.aarch64_neon.AArch64Move"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64Move</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.movz_imm_lsl" title="slothy.targets.aarch64.aarch64_neon.movz_imm_lsl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movz_imm_lsl</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.movz_imm" title="slothy.targets.aarch64.aarch64_neon.movz_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movz_imm</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mov_imm" title="slothy.targets.aarch64.aarch64_neon.mov_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mov_imm</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.movz_imm_lsl" title="slothy.targets.aarch64.aarch64_neon.movz_imm_lsl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movz_imm_lsl</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.movw_imm" title="slothy.targets.aarch64.aarch64_neon.movw_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movw_imm</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mov_imm" title="slothy.targets.aarch64.aarch64_neon.mov_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mov_imm</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mvn_xzr" title="slothy.targets.aarch64.aarch64_neon.mvn_xzr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mvn_xzr</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.movw_imm" title="slothy.targets.aarch64.aarch64_neon.movw_imm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movw_imm</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mov_xform" title="slothy.targets.aarch64.aarch64_neon.mov_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mov_xform</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mvn_xzr" title="slothy.targets.aarch64.aarch64_neon.mvn_xzr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mvn_xzr</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.umull_wform" title="slothy.targets.aarch64.aarch64_neon.umull_wform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">umull_wform</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mov_xform" title="slothy.targets.aarch64.aarch64_neon.mov_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mov_xform</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.umaddl_wform" title="slothy.targets.aarch64.aarch64_neon.umaddl_wform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">umaddl_wform</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.umull_wform" title="slothy.targets.aarch64.aarch64_neon.umull_wform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">umull_wform</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mul_wform" title="slothy.targets.aarch64.aarch64_neon.mul_wform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mul_wform</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.umaddl_wform" title="slothy.targets.aarch64.aarch64_neon.umaddl_wform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">umaddl_wform</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64HighMultiply" title="slothy.targets.aarch64.aarch64_neon.AArch64HighMultiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64HighMultiply</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mul_wform" title="slothy.targets.aarch64.aarch64_neon.mul_wform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mul_wform</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.umulh_xform" title="slothy.targets.aarch64.aarch64_neon.umulh_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">umulh_xform</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64HighMultiply" title="slothy.targets.aarch64.aarch64_neon.AArch64HighMultiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64HighMultiply</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.smulh_xform" title="slothy.targets.aarch64.aarch64_neon.smulh_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smulh_xform</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.umulh_xform" title="slothy.targets.aarch64.aarch64_neon.umulh_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">umulh_xform</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Multiply" title="slothy.targets.aarch64.aarch64_neon.AArch64Multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64Multiply</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.smulh_xform" title="slothy.targets.aarch64.aarch64_neon.smulh_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smulh_xform</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mul_xform" title="slothy.targets.aarch64.aarch64_neon.mul_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mul_xform</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Multiply" title="slothy.targets.aarch64.aarch64_neon.AArch64Multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64Multiply</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.madd_xform" title="slothy.targets.aarch64.aarch64_neon.madd_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">madd_xform</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mul_xform" title="slothy.targets.aarch64.aarch64_neon.mul_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mul_xform</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mneg_xform" title="slothy.targets.aarch64.aarch64_neon.mneg_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mneg_xform</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.madd_xform" title="slothy.targets.aarch64.aarch64_neon.madd_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">madd_xform</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.msub_xform" title="slothy.targets.aarch64.aarch64_neon.msub_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msub_xform</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mneg_xform" title="slothy.targets.aarch64.aarch64_neon.mneg_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mneg_xform</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.msub_xform" title="slothy.targets.aarch64.aarch64_neon.msub_xform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msub_xform</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64CRC32" title="slothy.targets.aarch64.aarch64_neon.AArch64CRC32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64CRC32</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.crc32b" title="slothy.targets.aarch64.aarch64_neon.crc32b"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crc32b</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.crc32h" title="slothy.targets.aarch64.aarch64_neon.crc32h"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crc32h</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.crc32w" title="slothy.targets.aarch64.aarch64_neon.crc32w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crc32w</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.crc32x" title="slothy.targets.aarch64.aarch64_neon.crc32x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crc32x</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.crc32cb" title="slothy.targets.aarch64.aarch64_neon.crc32cb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crc32cb</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.crc32ch" title="slothy.targets.aarch64.aarch64_neon.crc32ch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crc32ch</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.crc32cw" title="slothy.targets.aarch64.aarch64_neon.crc32cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crc32cw</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.crc32cx" title="slothy.targets.aarch64.aarch64_neon.crc32cx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crc32cx</span></code></a></p></td>
 <td></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.and_imm_wform" title="slothy.targets.aarch64.aarch64_neon.and_imm_wform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">and_imm_wform</span></code></a></p></td>
@@ -860,199 +896,211 @@ handling the loop can be considered by SLOTHY as well.</p></td>
 <tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vtbl" title="slothy.targets.aarch64.aarch64_neon.vtbl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vtbl</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vand" title="slothy.targets.aarch64.aarch64_neon.vand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vand</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vtbl_2" title="slothy.targets.aarch64.aarch64_neon.vtbl_2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vtbl_2</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vbic" title="slothy.targets.aarch64.aarch64_neon.vbic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vbic</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vand" title="slothy.targets.aarch64.aarch64_neon.vand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vand</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vbic_imm_shifted" title="slothy.targets.aarch64.aarch64_neon.vbic_imm_shifted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vbic_imm_shifted</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vbic" title="slothy.targets.aarch64.aarch64_neon.vbic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vbic</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmvn" title="slothy.targets.aarch64.aarch64_neon.vmvn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmvn</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vbic_imm_shifted" title="slothy.targets.aarch64.aarch64_neon.vbic_imm_shifted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vbic_imm_shifted</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vorr" title="slothy.targets.aarch64.aarch64_neon.vorr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vorr</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmvn" title="slothy.targets.aarch64.aarch64_neon.vmvn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmvn</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vorn" title="slothy.targets.aarch64.aarch64_neon.vorn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vorn</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vorr" title="slothy.targets.aarch64.aarch64_neon.vorr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vorr</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.veor" title="slothy.targets.aarch64.aarch64_neon.veor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">veor</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vorn" title="slothy.targets.aarch64.aarch64_neon.vorn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vorn</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vbif" title="slothy.targets.aarch64.aarch64_neon.vbif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vbif</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.veor" title="slothy.targets.aarch64.aarch64_neon.veor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">veor</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmov_d" title="slothy.targets.aarch64.aarch64_neon.vmov_d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmov_d</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vbif" title="slothy.targets.aarch64.aarch64_neon.vbif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vbif</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vext" title="slothy.targets.aarch64.aarch64_neon.vext"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vext</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmov_d" title="slothy.targets.aarch64.aarch64_neon.vmov_d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmov_d</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Vmul" title="slothy.targets.aarch64.aarch64_neon.Vmul"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vmul</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vext" title="slothy.targets.aarch64.aarch64_neon.vext"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vext</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmul" title="slothy.targets.aarch64.aarch64_neon.vmul"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmul</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Vmul" title="slothy.targets.aarch64.aarch64_neon.Vmul"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vmul</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmul_lane" title="slothy.targets.aarch64.aarch64_neon.vmul_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmul_lane</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmul" title="slothy.targets.aarch64.aarch64_neon.vmul"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmul</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Vmla" title="slothy.targets.aarch64.aarch64_neon.Vmla"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vmla</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmul_lane" title="slothy.targets.aarch64.aarch64_neon.vmul_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmul_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmla" title="slothy.targets.aarch64.aarch64_neon.vmla"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmla</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Vmla" title="slothy.targets.aarch64.aarch64_neon.Vmla"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vmla</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmla_lane" title="slothy.targets.aarch64.aarch64_neon.vmla_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmla_lane</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmla" title="slothy.targets.aarch64.aarch64_neon.vmla"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmla</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmls" title="slothy.targets.aarch64.aarch64_neon.vmls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmls</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmla_lane" title="slothy.targets.aarch64.aarch64_neon.vmla_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmla_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmls_lane" title="slothy.targets.aarch64.aarch64_neon.vmls_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmls_lane</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmls" title="slothy.targets.aarch64.aarch64_neon.vmls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmls</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vdup" title="slothy.targets.aarch64.aarch64_neon.vdup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vdup</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vmls_lane" title="slothy.targets.aarch64.aarch64_neon.vmls_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vmls_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vdup_w" title="slothy.targets.aarch64.aarch64_neon.vdup_w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vdup_w</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vdup" title="slothy.targets.aarch64.aarch64_neon.vdup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vdup</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Vmull" title="slothy.targets.aarch64.aarch64_neon.Vmull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vmull</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vdup_w" title="slothy.targets.aarch64.aarch64_neon.vdup_w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vdup_w</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumull" title="slothy.targets.aarch64.aarch64_neon.vumull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumull</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Vmull" title="slothy.targets.aarch64.aarch64_neon.Vmull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vmull</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumull2" title="slothy.targets.aarch64.aarch64_neon.vumull2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumull2</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumull" title="slothy.targets.aarch64.aarch64_neon.vumull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumull</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmull" title="slothy.targets.aarch64.aarch64_neon.vsmull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmull</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumull2" title="slothy.targets.aarch64.aarch64_neon.vumull2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumull2</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmull2" title="slothy.targets.aarch64.aarch64_neon.vsmull2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmull2</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmull" title="slothy.targets.aarch64.aarch64_neon.vsmull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmull</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumull_lane" title="slothy.targets.aarch64.aarch64_neon.vumull_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumull_lane</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmull2" title="slothy.targets.aarch64.aarch64_neon.vsmull2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmull2</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumull2_lane" title="slothy.targets.aarch64.aarch64_neon.vumull2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumull2_lane</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumull_lane" title="slothy.targets.aarch64.aarch64_neon.vumull_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumull_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmull_lane" title="slothy.targets.aarch64.aarch64_neon.vsmull_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmull_lane</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumull2_lane" title="slothy.targets.aarch64.aarch64_neon.vumull2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumull2_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmull2_lane" title="slothy.targets.aarch64.aarch64_neon.vsmull2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmull2_lane</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmull_lane" title="slothy.targets.aarch64.aarch64_neon.vsmull_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmull_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Vmlal" title="slothy.targets.aarch64.aarch64_neon.Vmlal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vmlal</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmull2_lane" title="slothy.targets.aarch64.aarch64_neon.vsmull2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmull2_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlal" title="slothy.targets.aarch64.aarch64_neon.vumlal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlal</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Vmlal" title="slothy.targets.aarch64.aarch64_neon.Vmlal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vmlal</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlal2" title="slothy.targets.aarch64.aarch64_neon.vumlal2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlal2</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlal" title="slothy.targets.aarch64.aarch64_neon.vumlal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlal</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlal" title="slothy.targets.aarch64.aarch64_neon.vsmlal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlal</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlal2" title="slothy.targets.aarch64.aarch64_neon.vumlal2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlal2</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlal2" title="slothy.targets.aarch64.aarch64_neon.vsmlal2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlal2</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlal" title="slothy.targets.aarch64.aarch64_neon.vsmlal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlal</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlal_lane" title="slothy.targets.aarch64.aarch64_neon.vumlal_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlal_lane</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlal2" title="slothy.targets.aarch64.aarch64_neon.vsmlal2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlal2</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlal2_lane" title="slothy.targets.aarch64.aarch64_neon.vumlal2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlal2_lane</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlal_lane" title="slothy.targets.aarch64.aarch64_neon.vumlal_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlal_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlal_lane" title="slothy.targets.aarch64.aarch64_neon.vsmlal_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlal_lane</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlal2_lane" title="slothy.targets.aarch64.aarch64_neon.vumlal2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlal2_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlal2_lane" title="slothy.targets.aarch64.aarch64_neon.vsmlal2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlal2_lane</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlal_lane" title="slothy.targets.aarch64.aarch64_neon.vsmlal_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlal_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlsl" title="slothy.targets.aarch64.aarch64_neon.vumlsl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlsl</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlal2_lane" title="slothy.targets.aarch64.aarch64_neon.vsmlal2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlal2_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlsl2" title="slothy.targets.aarch64.aarch64_neon.vumlsl2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlsl2</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlsl" title="slothy.targets.aarch64.aarch64_neon.vumlsl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlsl</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlsl" title="slothy.targets.aarch64.aarch64_neon.vsmlsl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlsl</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlsl2" title="slothy.targets.aarch64.aarch64_neon.vumlsl2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlsl2</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlsl2" title="slothy.targets.aarch64.aarch64_neon.vsmlsl2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlsl2</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlsl" title="slothy.targets.aarch64.aarch64_neon.vsmlsl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlsl</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlsl_lane" title="slothy.targets.aarch64.aarch64_neon.vumlsl_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlsl_lane</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlsl2" title="slothy.targets.aarch64.aarch64_neon.vsmlsl2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlsl2</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlsl2_lane" title="slothy.targets.aarch64.aarch64_neon.vumlsl2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlsl2_lane</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlsl_lane" title="slothy.targets.aarch64.aarch64_neon.vumlsl_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlsl_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlsl_lane" title="slothy.targets.aarch64.aarch64_neon.vsmlsl_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlsl_lane</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vumlsl2_lane" title="slothy.targets.aarch64.aarch64_neon.vumlsl2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vumlsl2_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlsl2_lane" title="slothy.targets.aarch64.aarch64_neon.vsmlsl2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlsl2_lane</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlsl_lane" title="slothy.targets.aarch64.aarch64_neon.vsmlsl_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlsl_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.VShiftImmediateBasic" title="slothy.targets.aarch64.aarch64_neon.VShiftImmediateBasic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VShiftImmediateBasic</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsmlsl2_lane" title="slothy.targets.aarch64.aarch64_neon.vsmlsl2_lane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsmlsl2_lane</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vshl" title="slothy.targets.aarch64.aarch64_neon.vshl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vshl</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.VShiftImmediateBasic" title="slothy.targets.aarch64.aarch64_neon.VShiftImmediateBasic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VShiftImmediateBasic</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vshl_d" title="slothy.targets.aarch64.aarch64_neon.vshl_d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vshl_d</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vshl" title="slothy.targets.aarch64.aarch64_neon.vshl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vshl</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vshrn" title="slothy.targets.aarch64.aarch64_neon.vshrn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vshrn</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vshl_d" title="slothy.targets.aarch64.aarch64_neon.vshl_d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vshl_d</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsshr" title="slothy.targets.aarch64.aarch64_neon.vsshr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsshr</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vshrn" title="slothy.targets.aarch64.aarch64_neon.vshrn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vshrn</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vushr" title="slothy.targets.aarch64.aarch64_neon.vushr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vushr</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsshr" title="slothy.targets.aarch64.aarch64_neon.vsshr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsshr</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vuxtl" title="slothy.targets.aarch64.aarch64_neon.vuxtl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vuxtl</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vushr" title="slothy.targets.aarch64.aarch64_neon.vushr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vushr</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.VShiftImmediateRounding" title="slothy.targets.aarch64.aarch64_neon.VShiftImmediateRounding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VShiftImmediateRounding</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vuxtl" title="slothy.targets.aarch64.aarch64_neon.vuxtl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vuxtl</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsrshr" title="slothy.targets.aarch64.aarch64_neon.vsrshr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsrshr</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.VShiftImmediateRounding" title="slothy.targets.aarch64.aarch64_neon.VShiftImmediateRounding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VShiftImmediateRounding</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vurshr" title="slothy.targets.aarch64.aarch64_neon.vurshr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vurshr</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsrshr" title="slothy.targets.aarch64.aarch64_neon.vsrshr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsrshr</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64NeonShiftInsert" title="slothy.targets.aarch64.aarch64_neon.AArch64NeonShiftInsert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64NeonShiftInsert</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vurshr" title="slothy.targets.aarch64.aarch64_neon.vurshr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vurshr</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsli" title="slothy.targets.aarch64.aarch64_neon.vsli"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsli</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.VShiftRegBasic" title="slothy.targets.aarch64.aarch64_neon.VShiftRegBasic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VShiftRegBasic</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsri" title="slothy.targets.aarch64.aarch64_neon.vsri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsri</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vushl_reg" title="slothy.targets.aarch64.aarch64_neon.vushl_reg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vushl_reg</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vusra" title="slothy.targets.aarch64.aarch64_neon.vusra"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vusra</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64NeonShiftInsert" title="slothy.targets.aarch64.aarch64_neon.AArch64NeonShiftInsert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AArch64NeonShiftInsert</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.VecToGprMov" title="slothy.targets.aarch64.aarch64_neon.VecToGprMov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VecToGprMov</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsli" title="slothy.targets.aarch64.aarch64_neon.vsli"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsli</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.umov_d" title="slothy.targets.aarch64.aarch64_neon.umov_d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">umov_d</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vsri" title="slothy.targets.aarch64.aarch64_neon.vsri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vsri</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mov_d" title="slothy.targets.aarch64.aarch64_neon.mov_d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mov_d</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.vusra" title="slothy.targets.aarch64.aarch64_neon.vusra"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vusra</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Fmov" title="slothy.targets.aarch64.aarch64_neon.Fmov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Fmov</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.VecToGprMov" title="slothy.targets.aarch64.aarch64_neon.VecToGprMov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VecToGprMov</span></code></a></p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.fmov_s_form" title="slothy.targets.aarch64.aarch64_neon.fmov_s_form"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fmov_s_form</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.umov_d" title="slothy.targets.aarch64.aarch64_neon.umov_d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">umov_d</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.mov_d" title="slothy.targets.aarch64.aarch64_neon.mov_d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mov_d</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Fmov" title="slothy.targets.aarch64.aarch64_neon.Fmov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Fmov</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.fmov_s_form" title="slothy.targets.aarch64.aarch64_neon.fmov_s_form"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fmov_s_form</span></code></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.fmov_d_form" title="slothy.targets.aarch64.aarch64_neon.fmov_d_form"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fmov_d_form</span></code></a></p></td>
 <td></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.fmov_0" title="slothy.targets.aarch64.aarch64_neon.fmov_0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fmov_0</span></code></a></p></td>
@@ -1374,7 +1422,7 @@ transformations in case of differences between uArchs.</p></td>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.llvm_mc_attr">
-<span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">llvm_mc_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'aes'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.llvm_mc_attr" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">llvm_mc_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'aes,crc'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.llvm_mc_attr" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
@@ -2099,6 +2147,32 @@ of a subclass of Instruction.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_ld1.make">
 <em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">make</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_ld1.make" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_ld1_2">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">q_ld1_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_ld1_2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Instruction" title="slothy.targets.aarch64.aarch64_neon.AArch64Instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64Instruction</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_ld1_2.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ld1</span> <span class="pre">{&lt;Va&gt;.&lt;dt&gt;,</span> <span class="pre">&lt;Vb&gt;.&lt;dt&gt;},</span> <span class="pre">[&lt;Xc&gt;]'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_ld1_2.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_ld1_2.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Xc']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_ld1_2.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_ld1_2.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Va',</span> <span class="pre">'Vb']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_ld1_2.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_ld1_2.make">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">make</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_ld1_2.make" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2953,6 +3027,32 @@ of a subclass of Instruction.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_st1_2_with_postinc.make">
 <em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">make</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_st1_2_with_postinc.make" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">q_st1_4_with_postinc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Instruction" title="slothy.targets.aarch64.aarch64_neon.AArch64Instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64Instruction</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'st1</span> <span class="pre">{&lt;Va&gt;.&lt;dt&gt;,</span> <span class="pre">&lt;Vb&gt;.&lt;dt&gt;,</span> <span class="pre">&lt;Vc&gt;.&lt;dt&gt;,</span> <span class="pre">&lt;Vd&gt;.&lt;dt&gt;},</span> <span class="pre">[&lt;Xc&gt;],</span> <span class="pre">&lt;imm&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Va',</span> <span class="pre">'Vb',</span> <span class="pre">'Vc',</span> <span class="pre">'Vd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc.in_outs">
+<span class="sig-name descname"><span class="pre">in_outs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Xc']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc.in_outs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc.make">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">make</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.q_st1_4_with_postinc.make" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -4876,17 +4976,38 @@ of a subclass of Instruction.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.asr_imm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">asr_imm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.asr_imm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Shift" title="slothy.targets.aarch64.aarch64_neon.AArch64Shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64Shift</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.asr_imm.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'asr</span> <span class="pre">&lt;Xd&gt;,</span> <span class="pre">&lt;Xa&gt;,</span> <span class="pre">&lt;imm&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.asr_imm.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.asr_imm.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Xa']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.asr_imm.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.asr_imm.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Xd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.asr_imm.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.asr">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">asr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.asr" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Shift" title="slothy.targets.aarch64.aarch64_neon.AArch64Shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64Shift</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.asr.pattern">
-<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'asr</span> <span class="pre">&lt;Xd&gt;,</span> <span class="pre">&lt;Xa&gt;,</span> <span class="pre">&lt;imm&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.asr.pattern" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'asr</span> <span class="pre">&lt;Xd&gt;,</span> <span class="pre">&lt;Xa&gt;,</span> <span class="pre">&lt;Xb&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.asr.pattern" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.asr.inputs">
-<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Xa']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.asr.inputs" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Xa',</span> <span class="pre">'Xb']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.asr.inputs" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -6227,6 +6348,180 @@ of a subclass of Instruction.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.AArch64CRC32">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">AArch64CRC32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.AArch64CRC32" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Instruction" title="slothy.targets.aarch64.aarch64_neon.AArch64Instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64Instruction</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32b">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">crc32b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32b" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64CRC32" title="slothy.targets.aarch64.aarch64_neon.AArch64CRC32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64CRC32</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32b.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crc32b</span> <span class="pre">&lt;Wd&gt;,</span> <span class="pre">&lt;Wa&gt;,</span> <span class="pre">&lt;Wb&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32b.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32b.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wa',</span> <span class="pre">'Wb']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32b.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32b.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32b.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32h">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">crc32h</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32h" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64CRC32" title="slothy.targets.aarch64.aarch64_neon.AArch64CRC32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64CRC32</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32h.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crc32h</span> <span class="pre">&lt;Wd&gt;,</span> <span class="pre">&lt;Wa&gt;,</span> <span class="pre">&lt;Wb&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32h.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32h.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wa',</span> <span class="pre">'Wb']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32h.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32h.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32h.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32w">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">crc32w</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32w" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64CRC32" title="slothy.targets.aarch64.aarch64_neon.AArch64CRC32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64CRC32</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32w.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crc32w</span> <span class="pre">&lt;Wd&gt;,</span> <span class="pre">&lt;Wa&gt;,</span> <span class="pre">&lt;Wb&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32w.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32w.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wa',</span> <span class="pre">'Wb']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32w.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32w.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32w.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32x">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">crc32x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32x" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64CRC32" title="slothy.targets.aarch64.aarch64_neon.AArch64CRC32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64CRC32</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32x.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crc32x</span> <span class="pre">&lt;Wd&gt;,</span> <span class="pre">&lt;Wa&gt;,</span> <span class="pre">&lt;Xb&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32x.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32x.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wa',</span> <span class="pre">'Xb']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32x.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32x.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32x.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cb">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">crc32cb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cb" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64CRC32" title="slothy.targets.aarch64.aarch64_neon.AArch64CRC32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64CRC32</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cb.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crc32cb</span> <span class="pre">&lt;Wd&gt;,</span> <span class="pre">&lt;Wa&gt;,</span> <span class="pre">&lt;Wb&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cb.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cb.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wa',</span> <span class="pre">'Wb']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cb.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cb.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cb.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32ch">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">crc32ch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32ch" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64CRC32" title="slothy.targets.aarch64.aarch64_neon.AArch64CRC32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64CRC32</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32ch.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crc32ch</span> <span class="pre">&lt;Wd&gt;,</span> <span class="pre">&lt;Wa&gt;,</span> <span class="pre">&lt;Wb&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32ch.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32ch.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wa',</span> <span class="pre">'Wb']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32ch.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32ch.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32ch.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cw">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">crc32cw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cw" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64CRC32" title="slothy.targets.aarch64.aarch64_neon.AArch64CRC32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64CRC32</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cw.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crc32cw</span> <span class="pre">&lt;Wd&gt;,</span> <span class="pre">&lt;Wa&gt;,</span> <span class="pre">&lt;Wb&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cw.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cw.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wa',</span> <span class="pre">'Wb']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cw.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cw.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cw.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cx">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">crc32cx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cx" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64CRC32" title="slothy.targets.aarch64.aarch64_neon.AArch64CRC32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64CRC32</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cx.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crc32cx</span> <span class="pre">&lt;Wd&gt;,</span> <span class="pre">&lt;Wa&gt;,</span> <span class="pre">&lt;Xb&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cx.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cx.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wa',</span> <span class="pre">'Xb']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cx.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.crc32cx.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.crc32cx.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.and_imm_wform">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">and_imm_wform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.and_imm_wform" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Instruction" title="slothy.targets.aarch64.aarch64_neon.AArch64Instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64Instruction</span></code></a></p>
@@ -7058,6 +7353,32 @@ of a subclass of Instruction.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.vtbl.outputs">
 <span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Vd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.vtbl.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.vtbl_2">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">vtbl_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.vtbl_2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Instruction" title="slothy.targets.aarch64.aarch64_neon.AArch64Instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64Instruction</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.vtbl_2.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tbl</span> <span class="pre">&lt;Vd&gt;.&lt;dt&gt;,</span> <span class="pre">{&lt;Va&gt;.&lt;dt&gt;,</span> <span class="pre">&lt;Vb&gt;.&lt;dt&gt;},</span> <span class="pre">&lt;Vc&gt;.&lt;dt&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.vtbl_2.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.vtbl_2.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Va',</span> <span class="pre">'Vb',</span> <span class="pre">'Vc']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.vtbl_2.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.vtbl_2.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Vd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.vtbl_2.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.vtbl_2.make">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">make</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.vtbl_2.make" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -8219,6 +8540,33 @@ of a subclass of Instruction.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.VShiftRegBasic">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">VShiftRegBasic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.VShiftRegBasic" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Instruction" title="slothy.targets.aarch64.aarch64_neon.AArch64Instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64Instruction</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.vushl_reg">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">vushl_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.vushl_reg" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.VShiftRegBasic" title="slothy.targets.aarch64.aarch64_neon.VShiftRegBasic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.VShiftRegBasic</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.vushl_reg.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ushl</span> <span class="pre">&lt;Vd&gt;.&lt;dt&gt;,</span> <span class="pre">&lt;Va&gt;.&lt;dt&gt;,</span> <span class="pre">&lt;Vb&gt;.&lt;dt&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.vushl_reg.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.vushl_reg.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Va',</span> <span class="pre">'Vb']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.vushl_reg.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.vushl_reg.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Vd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.vushl_reg.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.AArch64NeonShiftInsert">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">AArch64NeonShiftInsert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.AArch64NeonShiftInsert" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.AArch64Instruction" title="slothy.targets.aarch64.aarch64_neon.AArch64Instruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.AArch64Instruction</span></code></a></p>
@@ -8358,6 +8706,27 @@ of a subclass of Instruction.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.fmov_s_form.outputs">
 <span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Wd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.fmov_s_form.outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.fmov_d_form">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">slothy.targets.aarch64.aarch64_neon.</span></span><span class="sig-name descname"><span class="pre">fmov_d_form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifiesFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependsOnFlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.fmov_d_form" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slothy.targets.aarch64.aarch64_neon.Fmov" title="slothy.targets.aarch64.aarch64_neon.Fmov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slothy.targets.aarch64.aarch64_neon.Fmov</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.fmov_d_form.pattern">
+<span class="sig-name descname"><span class="pre">pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fmov</span> <span class="pre">&lt;Xd&gt;,</span> <span class="pre">&lt;Da&gt;'</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.fmov_d_form.pattern" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.fmov_d_form.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Da']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.fmov_d_form.inputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="slothy.targets.aarch64.aarch64_neon.fmov_d_form.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Xd']</span></em><a class="headerlink" href="#slothy.targets.aarch64.aarch64_neon.fmov_d_form.outputs" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -9993,8 +10362,8 @@ transformations in case of differences between uArchs.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="slothy.targets.aarch64.cortex_a72_frontend.html" class="btn btn-neutral float-left" title="slothy.targets.aarch64.cortex_a72_frontend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="slothy.targets.aarch64.neoverse_n1_experimental.html" class="btn btn-neutral float-right" title="slothy.targets.aarch64.neoverse_n1_experimental" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="slothy.targets.aarch64.cortex_a55.html" class="btn btn-neutral float-left" title="slothy.targets.aarch64.cortex_a55" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="slothy.targets.aarch64.aarch64_big_experimental.html" class="btn btn-neutral float-right" title="slothy.targets.aarch64.aarch64_big_experimental" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
