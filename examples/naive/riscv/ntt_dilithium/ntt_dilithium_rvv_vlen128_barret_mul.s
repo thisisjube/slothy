@@ -258,7 +258,7 @@ _ntt_rvv_vlen128_barret_mul:
     li count, 4
 
     .p2align 2
-//layer1234_start:
+layer1234_start:
     // Load 64 coefficients. For VLEN = 128 each register holds 4* 4 byte = 32 bit coefficients. Hence, 16 regs required
     // Base register must be incremented by L_STRIDE = 64 byte to load the correct coefficient pairs.
 
@@ -350,7 +350,8 @@ layer1234_end:
     addi in, in, -4*S_STRIDE    // reset in pointer to original value, has been updated 4 x S_STRIDE in the previous loop
                                 // other implementation saved original in to stack, maybe consider that ...
     li count, 16
-    addi root_ptr, root_ptr, 15*8 // point to twiddles for layer5678, starting with root16
+    addi root_ptr, root_ptr, 16*8 // point to twiddles for layer5678, starting with root16
+                                  // 16*8: skip 15 root/barretc pairs + 1 padding pair (pad=[0] in twiddle gen)
 
     .equ L_STRIDE, 16
     .equ S_STRIDE, 64  // check again
