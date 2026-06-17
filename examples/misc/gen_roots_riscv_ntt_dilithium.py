@@ -51,6 +51,7 @@ class NttRootGen:
         block_strided_twiddles=True,
         negacyclic=True,
         iters=None,
+        signed_roots=False,
     ):
         if pad is None:
             pad = []
@@ -65,6 +66,7 @@ class NttRootGen:
         self.negacyclic = negacyclic
         self.bitsize = bitsize
         self.vector_length = vector_length
+        self.signed_roots = signed_roots
 
         self.widen_single_twiddles_to_words = widen_single_twiddles_to_words
         self.block_strided_twiddles = block_strided_twiddles
@@ -143,9 +145,12 @@ class NttRootGen:
 
     def _prepare_root(self, root):
 
-        # Force _signed_ representation of root?
-        # if root > self.modulus // 2:
-        #    root -= self.modulus
+        # Force _signed_ representation of root. Required for a signed Barrett
+        # multiplication (vmulh / signed high-multiply): the multiplicand may be
+        # negative after the first butterfly layer, so the root and its twisted
+        # constant must use the signed representative in (-q/2, q/2].
+        if self.signed_roots and root > self.modulus // 2:
+            root -= self.modulus
 
         def round_to_even(x):
             rx = round(x)
@@ -629,6 +634,25 @@ def _main():
         "../naive/riscv/ntt_dilithium/ntt_dilithium_1234_5678_twiddles.s"
     )
     # ntt_dilithium_l1234.export("../opt/aarch64/ntt_dilithium_1234_5678_twiddles.s")
+
+    # Signed-root twiddles for the RVV signed-Barrett NTT (uses vmulh, so the
+    # multiplicand may be negative and roots must be signed representatives).
+    ntt_dilithium_l1234_barret = NttRootGen(
+        size=256,
+        bitsize=32,
+        modulus=8380417,
+        root=1753,
+        layers=8,
+        iters=[(0, 4), (4, 4)],
+        pad=[0],
+        print_label=True,
+        block_strided_twiddles=True,
+        signed_roots=True,
+    )
+    ntt_dilithium_l1234_barret.export(
+        "../naive/riscv/ntt_dilithium/include/"
+        "ntt_dilithium_1234_5678_twiddles_barret_mul.s"
+    )
 
     # ntt_dilithium_l123 = NttRootGen(
     #     size=256,

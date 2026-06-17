@@ -85,7 +85,7 @@
 
 .macro barret_mul dst, a, b, barret_const
     vmul.vx \dst, \a, \b                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, \a, \barret_const              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, \a, \barret_const               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx \dst, modulus, vtmp0                  // z = z - n * t
 .endm
 
@@ -97,7 +97,7 @@
 
 .macro barret_mul_v vdst, va, vb, vbarret_const
     vmul.vv \vdst, \va, \vb                         // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vv vtmp0, \va, \vbarret_const            // t = (a * barret_const) >> k
+    vmulh.vv vtmp0, \va, \vbarret_const             // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx \vdst, modulus, vtmp0                // z = z - n * t
 .endm
 
@@ -305,7 +305,7 @@ _ntt_rvv_vlen128_barret_mul:
     ct_butterfly data5, data7, xtmp, barretc_5
     ct_butterfly data8, data10, root6, barretc_6
     ct_butterfly data9, data11, root6, barretc_6
-    ct_butterfly data12, data14, root6, barretc_7
+    ct_butterfly data12, data14, root7, barretc_7
     ct_butterfly data13, data15, root7, barretc_7
 
     // level 4 - Stride = 16*4 byte -> BF(a0, a16), BF(a32, a48) ...

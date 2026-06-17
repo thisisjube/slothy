@@ -85,7 +85,7 @@
 
 .macro barret_mul dst, a, b, barret_const
     vmul.vx \dst, \a, \b                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, \a, \barret_const              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, \a, \barret_const               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx \dst, modulus, vtmp0                  // z = z - n * t
 .endm
 
@@ -97,7 +97,7 @@
 
 .macro barret_mul_v vdst, va, vb, vbarret_const
     vmul.vv \vdst, \va, \vb                         // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vv vtmp0, \va, \vbarret_const            // t = (a * barret_const) >> k
+    vmulh.vv vtmp0, \va, \vbarret_const             // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx \vdst, modulus, vtmp0                // z = z - n * t
 .endm
 
@@ -290,42 +290,42 @@ start:
     // Merge 4 layers (interleaved)
     // level 1 - Stride = 128*4 byte -> BF(a0,a128), BF(a16, a144) ...
     vmul.vx vtmp1, data8, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data8, barretc_1              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data8, barretc_1               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data8, data0, vtmp1                           // b = b - vtmp1
     vadd.vv data0, data0, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data9, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data9, barretc_1              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data9, barretc_1               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data9, data1, vtmp1                           // b = b - vtmp1
     vadd.vv data1, data1, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data10, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data10, barretc_1              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data10, barretc_1               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data10, data2, vtmp1                           // b = b - vtmp1
     vadd.vv data2, data2, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data11, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data11, barretc_1              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data11, barretc_1               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data11, data3, vtmp1                           // b = b - vtmp1
     vadd.vv data3, data3, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data12, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data12, barretc_1              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data12, barretc_1               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data12, data4, vtmp1                           // b = b - vtmp1
     vadd.vv data4, data4, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data13, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data13, barretc_1              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data13, barretc_1               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data13, data5, vtmp1                           // b = b - vtmp1
     vadd.vv data5, data5, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data14, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data14, barretc_1              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data14, barretc_1               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data14, data6, vtmp1                           // b = b - vtmp1
     vadd.vv data6, data6, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data15, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data15, barretc_1              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data15, barretc_1               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data15, data7, vtmp1                           // b = b - vtmp1
     vadd.vv data7, data7, vtmp1                           // a = a + vtmp1
@@ -334,22 +334,22 @@ start:
 
     // level 2 - Stride = 64*4 byte -> BF(a0, a64), BF(16, 80) ...
     vmul.vx vtmp1, data4, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data4, barretc_2              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data4, barretc_2               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data4, data0, vtmp1                           // b = b - vtmp1
     vadd.vv data0, data0, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data5, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data5, barretc_2              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data5, barretc_2               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data5, data1, vtmp1                           // b = b - vtmp1
     vadd.vv data1, data1, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data6, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data6, barretc_2              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data6, barretc_2               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data6, data2, vtmp1                           // b = b - vtmp1
     vadd.vv data2, data2, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data7, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data7, barretc_2              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data7, barretc_2               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data7, data3, vtmp1                           // b = b - vtmp1
     vadd.vv data3, data3, vtmp1                           // a = a + vtmp1
@@ -357,22 +357,22 @@ start:
     lw xtmp, 2*8(root_ptr)  // xtmp = root3
 
     vmul.vx vtmp1, data12, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data12, barretc_3              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data12, barretc_3               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data12, data8, vtmp1                           // b = b - vtmp1
     vadd.vv data8, data8, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data13, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data13, barretc_3              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data13, barretc_3               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data13, data9, vtmp1                           // b = b - vtmp1
     vadd.vv data9, data9, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data14, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data14, barretc_3              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data14, barretc_3               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data14, data10, vtmp1                           // b = b - vtmp1
     vadd.vv data10, data10, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data15, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data15, barretc_3              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data15, barretc_3               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data15, data11, vtmp1                           // b = b - vtmp1
     vadd.vv data11, data11, vtmp1                           // a = a + vtmp1
@@ -381,12 +381,12 @@ start:
 
     // level 3 - Stride = 32*4 byte -> BF(a0, a32), BF(a16, a48) ...
     vmul.vx vtmp1, data2, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data2, barretc_4              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data2, barretc_4               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data2, data0, vtmp1                           // b = b - vtmp1
     vadd.vv data0, data0, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data3, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data3, barretc_4              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data3, barretc_4               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data3, data1, vtmp1                           // b = b - vtmp1
     vadd.vv data1, data1, vtmp1                           // a = a + vtmp1
@@ -394,74 +394,74 @@ start:
     lw xtmp, 4*8(root_ptr)  // xtmp = root5
 
     vmul.vx vtmp1, data6, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data6, barretc_5              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data6, barretc_5               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data6, data4, vtmp1                           // b = b - vtmp1
     vadd.vv data4, data4, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data7, xtmp                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data7, barretc_5              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data7, barretc_5               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data7, data5, vtmp1                           // b = b - vtmp1
     vadd.vv data5, data5, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data10, root6                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data10, barretc_6              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data10, barretc_6               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data10, data8, vtmp1                           // b = b - vtmp1
     vadd.vv data8, data8, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data11, root6                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data11, barretc_6              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data11, barretc_6               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data11, data9, vtmp1                           // b = b - vtmp1
     vadd.vv data9, data9, vtmp1                           // a = a + vtmp1
-    vmul.vx vtmp1, data14, root6                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data14, barretc_7              // t = (a * barret_const) >> k
+    vmul.vx vtmp1, data14, root7                            // z = a*b = coefficient (vect) * root (scalar)
+    vmulh.vx vtmp0, data14, barretc_7               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data14, data12, vtmp1                           // b = b - vtmp1
     vadd.vv data12, data12, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data15, root7                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data15, barretc_7              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data15, barretc_7               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data15, data13, vtmp1                           // b = b - vtmp1
     vadd.vv data13, data13, vtmp1                           // a = a + vtmp1
 
     // level 4 - Stride = 16*4 byte -> BF(a0, a16), BF(a32, a48) ...
     vmul.vx vtmp1, data1, root8                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data1, barretc_8              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data1, barretc_8               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data1, data0, vtmp1                           // b = b - vtmp1
     vadd.vv data0, data0, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data3, root9                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data3, barretc_9              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data3, barretc_9               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data3, data2, vtmp1                           // b = b - vtmp1
     vadd.vv data2, data2, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data5, root10                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data5, barretc_10              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data5, barretc_10               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data5, data4, vtmp1                           // b = b - vtmp1
     vadd.vv data4, data4, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data7, root11                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data7, barretc_11              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data7, barretc_11               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data7, data6, vtmp1                           // b = b - vtmp1
     vadd.vv data6, data6, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data9, root12                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data9, barretc_12              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data9, barretc_12               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data9, data8, vtmp1                           // b = b - vtmp1
     vadd.vv data8, data8, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data11, root13                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data11, barretc_13              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data11, barretc_13               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data11, data10, vtmp1                           // b = b - vtmp1
     vadd.vv data10, data10, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data13, root14                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data13, barretc_14              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data13, barretc_14               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data13, data12, vtmp1                           // b = b - vtmp1
     vadd.vv data12, data12, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data15, root15                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data15, barretc_15              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data15, barretc_15               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data15, data14, vtmp1                           // b = b - vtmp1
     vadd.vv data14, data14, vtmp1                           // a = a + vtmp1
@@ -541,22 +541,22 @@ layer5678_start:
 
     // level 5+6
     vmul.vx vtmp1, data2, xroot1                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data2, xbarretc_1              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data2, xbarretc_1               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data2, data0, vtmp1                           // b = b - vtmp1
     vadd.vv data0, data0, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data3, xroot1                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data3, xbarretc_1              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data3, xbarretc_1               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data3, data1, vtmp1                           // b = b - vtmp1
     vadd.vv data1, data1, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data1, xroot2                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data1, xbarretc_2              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data1, xbarretc_2               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data1, data0, vtmp1                           // b = b - vtmp1
     vadd.vv data0, data0, vtmp1                           // a = a + vtmp1
     vmul.vx vtmp1, data3, xroot3                            // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vx vtmp0, data3, xbarretc_3              // t = (a * barret_const) >> k
+    vmulh.vx vtmp0, data3, xbarretc_3               // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                  // z = z - n * t
     vsub.vv data3, data2, vtmp1                           // b = b - vtmp1
     vadd.vv data2, data2, vtmp1                           // a = a + vtmp1
@@ -571,22 +571,22 @@ layer5678_start:
 
     // level 7+8
     vmul.vv vtmp1, data2, vroot1                         // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vv vtmp0, data2, vbarretc_1            // t = (a * barret_const) >> k
+    vmulh.vv vtmp0, data2, vbarretc_1             // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                // z = z - n * t
     vsub.vv data2, data0, vtmp1                         // b = b - vtmp1
     vadd.vv data0, data0, vtmp1                         // a = a + vtmp1
     vmul.vv vtmp1, data3, vroot1                         // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vv vtmp0, data3, vbarretc_1            // t = (a * barret_const) >> k
+    vmulh.vv vtmp0, data3, vbarretc_1             // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                // z = z - n * t
     vsub.vv data3, data1, vtmp1                         // b = b - vtmp1
     vadd.vv data1, data1, vtmp1                         // a = a + vtmp1
     vmul.vv vtmp1, data1, vroot2                         // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vv vtmp0, data1, vbarretc_2            // t = (a * barret_const) >> k
+    vmulh.vv vtmp0, data1, vbarretc_2             // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                // z = z - n * t
     vsub.vv data1, data0, vtmp1                         // b = b - vtmp1
     vadd.vv data0, data0, vtmp1                         // a = a + vtmp1
     vmul.vv vtmp1, data3, vroot3                         // z = a*b = coefficient (vect) * root (scalar)
-    vmulhu.vv vtmp0, data3, vbarretc_3            // t = (a * barret_const) >> k
+    vmulh.vv vtmp0, data3, vbarretc_3             // t = (a * barret_const) >> k, signed: a may be negative
     vnmsac.vx vtmp1, modulus, vtmp0                // z = z - n * t
     vsub.vv data3, data2, vtmp1                         // b = b - vtmp1
     vadd.vv data2, data2, vtmp1                         // a = a + vtmp1
