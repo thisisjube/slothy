@@ -212,8 +212,8 @@ class RISC_V_ntt_rvv_vlen128_barret_mul(OptimizationRunner):
         # slothy.config.sw_pipelining.enabled = True
         slothy.config.sw_pipelining.halving_heuristic = True
         slothy.config.split_heuristic = True
-        slothy.config.split_heuristic_factor = 10
-        slothy.config.split_heuristic_stepsize = 0.1
+        slothy.config.split_heuristic_factor = 5
+        slothy.config.split_heuristic_stepsize = 0.05
         slothy.config.timeout = 180
         slothy.config.split_heuristic_repeat = 2
 
@@ -226,7 +226,7 @@ class RISC_V_ntt_rvv_vlen128_barret_mul(OptimizationRunner):
         )
         # slothy.config.allow_useless_instructions = True
         # slothy.fusion_region("start", "end", ssa=False)
-        #slothy.optimize_loop("layer1234_start")
+        slothy.optimize_loop("layer1234_start")
         slothy.optimize_loop("layer5678_start")
 
 

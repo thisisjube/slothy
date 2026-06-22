@@ -23,7 +23,7 @@
 
     #define in       x10
     // == a0, first function arg
-    #define count    x3
+    //#define gp    x3
     #define modulus  x4
     #define root_ptr x5
     #define xtmp     x6
@@ -271,7 +271,7 @@ start:
     lw root15,     (14*8)(root_ptr)
     lw barretc_15, (14*8+4)(root_ptr)
 
-    li count, 4
+    li gp, 4
 
     .p2align 2
 layer1234_start:
@@ -475,8 +475,8 @@ layer1234_start:
     addi in, in, -15*L_STRIDE   // decrement pointer to original value
 
     addi in, in, S_STRIDE       // load next coeffient pairs, all shifted by 16 bytes
-    addi count, count, -1
-    bnez count, layer1234_start
+    addi gp, gp, -1
+    bnez gp, layer1234_start
 
     #undef barretc_1
     #undef barretc_2
@@ -500,7 +500,7 @@ layer1234_start:
     #define vbarretc_3  v24
     addi in, in, -4*S_STRIDE    // reset in pointer to original value, has been updated 4 x S_STRIDE in the previous loop
                                 // other implementation saved original in to stack, maybe consider that ...
-    li count, 16
+    li gp, 16
     addi root_ptr, root_ptr, 15*8 // point to twiddles for layer5678, starting with root16
 
     .equ L_STRIDE_2, 16
@@ -606,8 +606,8 @@ layer5678_start:
     // addi in, in, -3*L_STRIDE   // decrement pointer to original value
 
     addi in, in, S_STRIDE_2  // load next coeffient pairs, all shifted by 64 bytes
-    addi count, count, -1
-    bnez count, layer5678_start
+    addi gp, gp, -1
+    bnez gp, layer5678_start
 end:
 
     pop_stack
