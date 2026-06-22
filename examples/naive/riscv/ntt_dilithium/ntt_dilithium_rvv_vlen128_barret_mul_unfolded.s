@@ -23,7 +23,7 @@
 
     #define in       x10
     // == a0, first function arg
-    //#define gp    x3
+    // #define gp    x3
     #define modulus  x4
     #define root_ptr x5
     #define xtmp     x6
@@ -108,8 +108,8 @@
 .endm
 
 .macro transpose4 data, ptr
-    vsseg4e32.v \data, (\ptr)
-    vl4re32.v \data, (\ptr)  // loads data into data0, data1, data2, data3
+    vsseg4e32.v \data, (\ptr)   // @slothy:writes=['transpose_buf']
+    vl4re32.v   \data, (\ptr)   // @slothy:reads=['transpose_buf']
     // alternative:
     // vle32.v data0, ptr
     // vle32.v data1, ptr+1 etc.
@@ -278,10 +278,36 @@ layer1234_start:
     // Load 64 coefficients. For VLEN = 128 each register holds 4* 4 byte = 32 bit coefficients. Hence, 16 regs required
     // Base register must be incremented by L_STRIDE = 64 byte to load the correct coefficient pairs.
 
-    .irp r, data0,data1,data2,data3,data4,data5,data6,data7, data8,data9,data10,data11,data12,data13,data14
-    vle32.v \r, (in)
+    vle32.v data0, (in)
     addi in, in, L_STRIDE
-    .endr
+    vle32.v data1, (in)
+    addi in, in, L_STRIDE
+    vle32.v data2, (in)
+    addi in, in, L_STRIDE
+    vle32.v data3, (in)
+    addi in, in, L_STRIDE
+    vle32.v data4, (in)
+    addi in, in, L_STRIDE
+    vle32.v data5, (in)
+    addi in, in, L_STRIDE
+    vle32.v data6, (in)
+    addi in, in, L_STRIDE
+    vle32.v data7, (in)
+    addi in, in, L_STRIDE
+    vle32.v data8, (in)
+    addi in, in, L_STRIDE
+    vle32.v data9, (in)
+    addi in, in, L_STRIDE
+    vle32.v data10, (in)
+    addi in, in, L_STRIDE
+    vle32.v data11, (in)
+    addi in, in, L_STRIDE
+    vle32.v data12, (in)
+    addi in, in, L_STRIDE
+    vle32.v data13, (in)
+    addi in, in, L_STRIDE
+    vle32.v data14, (in)
+    addi in, in, L_STRIDE
     vle32.v data15, (in)
     addi in, in, -15*L_STRIDE   // decrement pointer to original value
 
@@ -467,14 +493,41 @@ layer1234_start:
     vadd.vv data14, data14, vtmp1                           // a = a + vtmp1
 
 
-    .irp r, data0,data1,data2,data3,data4,data5,data6,data7, data8,data9,data10,data11,data12,data13,data14
-    vse32.v \r, (in)
+    vse32.v data0, (in)
     addi in, in, L_STRIDE
-    .endr
+    vse32.v data1, (in)
+    addi in, in, L_STRIDE
+    vse32.v data2, (in)
+    addi in, in, L_STRIDE
+    vse32.v data3, (in)
+    addi in, in, L_STRIDE
+    vse32.v data4, (in)
+    addi in, in, L_STRIDE
+    vse32.v data5, (in)
+    addi in, in, L_STRIDE
+    vse32.v data6, (in)
+    addi in, in, L_STRIDE
+    vse32.v data7, (in)
+    addi in, in, L_STRIDE
+    vse32.v data8, (in)
+    addi in, in, L_STRIDE
+    vse32.v data9, (in)
+    addi in, in, L_STRIDE
+    vse32.v data10, (in)
+    addi in, in, L_STRIDE
+    vse32.v data11, (in)
+    addi in, in, L_STRIDE
+    vse32.v data12, (in)
+    addi in, in, L_STRIDE
+    vse32.v data13, (in)
+    addi in, in, L_STRIDE
+    vse32.v data14, (in)
+    addi in, in, L_STRIDE
     vse32.v data15, (in)
     addi in, in, -15*L_STRIDE   // decrement pointer to original value
 
     addi in, in, S_STRIDE       // load next coeffient pairs, all shifted by 16 bytes
+// layer1234_end:
     addi gp, gp, -1
     bnez gp, layer1234_start
 
@@ -501,7 +554,8 @@ layer1234_start:
     addi in, in, -4*S_STRIDE    // reset in pointer to original value, has been updated 4 x S_STRIDE in the previous loop
                                 // other implementation saved original in to stack, maybe consider that ...
     li gp, 16
-    addi root_ptr, root_ptr, 15*8 // point to twiddles for layer5678, starting with root16
+    addi root_ptr, root_ptr, 16*8 // point to twiddles for layer5678, starting with root16
+                                  // 16*8: skip 15 root/barretc pairs + 1 padding pair (pad=[0] in twiddle gen)
 
     .equ L_STRIDE_2, 16
     .equ S_STRIDE_2, 64  // check again
@@ -561,8 +615,8 @@ layer5678_start:
     vadd.vv data2, data2, vtmp1                           // a = a + vtmp1
 
     addi sp, sp, -64  // allocate 64 byte of memory for 4 vector registers
-    vsseg4e32.v data0, (sp)
-    vl4re32.v data0, (sp)  // loads data into data0, data1, data2, data3
+    vsseg4e32.v data0, (sp)   // @slothy:writes=['transpose_buf']
+    vl4re32.v   data0, (sp)   // @slothy:reads=['transpose_buf']
     // alternative:
     // vle32.v data0, ptr
     // vle32.v data1, ptr+1 etc.

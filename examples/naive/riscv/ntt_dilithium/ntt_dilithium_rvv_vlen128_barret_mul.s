@@ -108,8 +108,8 @@
 .endm
 
 .macro transpose4 data, ptr
-    vsseg4e32.v \data, (\ptr)
-    vl4re32.v \data, (\ptr)  // loads data into data0, data1, data2, data3
+    vsseg4e32.v \data, (\ptr)   // @slothy:writes=[transpose_buf]
+    vl4re32.v   \data, (\ptr)   // @slothy:reads=[transpose_buf]
     // alternative:
     // vle32.v data0, ptr
     // vle32.v data1, ptr+1 etc.
@@ -353,20 +353,20 @@ layer1234_start:
     addi root_ptr, root_ptr, 16*8 // point to twiddles for layer5678, starting with root16
                                   // 16*8: skip 15 root/barretc pairs + 1 padding pair (pad=[0] in twiddle gen)
 
-    .equ L_STRIDE, 16
-    .equ S_STRIDE, 64  // check again
+    .equ L_STRIDE_2, 16
+    .equ S_STRIDE_2, 64  // check again
 
     .p2align 2
 layer5678_start:
     vle32.v data0, (in)
-    addi in, in, L_STRIDE
+    addi in, in, L_STRIDE_2
     vle32.v data1, (in)
-    addi in, in, L_STRIDE
+    addi in, in, L_STRIDE_2
     vle32.v data2, (in)
-    addi in, in, L_STRIDE
+    addi in, in, L_STRIDE_2
     vle32.v data3, (in)
 
-    addi in, in, -3*L_STRIDE  // decrement pointer to original value
+    addi in, in, -3*L_STRIDE_2  // decrement pointer to original value
 
     load_roots_5678 xroot1, xbarretc_1, xroot2, xbarretc_2, xroot3, xbarretc_3,\
                          vroot1, vbarretc_1, vroot2, vbarretc_2, vroot3, vbarretc_3,\
@@ -403,8 +403,7 @@ layer5678_start:
     //vsse32.v data3, (in), vtmp2
     // addi in, in, -3*L_STRIDE  // decrement pointer to original value
 
-    addi in, in, S_STRIDE  // load next coeffient pairs, all shifted by 64 bytes
-layer5678_end:
+    addi in, in, S_STRIDE_2  // load next coeffient pairs, all shifted by 64 bytes
     addi gp, gp, -1
     bnez gp, layer5678_start
     end:
