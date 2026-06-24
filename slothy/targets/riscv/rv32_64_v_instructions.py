@@ -212,7 +212,7 @@ v_instrs = [
     (["vmv.s.x"], RISCVVectorScalar),
     (["vmv.v.v"], RISCVVectorVector),
     (["vmv.v.x"], RISCVVectorScalar),
-    (["vnmsac.vx"], RISCVVectorScalarVector)
+    (["vnmsac.vx"], RISCVVectorScalarVector),
     # vcpop.m rd, vs2 : population count of mask vs2 into scalar rd
     # (vector/mask in -> scalar out, same shape as vmv.x.s)
     (["vcpop.m"], RISCVScalarVector),
