@@ -209,7 +209,7 @@ class RISC_V_ntt_rvv_vlen128_barret_mul(OptimizationRunner):
         slothy.config.constraints.stalls_first_attempt = 512
         slothy.config.inputs_are_outputs = True
 
-        # slothy.config.sw_pipelining.enabled = True
+        slothy.config.sw_pipelining.enabled = True
         slothy.config.sw_pipelining.halving_heuristic = True
         slothy.config.split_heuristic = True
         slothy.config.split_heuristic_factor = 5
