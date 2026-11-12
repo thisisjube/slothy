@@ -125,6 +125,7 @@ v_instrs = [
             "vmulh.vv",
             "vmulhu.vv",
             "vmulhsu.vv",
+            "vsmul.vv",  # fixed-point multiply, rounded per vxrm
             "vdivu.vv",
             "vdiv.vv",
             "vremu.vv",
@@ -168,6 +169,7 @@ v_instrs = [
             "vmulh.vx",
             "vmulhu.vx",
             "vmulhsu.vx",
+            "vsmul.vx",  # fixed-point multiply, rounded per vxrm
             "vdivu.vx",
             "vdiv.vx",
             "vremu.vx",

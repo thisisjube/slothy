@@ -1,5 +1,5 @@
 ///
-/// Copyright (c) 2025 Justus Bergermann
+/// Copyright (c) 2026 Justus Bergermann
 /// SPDX-License-Identifier: MIT
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,16 +23,20 @@
 
 // Inverse NTT for Dilithium (VLEN = 128) with Barrett multiplication, the counterpart of
 // ntt_rvv_vlen128_barret_mul (ntt_dilithium_rvv_vlen128_barret_mul.s). Input in the order of that
-// NTT (= upstream's NTT order), output as upstream's invntt_tomont: multiplied by 2^32, centered in
-// (-q/2, q/2] like the Montgomery output of upstream's and PQRV's INTT. Keypair relies on that:
+// NTT (= upstream's NTT order), output as upstream's invntt_tomont: multiplied by 2^32, centered
+// like the Montgomery output of upstream's and PQRV's INTT. Keypair relies on that:
 // t = intt(A*s1) + s2 must stay in (-q, q) for caddq/power2round.
 // Gentleman-Sande butterflies with plain roots (include/intt_dilithium_1234_5678_twiddles_barret_mul.s).
 //   layer8765: 16 blocks of 16 coefficients; levels 8, 7 (len 1, 2) on the transposed block
 //              (vlseg4e32), then levels 6, 5 (len 4, 8).
 //   layer4321: 4 x 64 coefficients (as layer1234 of the NTT); levels 4, 3, 2 (len 16, 32, 64) and
-//              level 1 (len 128) merged with the scaling by 2^32 / 256, then centered.
-// Bounds: as in upstream's invntt_tomont the sums are not reduced (|input| < q rules out overflow);
-// Barrett products are in (-q/4, 5q/4).
+//              level 1 (len 128) merged with the scaling by 2^32 / 256. Level 1 uses the rounding
+//              Barrett multiplication (vsmul, vxrm = round-to-nearest-up), which yields centered
+//              results directly.
+// Bounds: as in upstream's invntt_tomont the sums are not reduced (|input| < q rules out overflow).
+// Barrett products (vmulh, levels 8-2) are in (-q/4, 5q/4); the outputs (vsmul, level 1) satisfy
+// |out| <= q/2 + q*|a|/2^32 for the input a of that multiplication, i.e. |out| < q - 4 as long as
+// |a| < 2^31 - 2050.
 // Uses only caller-saved scalar registers, so nothing is saved. The SLOTHY config reserves the
 // callee-saved ones (CALLEE_SAVED in _example.py), so the opt version keeps this. Loop counter:
 // t2 (an ABI name, as SLOTHY's loop detection requires).
@@ -41,8 +45,6 @@
     // == a0, first function arg (a1, the twiddle pointer, is not used)
     #define root_ptr  x5
     #define modulus   x6
-    #define xhalf     x11
-    // (q-1)/2 for center, set before layer4321 (a1, the unused twiddle pointer)
 
     #define data0  v0
     #define data1  v1
@@ -64,7 +66,7 @@
     #define vtmp0  v16
     // used by barret_mul
     #define vtmp1  v17
-    // used by gs_butterfly, gs_butterfly_scale, center
+    // used by gs_butterfly, gs_butterfly_scale
     #define vtmp2  v18
     // used by gs_butterfly_scale
 
@@ -100,6 +102,14 @@
     vnmsac.vx \vdst, modulus, vtmp0                 // z = z - n * t
 .endm
 
+// as barret_mul, but with the rounded quotient round(a*b/q) instead of floor: the result is
+// centered, |z| <= q/2 + q*|a|/2^32. barret_const_31 = round(b * 2^31 / q); needs vxrm = 0.
+.macro barret_mul_round dst, a, b, barret_const_31
+    vmul.vx \dst, \a, \b                            // z = a*b = coefficient (vect) * root (scalar)
+    vsmul.vx vtmp0, \a, \barret_const_31            // t = round((a * barret_const_31) / 2^31)
+    vnmsac.vx \dst, modulus, vtmp0                  // z = z - n * t
+.endm
+
 .macro gs_butterfly a, b, root, barret_const
     vsub.vv vtmp1, \a, \b                           // vtmp1 = a - b
     vadd.vv \a, \a, \b                              // a = a + b
@@ -112,20 +122,13 @@
     barret_mul_v \vb, vtmp1, \vroot, \vbarret_const // b = (a - b) * root mod modulus
 .endm
 
-// last level, merged with the final scaling: a = (a + b) * f, b = (a - b) * root * f
-.macro gs_butterfly_scale a, b, root_f, barret_const, f, barret_const_f
+// last level, merged with the final scaling: a = (a + b) * f, b = (a - b) * root * f, both
+// with the rounding Barrett multiplication, so the outputs are centered (constants at 2^31 scale)
+.macro gs_butterfly_scale a, b, root_f, barret_const_31, f, barret_const_f_31
     vadd.vv vtmp1, \a, \b                           // vtmp1 = a + b
     vsub.vv vtmp2, \a, \b                           // vtmp2 = a - b
-    barret_mul \a, vtmp1, \f, \barret_const_f
-    barret_mul \b, vtmp2, \root_f, \barret_const
-.endm
-
-// a = a > (q-1)/2 ? a - modulus : a: (-q/4, 5q/4) -> (-q/2, q/2]
-.macro center a
-    vrsub.vx vtmp1, \a, xhalf                       // vtmp1 = (q-1)/2 - a
-    vsra.vi vtmp1, vtmp1, 31                        // vtmp1 = a > (q-1)/2 ? -1 : 0
-    vand.vx vtmp1, vtmp1, modulus                   // vtmp1 = a > (q-1)/2 ? q : 0
-    vsub.vv \a, \a, vtmp1
+    barret_mul_round \a, vtmp1, \f, \barret_const_f_31
+    barret_mul_round \b, vtmp2, \root_f, \barret_const_31
 .endm
 
 .macro transpose4 data, ptr
@@ -213,6 +216,7 @@ roots:
 intt_rvv_vlen128_barret_mul:
 _intt_rvv_vlen128_barret_mul:
     vsetivli zero, 4, e32, m1   // configure vector unit, 4*32 bit elements per vector @ VLEN=128
+    csrwi vxrm, 0               // vsmul (level 1): round-to-nearest-up
     start:
     li modulus, 8380417         // load dilithium modulus
 
@@ -281,7 +285,6 @@ layer8765_start:
 
     addi in, in, -16*4*L_STRIDE_1   // reset in pointer (16 blocks of 64 bytes)
     li t2, 4                  // root_ptr now points to roots_l3210
-    li xhalf, 4190208         // (q-1)/2
 
     .p2align 2
 layer4321_start:
@@ -347,11 +350,12 @@ layer4321_start:
     gs_butterfly data10, data14, xroot, xbarretc
     gs_butterfly data11, data15, xroot, xbarretc
 
-    // level 1 - Stride = 128*4 byte -> BF(a0, a128), BF(a16, a144) ..., merged with the scaling
+    // level 1 - Stride = 128*4 byte -> BF(a0, a128), BF(a16, a144) ..., merged with the scaling;
+    // rounding Barrett multiplication: the outputs are centered, as upstream's invntt_tomont
     lw xroot,      (14*8)(root_ptr)     // root * f
-    lw xbarretc,   (14*8+4)(root_ptr)
+    lw xbarretc,   (14*8+4)(root_ptr)   // its Barrett constant at 2^31 scale
     lw xroot_f,    (15*8)(root_ptr)     // f = 2^32 / 256 mod q
-    lw xbarretc_f, (15*8+4)(root_ptr)
+    lw xbarretc_f, (15*8+4)(root_ptr)   // its Barrett constant at 2^31 scale
     gs_butterfly_scale data0, data8, xroot, xbarretc, xroot_f, xbarretc_f
     gs_butterfly_scale data1, data9, xroot, xbarretc, xroot_f, xbarretc_f
     gs_butterfly_scale data2, data10, xroot, xbarretc, xroot_f, xbarretc_f
@@ -360,24 +364,6 @@ layer4321_start:
     gs_butterfly_scale data5, data13, xroot, xbarretc, xroot_f, xbarretc_f
     gs_butterfly_scale data6, data14, xroot, xbarretc, xroot_f, xbarretc_f
     gs_butterfly_scale data7, data15, xroot, xbarretc, xroot_f, xbarretc_f
-
-    // (-q/4, 5q/4) -> (-q/2, q/2], as upstream's invntt_tomont
-    center data0
-    center data1
-    center data2
-    center data3
-    center data4
-    center data5
-    center data6
-    center data7
-    center data8
-    center data9
-    center data10
-    center data11
-    center data12
-    center data13
-    center data14
-    center data15
 
     store16 in, L_STRIDE_2          // store results
     addi in, in, -15*L_STRIDE_2     // decrement pointer to original value

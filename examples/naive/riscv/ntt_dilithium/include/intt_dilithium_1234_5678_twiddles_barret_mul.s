@@ -30,7 +30,9 @@
 //   vector pairs (4 roots, then 4 constants): len 1 (pairs 4l+0/1), len 1 (pairs 4l+2/3), len 2;
 //   scalar pairs (root, constant): len 4 (first 8 coefficients), len 4 (last 8), len 8.
 // roots_l3210: 16 scalar pairs (loop layer4321): len 16 (8 pairs), len 32 (4), len 64 (2),
-//   then len 128 merged with the final scaling: w*f and f, where f = 2^32/256 mod q.
+//   then len 128 merged with the final scaling: w*f and f, where f = 2^32/256 mod q. These last
+//   two pairs are used with the rounding Barrett multiplication (vsmul), so their constants are
+//   round(w * 2^31 / q) instead of round(w * 2^32 / q).
 
 roots_l7654:
 .word 731434
@@ -543,6 +545,6 @@ roots_l3210:
 .word -3765607
 .word -1929875198
 .word -294725
-.word -151046689
+.word -75523344
 .word 16382
-.word 8395782
+.word 4197891
