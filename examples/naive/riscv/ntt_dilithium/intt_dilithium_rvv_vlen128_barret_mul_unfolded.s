@@ -104,6 +104,7 @@
 
 // as barret_mul, but with the rounded quotient round(a*b/q) instead of floor: the result is
 // centered, |z| <= q/2 + q*|a|/2^32. barret_const_31 = round(b * 2^31 / q); needs vxrm = 0.
+// see https://eprint.iacr.org/2021/986.pdf, Corollary 2 - with round |z| < q -> output is in [-q, q]
 .macro barret_mul_round dst, a, b, barret_const_31
     vmul.vx \dst, \a, \b                            // z = a*b = coefficient (vect) * root (scalar)
     vsmul.vx vtmp0, \a, \barret_const_31            // t = round((a * barret_const_31) / 2^31)
