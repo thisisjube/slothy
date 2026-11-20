@@ -156,8 +156,7 @@
     lw \xbarretc_1, (0*8+4)(\root_ptr)
     lw \xroot2,     (1*8)(\root_ptr)
     lw \xbarretc_2, (1*8+4)(\root_ptr)
-    lw \xroot3,     (2*8)(\root_ptr)
-    lw \xbarretc_3,  (2*8+4)(\root_ptr)
+    // the third pair is padding (not loaded: SLOTHY rejects useless instructions)
     addi \root_ptr, \root_ptr, 3*8  // increment root_ptr manually here, bc vle16 does not allow offsets
     vle16.v \vroot1, (\root_ptr)
     addi \root_ptr, \root_ptr, 16

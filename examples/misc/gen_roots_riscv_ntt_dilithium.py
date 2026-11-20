@@ -52,6 +52,7 @@ class NttRootGen:
         negacyclic=True,
         iters=None,
         signed_roots=False,
+        merged_scaling=None,
     ):
         if pad is None:
             pad = []
@@ -67,6 +68,8 @@ class NttRootGen:
         self.bitsize = bitsize
         self.vector_length = vector_length
         self.signed_roots = signed_roots
+        # scaling factor merged into the last layer of an inverse NTT (Kyber RVV INTT)
+        self.merged_scaling = merged_scaling
 
         self.widen_single_twiddles_to_words = widen_single_twiddles_to_words
         self.block_strided_twiddles = block_strided_twiddles
@@ -426,7 +429,39 @@ class NttRootGen:
         num_pairs = len(all_root_pairs)
         assert num_pairs % stride == 0
 
-        if layer == 0:
+        if self.inverse and layer == 4 and merged == 3:
+            # Kyber RVV INTT layer765: one loop iteration = 32 coefficients = 2 blocks
+            for b in range(0, num_pairs, 2):
+                r = all_roots[b : b + 2]
+                t = all_roots_twisted[b : b + 2]
+                # vectors: level 7 even (64+8m+2s), level 7 odd, level 6 (32+4m..)
+                for idx in ([3, 5], [4, 6], [1, 2]):
+                    for k in range(2):
+                        for i in idx:
+                            yield (r[k][i], stride)
+                    for k in range(2):
+                        for i in idx:
+                            yield (t[k][i], stride)
+                # level 5, scalar: roots 16+2m, 17+2m
+                for k in range(2):
+                    yield (r[k][0], 1)
+                    yield (t[k][0], 1)
+        elif self.inverse and layer == 0 and merged == 4:
+            # Kyber RVV INTT layer4321: levels 4, 3, 2, then level 1 merged with the
+            # scaling f: root * f and f, with constants round(w * 2^(bitsize-1) / q) for
+            # the rounding Barrett multiplication (vsmul)
+            r, t = all_roots[0], all_roots_twisted[0]
+            for i in list(range(7, 15)) + list(range(3, 7)) + [1, 2]:
+                yield (r[i], 1)
+                yield (t[i], 1)
+            f = self.merged_scaling
+            root_f = (r[0] * f) % self.modulus
+            if root_f > self.modulus // 2:
+                root_f -= self.modulus
+            for w in (root_f, f):
+                yield (w, 1)
+                yield (round(w * 2 ** (self.bitsize - 1) / self.modulus), 1)
+        elif layer == 0:
             for i in range(0, num_pairs, stride):
                 root_chunk = list(zip(*all_roots[i : i + stride]))
                 root_twisted_chunk = list(zip(*all_roots_twisted[i : i + stride]))
@@ -687,6 +722,24 @@ def _main():
     )
     ntt_kyber_l1234_barret.export(
         "../naive/riscv/ntt_kyber/include/ntt_kyber_1234_567_twiddles_barret_mul.s"
+    )
+
+    # Inverse roots for the RVV Barrett Kyber INTT, the last layer merged with the
+    # scaling f = 2^16 / 128 = 512 (output multiplied by 2^16, as upstream's invntt)
+    intt_kyber_l1234_barret = NttRootGen(
+        size=256,
+        bitsize=16,
+        modulus=3329,
+        root=17,
+        layers=7,
+        iters=[(0, 4), (4, 3)],
+        print_label=True,
+        signed_roots=True,
+        inverse=True,
+        merged_scaling=512,
+    )
+    intt_kyber_l1234_barret.export(
+        "../naive/riscv/ntt_kyber/include/intt_kyber_1234_567_twiddles_barret_mul.s"
     )
 
     # ntt_dilithium_l123 = NttRootGen(
